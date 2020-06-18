@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<link rel="stylesheet" href="__INDEX__/style/complaint.css" />
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<style>
+				.container_l_left>.require_form {
+				    height: 992px;
+				    background: #fff;
+				    margin-bottom: -280px;
+				}
+				.container_l_left>.optional_form>.optional_form_box {
+				    width: 690px;
+				    height: 261px;
+				    margin-left: 21px;
+				    background: #F8F8F8;
+				    padding: 30px 30px 0 20px;
+				}
+				.container_l_left>.optional_form {
+				    height: 553px;
+				    background: #fff;
+				}
+		</style>
+	</head>
+	<div id="dialog"></div>
+	<!--头部-->
+{include file="public/header"}
+	<!--内容-->
+	<div class="container_l">
+		<!-- 左侧 -->
+		<div class="container_l_left">
+			<!-- 头部面包屑 -->
+			<div class="breadcrumb">
+				<span>
+					首页&nbsp;>&nbsp;
+				</span>
+				<span>
+					补充投诉
+				</span>
+			</div>
+			<!-- 必填表单 -->
+			<div class="require_form">
+				<p>以下项目为必填</p>
+				<div class="require_form_box">
+
+					<div class="textarea_box">
+						<span>追加内容</span>
+						<textarea maxlength=400 name="" id="details_content" cols="60" rows="10" placeholder="我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。"></textarea>
+						<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+					</div>
+					<div class="textarea_box">
+						<span>隐私内容</span>
+						<span style="font-size: 16px;font-weight: 500;color: rgba(20,20,20,1);margin-left: 20px;">可不填，仅自己、投诉平台、被投诉人可见</span>
+						<div>
+							<textarea maxlength=400 name="" id="private_details_content" cols="60" rows="10" placeholder="我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。"></textarea>
+							<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 非必填表单 -->
+			<div class="optional_form">
+				<p>以下项目可以不填写</p>
+				<div class="optional_form_box">
+					<div class="img_upload">
+						<span>上传附件</span>
+						<p>请上传购买凭证、相关截图照片、投诉/对话记录等有效证据;图片最多上传9张，大小不超过5M，支持jpg;</p>
+						<input id="upload_input" type="file" name="" id="" accept="image/*">
+						<div id="addupload_box">
+							<img id="addupload" src="__INDEX__/images/upload.jpg" alt="">
+						</div>
+					</div>
+					<div class="contact_option">
+						<div style="width:87px;"></div>
+						<input type="checkbox" name="is_hidefile" id="input_checkbox_one">
+						<label for="input_checkbox_one"></label>
+						<div style="position: relative;top: -2px;">隐藏附件</div>
+					</div>
+				</div>
+				<button id="submit_btn">提交</button>
+			</div>
+		</div>
+		<!-- 右侧 -->
+{include file="myform/right_content"}
+	</div>
+
+	<!--尾部-->
+{include file="public/footer"}
+	<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+	<!-- 表单逻辑 -->
+	<script src="__INDEX__/style/addcase.js"></script>
+	</body>
+</html>

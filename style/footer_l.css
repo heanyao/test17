@@ -1,0 +1,133 @@
+.footer_l {
+    width: 100%;
+    min-width: 1200px;
+    background: rgba(25, 45, 76, 1);
+}
+
+.footer_l_content {
+    display: flex;
+    display: -webKit-flex;
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 62px;
+    border-bottom: 1px solid #F1F2F6FF;
+    justify-content: space-between;
+}
+
+.footer_title_l {
+    font-size: 20px;
+    font-family: Helvetica;
+    color: #FFFFFF;
+}
+
+.about_us_l {
+    width: 219px;
+}
+
+.link_friendship_l {
+    width: 630px;
+}
+
+.Qr_code_l {
+    width: 128px;
+    margin-top: 15px;
+}
+
+.about_us_list {
+    margin-top: 17px;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.about_us_item {
+    width: 50%;
+    font-size: 14px;
+    font-family: Helvetica;
+    color: #FFFFFF;
+    line-height: 39px;
+    text-decoration: none;
+    outline: none;
+}
+
+.link_friendship_list {
+    margin-top: 17px;
+    display: flex;
+    display: -webkit-flex;
+    flex-wrap: wrap;
+}
+
+.link_item {
+    width: 20%;
+    font-size: 14px;
+    font-family: Helvetica;
+    color: #ffffff;
+    line-height: 39px;
+    text-decoration: none;
+    outline: none;
+}
+
+.qrCode_image {
+    width: 128px;
+    height: 128px;
+    display: block;
+    outline: none;
+    border-width: 0;
+}
+
+.qrCode_desc {
+    font-size: 16px;
+    font-family: Helvetica;
+    color: #ffffff;
+    line-height: 66px;
+    text-align: center;
+}
+
+.footer_l_content2 {
+    width: 1200px;
+    margin: 0 auto;
+    padding-top: 27px;
+    padding-bottom: 49px;
+}
+
+.footer_con2_link1 {
+    font-size: 16px;
+    font-family: Helvetica;
+    color: #ffffff;
+}
+
+.footer_con2_link2 {
+    margin-top: 18px;
+    font-size: 16px;
+    font-family: Helvetica;
+    color: #ffffff;
+}
+
+.footer_con2_link1 div {
+    display: inline-block;
+}
+
+.footer_con2_link2 div {
+    display: inline-block;
+}
+
+.marginLeft102 {
+    margin-left: 102px;
+}
+
+.marginLeft60 {
+    margin-left: 60px;
+}
+
+.marginLeft165 {
+    margin-left: 165px;
+}
+
+.about_us_item:hover {
+    color: #1E6FE4;
+}
+
+.link_item:hover {
+    color: #1E6FE4;
+}

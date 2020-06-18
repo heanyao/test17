@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>搜索企业!</title>
+		<link rel="stylesheet" href="__INDEX__/style/search.css">
+		<link rel="stylesheet" href="__INDEX__/style/bootstrap.css">
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+		<script src='__INDEX__/style/prefixfree.min.js'></script>
+		<script src='__INDEX__/style/stopExecutionOnTimeout.js'></script>
+		<style class="cp-pen-styles">
+			img {
+				vertical-align: top;
+			}
+			.stars-box {
+			  /* background: radial-gradient(100% 0% at bottom center, #0070aa, #0b2570, #000035, #000); */
+			  background: radial-gradient(100% 45% at top center, #000 10%, #000035 40%, #0b2570 65%, #0070aa);
+			  background-attachment: fixed;
+			  overflow: hidden;
+			  position: relative;
+			}
+		
+			@keyframes rotate {
+			  0% {
+				transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+			  }
+			  100% {
+				transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+			  }
+			}
+			.stars {
+			  transform: perspective(150px);
+			  transform-style: preserve-3d;
+			  position: absolute;
+			  bottom: 0;
+			  perspective-origin: 50% 100%;
+			  left: 50%;
+			  animation: rotate 90s infinite linear;
+			}
+		
+			.star {
+			  width: 2px;
+			  height: 2px;
+			  background: #F7F7B6;
+			  position: absolute;
+			  top: 0;
+			  left: 0;
+			  transform-origin: 0 0 -150px;
+			  transform: translate3d(0, 0, -150px);
+			  backface-visibility: hidden;
+			}
+		</style>
+	</head>
+	<body>
+	{include file="public/header"}
+		<header class="z_index_search stars-box">
+			<div class="stars"></div>
+			<div class="z_container">
+				<div class="z_search_contain">
+					<h1 class="z_title" style="margin: 0;">
+						快速查，都在用的安全工具
+					</h1>
+					<div class="z_search_area">
+						<ul class="search-nav clearfix"> 
+							<li class="search-type active" data-index="1">查企业</li> 
+							<li class="search-type " data-index="2">查代理</li> 
+							<li class="search-type" data-index="3">查投诉</li> 
+						</ul>
+					</div>
+					<div class="z_search_area">
+						<form class="z_search_form" id="indexSearchForm">
+							<div class="input-group">
+								<input type="text" class="form-control z_form" maxlength='1000' placeholder="请输入企业名" aria-describedby="basic-addon2">
+								<span class="input-group-addon" id="basic-addon2">查一下</span>
+							  </div>
+						</form>
+					</div>
+					<div class="z_search_area">
+						<div class="z_index_hot_box">
+							<p class="index-hot company" style="display:block">
+								<span class="hot_data_label">热搜榜：</span>
+								<span class="hot_data">
+									<a class="index-hot-company" href="javascript:;">1</a>
+                					<a class="index-hot-company" href="javascript:;">2</a>
+								</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="container_l">
+				<div class="con_row3_l">
+					<!--左侧-->
+					<div class="list_left_l">
+						<!-- <div class="j_dangan">
+							<div class="j_row">
+								<div class="j_row">
+									<div class="j_dangan_lt">黑平台</div>
+									<div class="j_dangan_left">
+										<img src="__INDEX__/images/img1.png">
+									</div>
+									<div class="j_dangan_right j_col">
+										<p><span>FinUK英国金融</span>
+											<span class="dangan_icon">
+												<span>口碑评分</span>
+												<span>1.35</span>
+											</span></p>
+										<p>黑平台 | 1年内 | 监管牌照存疑 | 非MT4/5软件</p>
+									</div>
+								</div>
+							</div>
+						</div> -->
+						<div class="left_con_list">
+							<!-- <a href="" class="left_con_item_company">
+								<div>
+									<div class="flag_tips">黑平台</div>
+									<img src="__INDEX__/images/5.jpg" alt="">
+								</div>
+								<div>
+									<div>
+										<div>HUUB汇丰金融</div>
+										<div class="country_flag"><img src="" alt=""></div>
+									</div>
+									<div>
+										<span>5-10年</span>|<span>英国监管</span>|<span>零售外汇牌照</span>|<span>主表MT4/5软件</span>
+									</div>
+								</div>
+								<div>
+									<div>口碑评分</div>
+									<div>1.35</div>
+								</div>
+							</a> -->
+							<!-- <a href="www.baidu/zx/1" class="left_con_item">
+								<img src="__INDEX__/images/dealIcon.png" alt="状态" class="left_msg_status"/>
+								<div class="left_item_title">
+									<i class="left_hot_icon"></i>Boman提款3个月未到！希望Boman尽快核查
+								</div>
+								<div class="left_item_text">
+									我在微信被拉去一个英诺外汇群，天天讲投资外汇，后面我就抱着试试的心里投资了2000.刚开始还盈利了些，后面他们平台给我安排老师喊单，行情基本都是错的，搞得我亏损3.7万，后面我找平台理论，他们平台的业务员就解散群，冻结我账户，我的钱也不给出金。这个英语好得很
+								</div>
+								<div class="left_item_complaint_user">
+									<span>【投诉对象】</span>
+									<div class="complain_user_info">
+										<img src="__INDEX__/images/4.jpg" alt="头像"/>
+										<span class="complain_user_name">汇鹰环球</span>
+									</div>
+								</div>
+								<div class="left_item_complaint_content">
+									<span>【投诉要求】</span>
+									<span class="item_marginLeft10">返还全部本金</span>
+								</div>
+							</a> -->
+							<!-- <a href="www.baidu/zx/1" class="left_con_item_2 j_row">
+								<div class="j_dangan_lt">黑平台</div>
+								<div class="j_dangan_left">
+									<img src="__INDEX__/images/img1.png">
+								</div>
+							</a> -->
+							<!-- <a href="www.baidu/zx/2" class="left_con_item">
+								<img src="__INDEX__/images/replyIcon.png" alt="状态" class="left_msg_status"/>
+								<div class="left_item_title">
+									<i class="left_hot_icon"></i>Boman提款3个月未到！希望Boman尽快核查
+								</div>
+								<div class="left_item_text">
+									我在微信被拉去一个英诺外汇群，天天讲投资外汇，后面我就抱着试试的心里投资了2000.刚开始还盈利了些，后面他们平台给我安排老师喊单，行情基本都是错的，搞得我亏损3.7万，后面我找平台理论，他们平台的业务员就解散群，冻结我账户，我的钱也不给出金。这个英语好得很
+								</div>
+								<div class="left_item_complaint_user">
+									<span>【投诉对象】</span>
+									<div class="complain_user_info">
+										<img src="__INDEX__/images/4.jpg" alt="头像"/>
+										<span class="complain_user_name">汇鹰环球</span>
+									</div>
+								</div>
+								<div class="left_item_complaint_content">
+									<span>【投诉要求】</span>
+									<span class="item_marginLeft10">返还全部本金</span>
+								</div>
+							</a>
+							<a href="www.baidu/zx/3" class="left_con_item">
+								<img src="__INDEX__/images/doneIcon.png" alt="状态" class="left_msg_status"/>
+								<div class="left_item_title">
+									<i class="left_hot_icon"></i>Boman提款3个月未到！希望Boman尽快核查
+								</div>
+								<div class="left_item_text">
+									我在微信被拉去一个英诺外汇群，天天讲投资外汇，后面我就抱着试试的心里投资了2000.刚开始还盈利了些，后面他们平台给我安排老师喊单，行情基本都是错的，搞得我亏损3.7万，后面我找平台理论，他们平台的业务员就解散群，冻结我账户，我的钱也不给出金。这个英语好得很
+								</div>
+								<div class="left_item_complaint_user">
+									<span>【投诉对象】</span>
+									<div class="complain_user_info">
+										<img src="__INDEX__/images/4.jpg" alt="头像"/>
+										<span class="complain_user_name">汇鹰环球</span>
+									</div>
+								</div>
+								<div class="left_item_complaint_content">
+									<span>【投诉要求】</span>
+									<span class="item_marginLeft10">返还全部本金</span>
+								</div>
+							</a> -->
+						</div>
+						<div class="left_click_load_more">
+							点击加载更多
+						</div>
+						<div class="no_more" style="display: none;">
+							没有搜索到相关内容
+						</div>
+					</div>
+					<!--右侧导航-->
+					<div class="list_right_l">
+						<div class="right_menu_list_l">
+							<ul>
+								<li>
+									<a href="#">头条新闻</a>
+								</li>
+								<li>
+									<a href="/index/article/index" style="margin-left: 215px; color: #006bc1;">更多</a>
+								</li>
+							</ul>
+						</div>
+						<div class="q_news_list_content">
+						{volist name="newslist" id="vo" key="k" }
+
+							<div class="q_news_item j_row">
+								<div>
+								  <a style="text-decoration: none;color: #000;" href="fin110.com/{$vo.myid}">
+									<p>{$vo.title}</p>
+								 </a>
+									<p><img src="{$vo.head_img_url}"><span class="tousu_username">{$vo.name}</span><span>{$vo.time|date="Y-m-d",###}</span></p>
+								</div>
+								<div><img src="{$vo.thumb}"></div>
+							</div>
+						{/volist}
+						</div>
+						<div class="q_news_more">
+							<a href="/index/article/index">查看更多</a>
+						</div>
+						<!-- <div class="right_con_list">
+							<a href="wwww.baidu.com/1" class="right_con_item one_item_right">
+								<div class="thumbnail_right_item">
+									<img class="right_thumbnail" src="__INDEX__/images/5.jpg" alt="图片"/>
+								</div>
+								<img src="__INDEX__/images/ico_shouye_top1.png" alt="" class="list_top top1"/>
+			
+								<div class="text_right_item">
+									<div class="right_item_title">
+										中国平安-PINGAN
+									</div>
+									<div class="item_public_praise">
+										<div>
+											<div class="public_praise_title">口碑评分</div>
+											<div class="public_praise_number">9.0</div>
+										</div>
+										<img src="__INDEX__/images/rightItemStauts.png" alt="状态" class="right_item_status"/>
+									</div>
+									<div class="right_item_other_msg">
+										<div class="item_year_long">
+											15-20年|澳大利亚监管|有人说这里很好dfsdfasdfads
+										</div>
+									</div>
+								</div>
+							</a>
+							<a href="wwww.baidu.com/2" class="right_con_item one_item_right">
+								<div class="thumbnail_right_item">
+									<img class="right_thumbnail" src="__INDEX__/images/5.jpg" alt="图片"/>
+								</div>
+								<img src="__INDEX__/images/ico_shouye_top2.png" alt="" class="list_top top2"/>
+			
+								<div class="text_right_item">
+									<div class="right_item_title">
+										中国平安-PINGAN
+									</div>
+									<div class="item_public_praise">
+										<div>
+											<div class="public_praise_title">口碑评分</div>
+											<div class="public_praise_number">9.0</div>
+										</div>
+										<img src="__INDEX__/images/rightItemStauts.png" alt="状态" class="right_item_status"/>
+									</div>
+									<div class="right_item_other_msg">
+										<div class="item_year_long">
+											15-20年|澳大利亚监管|有人说这里很好dfsdfasdfads
+										</div>
+									</div>
+								</div>
+							</a>
+						</div> -->
+						<!-- <div class="right_con_flag_con">
+							<div class="right_con_flag">
+								<i class="right_cup_icon"></i>
+								做业内最权威最客观的交易商排行
+							</div>
+						</div> -->
+					</div>
+			
+				</div>
+			</div>
+			
+		</section>
+		<footer>
+		<!--尾部-->
+{include file="public/footer"}
+		</footer>
+	</body>
+	<script src="__INDEX__/style/search.js"></script>
+</html>

@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Person</title>
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="__INDEX__/style/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/layer.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css" />
+		<script src="__INDEX__/style/layer.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_black.css" />
+		<script>
+			// var __HOMEURL__ = __HOMEURL__;
+	</script>
+		<style>
+			[v-cloak] {
+			display: none;
+		}
+	</style>
+	</head>
+	<body>
+	{include file="public/header"}
+		<div id="app">
+			<div class="wrapper c_row">
+				<div class="c_aside c_col">
+					<a v-for="(item,idx) in p_left_list" :key="idx" href="javascript:;" @click="person_page(item.src)" :class="item.class"><img
+						 :src="item.img" alt="">{{item.title}}</a>
+				</div>
+				<div class="p_info_content">
+					<div class="hd c_row">
+						<strong>黑名单管理</strong>
+						<span class="c_row">
+							资料完善度 &nbsp;&nbsp;&nbsp;
+							<el-progress class="progress" :text-inside="true" :stroke-width="26" status="warning" :percentage="70"></el-progress>
+						</span>
+					</div>
+					<div class="c_col">
+						<div class="c_black_box c_row">
+							<div class="c_blackLeft">
+								<div class="c_b_input_box c_row">
+									<input type="text" placeholder="输入用户昵称搜索指定用户" v-model="name">
+									<input type="button" @click="search_name">
+								</div>
+								<div class="c_b_list">
+									<div class="c_b_item c_row" @click="chose_search($event,item.id)" v-cloak v-for="(item,idx) in search_list"
+									 :key="idx">
+										<img :src="__HOMEURL__+item.head_img_url">
+										<span>{{item.name}}</span>
+									
+										<i v-if="item.user_sex == 1" class="c_b_item_sex"></i>
+										<i v-else-if="item.user_sex == 0" class="c_b_item_sex2"></i>
+										<i class="c_b_item_select"></i>
+									</div>
+
+								</div>
+								<div class="c_b_btn c_row">
+									<a href="javascript:;" class="c_b_add" @click="to_black">加入黑名单</a>
+								</div>
+							</div>
+							<div class="c_blackrRight">
+								<div class="c_b_right_top">
+									我的黑名单
+								</div>
+								<div class="c_b_right_list">
+									<div class="c_b_right_item c_row" v-cloak v-for="(item,idx) in my_black_list" :key="idx">
+										<img :src="__HOMEURL__+item.head_img_url">
+										<a :href="__HOMEURL__+/profiledetails/+item.id" class="c_b_right_a">{{item.name}}</a>
+										<i class="c_b_item_select" @click="del_my_black(item.id)"></i>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+						<div class="c_b_bottom">
+							＊你将不会收到此黑名单中用户发来的私信
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+{include file="public/footer"}
+
+		<script src="__INDEX__/style/c_index.js"></script>
+
+		<script>
+			new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						p_left_list: [{
+								src: 'c_person_info.html',
+								img: '__INDEX__/images/p1.png',
+								class: '',
+								title: '我的信息'
+							},
+							{
+								src: 'c_person_tx.html',
+								img: '__INDEX__/images/tx1.png',
+								class: '',
+								title: '我的头像'
+							},
+							{
+								src: 'c_person_safe.html',
+								img: '__INDEX__/images/safety1.png',
+								class: '',
+								title: '账号安全'
+							},
+							{
+								src: 'mycaselist.html',
+								img: '__INDEX__/images/home1.png',
+								class: '',
+								title: '我的投诉'
+							},
+
+							{
+								src: 'c_person_follow.html',
+								img: '__INDEX__/images/follow.png',
+								class: '',
+								title: '我的关注'
+							},
+							{
+								src: 'c_person_fan.html',
+								img: '__INDEX__/images/fans.png',
+								class: '',
+								title: '我的粉丝'
+							},
+							{
+								src: 'c_person_messages.html',
+								img: '__INDEX__/images/message.png',
+								class: '',
+								title: '我的私信'
+							},
+							{
+								src: 'c_black_list.html',
+								img: '__INDEX__/images/blackname2.png',
+								class: 'c_aside_on',
+								title: '黑名单管理'
+							},
+							{
+								src: 'brokercenter.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '交易商中心'
+							},
+							{
+								src: 'myarticles.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '我的文章'
+							}
+
+						],
+						name: '',
+						search_list: [],
+						my_black_list: [],
+						to_black_id: 0,
+					}
+				},
+				methods: {
+					person_page: function(src) {
+						if (src != '') {
+							window.location.assign(src);
+						}
+					},
+					search_name: function() {
+						var _self = this;
+						if (_self.name != '') {
+							$.ajax({
+								url: __HOMEURL__ + '/api/messages/blacksearch',
+								type: 'post',
+								dataType: 'json',
+								data: {
+									'name': _self.name
+								},
+								success: function(data) {
+									_self.search_list = data.data;
+									_self.$forceUpdate();
+									
+								},
+								error: function(e) {
+									console.log(e)
+								}
+							});
+						}
+					},
+					chose_search: function(e, id) {
+						var _self = this;
+						$(e.currentTarget).children('.c_b_item_select').css('display', 'block');
+						$(e.currentTarget).siblings('div').children('.c_b_item_select').css('display', 'none');
+						_self.to_black_id = id;
+					},
+					to_black: function() {
+						var _self = this;
+						_self.$confirm('确定将该用户加入私信黑名单?', '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							type: 'warning'
+						}).then(() => {
+							$.ajax({
+								url: __HOMEURL__ + '/api/messages/addblack',
+								type: 'post',
+								dataType: 'json',
+								data: {
+									'uid': _self.to_black_id
+								},
+								success: function(data) {
+									if (data.code === 200) {
+										_self.update_my_black();
+									} else if (data.code === 400) {
+										_self.$alert(data.msg, '提示', {
+											confirmButtonText: '确定',
+											type: 'warning'
+										});;
+									}
+								},
+								error: function(e) {
+									console.log(e);
+								}
+							});
+						}).catch(() => {});
+					},
+					update_my_black: function() {
+						var _self = this;
+						$.ajax({
+							url: __HOMEURL__ + '/api/messages/myblacklist',
+							type: 'get',
+							dataType: 'json',
+							success: function(data) {
+								if (data.code === 200) {
+									_self.my_black_list = data.data;
+									_self.$forceUpdate();
+								}
+							},
+							error: function(e) {
+
+								console.log(e);
+							}
+						});
+					},
+					del_my_black: function(id) {
+						var _self = this;
+						$.ajax({
+							url: __HOMEURL__ + '/api/messages/removeblack',
+							type: 'post',
+							dataType: 'json',
+							data: {
+								'uid': id
+							},
+							success: function(data) {
+								if (data.code === 200) {
+									_self.update_my_black();
+								}
+							},
+							error: function(e) {
+
+								console.log(e);
+							}
+						});
+					}
+
+				},
+				mounted: function() {
+					this.update_my_black();
+				}
+			});
+		</script>
+	</body>
+</html>

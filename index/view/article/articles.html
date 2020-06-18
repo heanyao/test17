@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="__INDEX__/style/reset.css">
+    <link rel="stylesheet" href="__INDEX__/style/jquery.sPage.css">
+    <link rel="stylesheet" href="__INDEX__/style/home.css">
+    <link rel="stylesheet" type="text/css" href="__INDEX__/style/bootstrap.css" />
+    <script>
+        var api_address = "__ROOTURL__"
+        var urls = "__ROOTURL__"
+    </script>
+    <style>
+        .user_head_photo img {
+            vertical-align: top;
+        }
+    </style>
+    <style>
+    .dangan_icon {
+        margin-left: 20px;
+        position: relative;
+    }
+
+    .dangan_icon>span {
+        text-align: center;
+        height: 24px;
+        display: inline-block;
+    }
+
+    .dangan_icon>span:first-child {
+        width: 80px;
+
+        color: white;
+        border-radius: 100px 0px 0px 100px;
+        background: linear-gradient(180deg, rgba(255, 132, 26, 1) 0%, rgba(255, 76, 11, 1) 100%);
+    }
+
+    .dangan_icon>span:last-child {
+        position: absolute;
+        width: 40px;
+        color: #FF4C0B;
+        border: 1px solid #FF4C0B;
+        border-left: none;
+        border-radius: 0px 100px 100px 0px;
+    }
+    </style>
+</head>
+
+<body>
+        <!-- 头部 -->
+{include file="public/header"}
+    <input type="hidden" name="" id="article_id" value="{$artinfo.myid}" />
+    <!-- 放大的图片 -->
+    <!-- <div id="yulantupian1-1">
+        <img src="__INDEX__/images/abc.png" alt="">
+    </div>
+    <div id="yulantupian2-1">
+        <img src="__INDEX__/images/abc.png" alt="">
+    </div> -->
+ 
+
+    <!-- 标题背景 -->
+    <div class="f-biaotibg">
+        <div class="contenrts">
+            <div style="display: flex;">
+                <!-- 用户头像 -->
+                <a href="/profiledetails/{$artinfo.user_id}">
+                <div class="f-userphoto"><img src="{$artinfo.head_img_url}" alt=""></div>
+                </a>
+                <!-- 标题 -->
+                <h2 class="f-biaoti">{$artinfo.title}</h2>
+            </div>
+            <!-- 加关注 -->
+            <div class="f-addinterest" id="follow">
+                十关注
+            </div>
+        </div>
+    </div>
+    <!-- 当前页面信息 -->
+    <div class="f-pagemsg">
+        <div style="display: flex;padding-left: 130px;">
+            <!-- 用户名字 -->
+            <div class="f-username">
+            {$artinfo.name}
+            </div>
+            <!-- 用户id -->
+            <div style="display: none;" id="user_Id">{$artinfo.user_id}</div>
+            <!-- 时间 -->
+            <div class="f-time">
+            {$artinfo.time|date='Y-m-d H:i:s',###}
+            </div>
+            <!-- 分隔 -->
+            <div class="f-stop"></div>
+            <!-- 浏览次数 -->
+            <div class="f-looked">
+                <img src="__INDEX__/images/yanjing.png" alt="">
+            </div>
+            <div class="f-lookedtime">
+                {$artinfo.views}/{$artinfo.comments_sum}
+            </div>
+            <!-- 顶的次数 -->
+            <div class="f-puttime">
+               {$artinfo.ding_sum}
+            </div>
+            <div class="f-putimg" id="carry">
+                <!-- 这里需要你去做一个判断 判断是否已经顶做相应的渲染img就好了 -->
+                {if condition="$artinfo.is_ding eq null"}
+                <img src="__INDEX__/images/ding.png" num="1" alt="">
+                {else /}
+                <img src="__INDEX__/images/dinged.png" num="2" alt="">
+                {/if}
+            </div>
+        </div>
+        <div style="display: flex;">
+            <!-- 收藏 -->
+            <div class="f-collect">
+                <!-- 这里需要你去做一个判断 判断是否已经收藏做相应的渲染img就好了和顶一样 -->
+                {if condition="$artinfo.is_keep eq null"}
+                <div class="f-xingxing" num="1" id="f-xingxing"></div>
+                {else /}
+                <div class="f-xingxing f-xingxing1" num="2"></div>
+                {/if}
+                <div class="f-xingxingtime"><span id="keepchange">{$artinfo.keep_sum}</span>收藏</div>
+            </div>
+            <!-- 分隔 -->
+            <div class="f-stoplong"></div>
+            <!-- 转发 -->
+            <div class="f-transmit">
+                <div class="f-transmitcont"></div>
+                <div class="f-transmittime">8人分享</div>
+            </div>
+            <!-- 分隔 -->
+        </div>
+    </div>
+    <!-- 主体 -->
+    <div class="f-body">
+        <div class="contenrts">
+            <div>
+                <!-- 内容 -->
+                <div class="f-content">
+                    <div class="abstract">
+                        <span>摘要：</span><span>{$artinfo.abstract}</span>
+                    </div>
+                    <div class="bContent">
+                        <!-- 文章id -->
+                        <div style="display: none;" id="articleId">2020051352100515</div>
+                        <div class="f-contenttop">
+                                {$artinfo.content}
+                        </div>
+                        <div class="felxe">
+                            <div class="f-report">
+                                举报
+                            </div>
+                        </div>
+                        <div class="tips">
+                            <div>
+                                <span>·&nbsp;&nbsp;声明：</span><span>本文由入驻金色财经进去的时候被套了，我不断补仓，于是又在4.20号最底部抄底美原油，结果</span>
+                            </div>
+                            <div>
+                                <span>·&nbsp;&nbsp;提示：</span><span>投资有风险，入市需谨慎，本资讯不作为投资理财建议。</span>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- 回复文本 -->
+                        <!-- <div class="f-reply">
+                            <div class="f-reply-title">
+                                回复文本
+                            </div>
+                        </div> -->
+                </div>
+                {if condition="$related_cpy neq null"}
+                <div class="j_dangan">
+                    <label>文中提到的企业</label>
+                    {volist name="related_cpy" id="vo" key="k" }
+                        <div class="j_row" onclick="javascript:location.href=__HOMEURL__+'/index/broker/index?myid={$vo.myid}'">
+                            <div class="j_row">
+                                <div class="j_dangan_lt" style="background: {$vo.status.color};">{$vo.status.name}</div>
+                                <div class="j_dangan_left">
+                                    <img src="__INDEX__/images/img1.png">
+                                </div>
+                                <div class="j_dangan_right j_col">
+                                    <p><span>{$vo.name_en}</span>
+                                        <span class="dangan_icon">
+                                            <span>口碑评分</span>
+                                            <span>{$vo.avg_rate/10}</span>
+                                        </span></p>
+                                    <p>{$vo.tag_regulation} | {$vo.tag_year} | {$vo.tag_license} | {$vo.tag_mt4}</p>
+                                </div>
+                            </div>
+                            <div class="j_dangan_r_btn j_col">
+                                <img src="__INDEX__/images/search.png">
+                                <div>
+                                    查看<br>
+                                    更多详情
+                                </div>
+
+                            </div>
+                        </div>
+                    {/volist}
+                </div>
+                {else /}
+                {/if}
+                <div class="j_bottom_article">
+                    <span class="j_bottom_title">评论</span>
+                    <!-- 新增评论版块 -->
+                    <div class="q_yhdp">
+                        <div class="q_yhdp_type q_row">
+                            <span class="q_yhdp_type_item q_yhdp_active" data-type="0">全部（1234)</span>
+                            <span class="q_yhdp_type_item" data-type="1">最新（1234)</span>
+        
+                        </div>
+        
+                        <div class="q_pinglun_box" id="q_pl_item_html">
+        
+                        </div>
+                        <div class="pages">
+        
+                        </div>
+                        <div class="q_tijiao_box">
+        
+                            <div class="q_row">
+                                <div class="q_tijiao_title">点评：</div>
+                                <div class="q_tijiao_right">
+                                    <div class="qq">
+                                        <p>企业的发展离不开您宝贵的建议，请留下您的最真实的评论！</p>
+                                        <div class="message q_tj_msh" contentEditable='true'></div>
+                                        <div class="But">
+                                            <img src="__INDEX__/images/emojis/bba_thumb.gif" class='bq' />
+                                            <img src="__INDEX__/images/icons/ico_hf_picture.png" onclick="up_imgs(2)" class='bq2' />
+                                            <input type="file" style="display: none;" id="q_th_img" onchange="q_tj_imgs(this)" value="" />
+                                            <span class='submit' onclick="q_tj_pl()">发表</span>
+                                            <div class="img_sp img_sp2">
+        
+                                            </div>
+                                            <!--face begin-->
+                                            <div class="face">
+                                                <ul>
+                                                    <li><img src="__INDEX__/images/emojis/smilea_thumb.gif" title="呵呵]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/tootha_thumb.gif" title="嘻嘻]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/laugh.gif" title="[哈哈]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/tza_thumb.gif" title="[可爱]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/kl_thumb.gif" title="[可怜]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/cj_thumb.gif" title="[吃惊]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/shamea_thumb.gif" title="[害羞]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/zy_thumb.gif" title="[挤眼]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/bz_thumb.gif" title="[闭嘴]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/bs2_thumb.gif" title="[鄙视]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/lovea_thumb.gif" title="[爱你]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sada_thumb.gif" title="[泪]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/heia_thumb.gif" title="[偷笑]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/qq_thumb.gif" title="[亲亲]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sb_thumb.gif" title="[生病]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/mb_thumb.gif" title="[太开心]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/ldln_thumb.gif" title="[懒得理你]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/yhh_thumb.gif" title="[右哼哼]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/zhh_thumb.gif" title="[左哼哼]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/x_thumb.gif" title="[嘘]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/cry.gif" title="[衰]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/wq_thumb.gif" title="[委屈]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/t_thumb.gif" title="[吐]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/k_thumb.gif" title="[打哈气]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/bba_thumb.gif" title="[抱抱]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/angrya_thumb.gif" title="[怒]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/yw_thumb.gif" title="[疑问]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/cza_thumb.gif" title="[馋嘴]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/88_thumb.gif" title="[拜拜]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sk_thumb.gif" title="[思考]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sweata_thumb.gif" title="[汗]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sleepya_thumb.gif" title="[困]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sleepa_thumb.gif" title="[睡觉]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/money_thumb.gif" title="[钱]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/sw_thumb.gif" title="[失望]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/cool_thumb.gif" title="[酷]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/hsa_thumb.gif" title="[花心]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/hatea_thumb.gif" title="[哼]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/gza_thumb.gif" title="[鼓掌]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/dizzya_thumb.gif" title="[晕]"></li>
+                                                    <li><img src="__INDEX__/images/emojis/bs_thumb.gif" title="[悲伤]"></li>
+        
+                                                </ul>
+                                            </div>
+                                            <!--face end-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 相关文章开始 -->
+            <div>
+                <div class="f-related">
+                    <div class="f-title">相关文章</div>
+                    <div class="f-stop1"></div>
+                <div class="f-relatedtitle">
+                   {volist name="promote_arts" id="artlist"}
+                    <div class="paddings">
+                    <a href="/article/{$artlist.myid}">
+                        <div class="f-relatedtext">{$artlist.title}</div>
+                     </a>
+                        <div class="flex">
+                            <div class="onFlex">
+                                <div class="f-relatedphoto">
+                                    <img src="{$artlist.head_img_url}" alt="">
+                                </div>
+                                <div class="f-relatedname">{$artlist.name}</div>
+                            </div>
+                            <div class="f-relatedtime">{$artlist.time|date='Y-m-d',###}</div>
+                        </div>
+                        <div class="f-stop2"></div>
+                    </div>
+                    {/volist}
+                </div>
+                </div>
+            </div>
+            <!-- 相关文章结束 -->
+        </div>
+    </div>
+
+    <div id="outerdiv"
+        style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+        <div id="innerdiv" style="position:absolute;">
+            <img id="bigimg" style="border:5px solid #fff;" src="" />
+        </div>
+    </div>
+{include file="public/footer"}  
+</body>
+<script type="text/javascript" src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+    var urls = "__ROOTURL__";
+    var index_url = "__INDEX__";
+
+</script>
+
+<!-- 新增 -->
+<script src="__INDEX__/style/d_jquery.page.js"></script>
+<link rel="stylesheet" href="__INDEX__/style/page.css">
+<script src="__INDEX__/style/article_emoji.js"></script>
+<link rel="stylesheet" href="__INDEX__/style/q_emoji.css">
+<link rel="stylesheet" href="__INDEX__/style/q_style.css">
+<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+<script type="text/javascript" src="__INDEX__/style/uploadImg.js"></script>
+<script type="text/javascript" src="__INDEX__/style/upload.js"></script>
+<script type="text/javascript" src="__INDEX__/style/home.js"></script>
+<script type="text/javascript" src="__INDEX__/style/api.js"></script>
+<script type="text/javascript" src="__INDEX__/style/jquery.sPage.min.js"></script>
+<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+<!-- 新增评论 -->
+<script src="__INDEX__/style/articledetails.js"></script>
+<script src="__INDEX__/style/d_jquery.page.js"></script>
+    <script>
+        // $('.circlechart').circlechart(); // Initialization
+        // $(".tcdPageCode").createPage({
+        //     pageCount: 10,
+        //     current: 1,
+        //     backFn: function(p) {
+        //         console.log(p);
+        //     }
+        // });
+
+        function q_huifu_img(e) {
+            var _this = $(e); //将当前的pimg元素作为_this传入函数
+            imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+        }
+    </script>
+ <!--    <script src="style/q_ui/Chart.min.js"></script> -->
+</html>

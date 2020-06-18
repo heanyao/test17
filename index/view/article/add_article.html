@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>add_article</title>
+		<script src="style/ueditor/jquery-2.0.3.min.js"></script>
+		<link href="test/font-awesome.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="style/ueditor/e_editor.css" />
+		<script charset="utf-8" src="style/ueditor/ueditor.config.js"></script>
+		<script charset="utf-8" src="style/ueditor/ueditor.all.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="style/ueditor/ueditor.css" />
+		<script charset="utf-8" src="style/ueditor/zh-cn.js"></script>
+
+		<script src="style/bootstrap.js"></script>
+		<link id="beyond-link" href="test/beyond.min.css" rel="stylesheet" />
+	</head>
+	<body>
+		<div class="add_main">
+			<form id="add_article" class="add_form" action="">
+				<p><input id="add_title" class="add_title" name="title" type="text" value="" placeholder="请在这里输入标题"></p>
+				<p><select id="e1" class="add_title select">
+						<option value="1" />房产置业
+						<option value="2" />海外留学
+						<option value="3" />海外生活
+						<option value="4" />移民政策
+						<option value="5" />海外金融
+						<option value="6" />其他相关
+					</select></p>
+				<p><select id="e2" class="add_title select">
+						<option value="1" />中国
+						<option value="2" />日本
+						<option value="3" />美国
+					</select>
+				</p>
+
+
+
+				<div class="editor_box">
+					<div id="editor"></div>
+				</div>
+				<div class="btns">
+					<div class="accept_pact">
+						<input type="checkbox" checked="">
+						我已阅读并同意<a href="javascript:;" title="《马蜂窝游记协议》" target="_blank">《马蜂窝游记协议》</a>
+					</div>
+					<br>
+					<input class="btn_submit" value="发表" type="submit">
+					<div class="cont">或者</div>
+					<input class="btn_save" value="保存草稿" type="button">
+				</div>
+			</form>
+		</div>
+		<script src="style/ueditor/e_editor.js"></script>
+		<script src="test/beyond.js"></script>
+		<script src="test/select-search-extra.js"></script>
+		<script src="test/select2.js"></script>
+		<script type="text/javascript">
+			UE.getEditor('editor', {
+				initialFrameWidth: 595,
+				initialFrameHeight: 400,
+			});
+		</script>
+	</body>
+</html>

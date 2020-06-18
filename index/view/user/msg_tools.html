@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Person</title>
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="__INDEX__/style/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/layer.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css" />
+		<script src="__INDEX__/style/layer.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/font_Icon/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_new_follows.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/chat.css ">
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	    <script>
+	    {if condition="$user_head neq ''"}
+		{php}
+		$photo_url = str_replace("\\", "/", $user_head);
+		{/php}
+	    var photo_url = "{$photo_url}";
+	    {else /}
+	    var photo_url = "/static/index/images/icon01.png";
+	    {/if}
+	    </script>
+	</head>
+	<body>
+	{include file="public/header"}
+		<div id="app">
+			<a href="c_person_messages.html" οnclick="javascript:location.replace(this.href);event.returnValue=false; " style="position: absolute;top: 113px;left: 280px;"> <返回 </a><br>
+			<!-- chat部分 -->
+			<div class="chatContainer">
+				
+				<div class="chatBox" ref="chatBox">
+					
+					<div class="chatBox-head">
+						<div class="chatBox-head-one">
+						</div>
+						<div class="chatBox-head-two">
+
+							<div class="chat-people">
+								<div class="ChatInfoHead">
+									<img :src="from_head_img" alt="头像" />
+								</div>
+								<div class="ChatInfoName">{{from_name}}</div>
+							</div>
+
+						</div>
+					</div>
+					<div class="chatBox-info">
+						<div class="chatBox-kuang" ref="chatBoxkuang">
+							<div class="chatBox-content">
+								<div class="chatBox-content-demo" id="chatBox-content-demo">
+
+									<div class="clearfloat" v-cloak v-for="(item,idx) in sx_box_list" :key="idx">
+										<div class="author-name">
+											<small class="chat-date">{{item.addtime | formatDate}}</small>
+										</div>
+										<div v-if="item.from_uid == from_id" class="left">
+											<div class="chat-avatars"><img :src="from_head_img" alt="头像" /></div>
+											<div class="chat-message">
+												<p v-if="item.type == 0">{{item.content}}</p>
+												<img style="cursor: pointer;" @click="big_img($event)" v-else-if="item.type == 1" :src="api_address+item.content">
+												<span class="emoji-picker-image" :style="get_emoji_html(item.content)" v-else></span>
+											</div>
+										</div>
+										<div v-else class="right">
+
+											<div class="chat-message">
+												<p v-if="item.type == 0">{{item.content}}</p>
+												<img style="cursor: pointer;" @click="big_img($event)" v-else-if="item.type == 1" :src="api_address+item.content">
+												<span class="emoji-picker-image" :style="get_emoji_html(item.content)" v-else></span>
+											</div>
+											<div class="chat-avatars"><img :src="my_head_img" alt="头像" /></div>
+										</div>
+									</div>
+
+
+
+								</div>
+							</div>
+							<div class="chatBox-send">
+								<div class="div-textarea" contenteditable="true"></div>
+								<div>
+									<button id="chat-biaoqing" class="btn-default-styles">
+										<i class="iconfont icon-biaoqing"></i>
+									</button>
+									<label id="chat-tuxiang" title="发送图片" for="inputImage" class="btn-default-styles">
+										<input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png" name="file" id="inputImage"
+										 class="hidden">
+										<i class="iconfont icon-tuxiang"></i>
+									</label>
+									<button id="chat-fasong" class="btn-default-styles"><i class="iconfont icon-fasong"></i>
+									</button>
+								</div>
+								<div class="biaoqing-photo">
+									<ul>
+										<li><span data-emoji-num="微笑" class="emoji-picker-image" style="background-position: -9px -18px;"></span></li>
+										<li><span data-emoji-num="难过" class="emoji-picker-image" style="background-position: -40px -18px;"></span></li>
+										<li><span data-emoji-num="开心" class="emoji-picker-image" style="background-position: -71px -18px;"></span></li>
+										<li><span data-emoji-num="嘘" class="emoji-picker-image" style="background-position: -102px -18px;"></span></li>
+										<li><span data-emoji-num="眨眼睛" class="emoji-picker-image" style="background-position: -133px -18px;"></span></li>
+										<li><span data-emoji-num="困了" class="emoji-picker-image" style="background-position: -164px -18px;"></span></li>
+										<li><span data-emoji-num="得意" class="emoji-picker-image" style="background-position: -9px -52px;"></span></li>
+										<li><span data-emoji-num="眼冒金星" class="emoji-picker-image" style="background-position: -40px -52px;"></span></li>
+										<li><span data-emoji-num="要哭了" class="emoji-picker-image" style="background-position: -71px -52px;"></span></li>
+										<li><span data-emoji-num="难为情" class="emoji-picker-image" style="background-position: -102px -52px;"></span></li>
+										<li><span data-emoji-num="吓" class="emoji-picker-image" style="background-position: -133px -52px;"></span></li>
+										<li><span data-emoji-num="嘻嘻" class="emoji-picker-image" style="background-position: -164px -52px;"></span></li>
+										<li><span data-emoji-num="掉眼泪" class="emoji-picker-image" style="background-position: -9px -86px;"></span></li>
+										<li><span data-emoji-num="尴尬" class="emoji-picker-image" style="background-position: -40px -86px;"></span></li>
+										<li><span data-emoji-num="美" class="emoji-picker-image" style="background-position: -71px -86px;"></span></li>
+										<li><span data-emoji-num="奋斗" class="emoji-picker-image" style="background-position: -102px -86px;"></span></li>
+										<li><span data-emoji-num="流口水" class="emoji-picker-image" style="background-position: -133px -86px;"></span></li>
+										<li><span data-emoji-num="嗯" class="emoji-picker-image" style="background-position: -164px -86px;"></span></li>
+										<li><span data-emoji-num="傲慢" class="emoji-picker-image" style="background-position: -9px -120px;"></span></li>
+										<li><span data-emoji-num="正经" class="emoji-picker-image" style="background-position: -40px -120px;"></span></li>
+										<li><span data-emoji-num="酷" class="emoji-picker-image" style="background-position: -71px -120px;"></span></li>
+										<li><span data-emoji-num="高兴" class="emoji-picker-image" style="background-position: -102px -120px;"></span>
+										</li>
+										<li><span data-emoji-num="超喜欢" class="emoji-picker-image" style="background-position: -133px -120px;"></span>
+										</li>
+										<li><span data-emoji-num="愤怒" class="emoji-picker-image" style="background-position: -164px -120px;"></span>
+										</li>
+										<li><span data-emoji-num="不会吧" class="emoji-picker-image" style="background-position: -9px -154px;"></span></li>
+										<li><span data-emoji-num="撇嘴" class="emoji-picker-image" style="background-position: -40px -154px;"></span></li>
+										<li><span data-emoji-num="得意" class="emoji-picker-image" style="background-position: -71px -154px;"></span></li>
+										<li><span data-emoji-num="一般" class="emoji-picker-image" style="background-position: -102px -154px;"></span>
+										</li>
+										<li><span data-emoji-num="喔" class="emoji-picker-image" style="background-position: -133px -154px;"></span>
+										</li>
+										<li><span data-emoji-num="鬼脸" class="emoji-picker-image" style="background-position: -164px -154px;"></span>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- 展示大图 -->
+		<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:9999999;width:100%;height:100%;display:none;">
+			<div id="innerdiv" style="position:absolute;">
+				<img id="bigimg" style="border:5px solid #fff;" src="" />
+			</div>
+		</div>
+
+		<script src="__INDEX__/style/c_index.js"></script>
+		<script src="__INDEX__/style/url_tools.js"></script>
+		<script src="__INDEX__/style/c_chat.js"></script>
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+		<script>
+			new Vue({
+				el: '#app',
+				filters: {
+					formatDate(time) {
+						time = time * 1000
+						let date = new Date(time);
+						return formatDate(date, 'yyyy-MM-dd hh:mm')
+					}
+				},
+				data: function() {
+					return {
+						my_id: 1,
+						from_head_img: f_head_img,
+						from_id: f_id,
+						from_name: f_name,
+						my_head_img: my_h_img,
+						sx_box_list: []
+					}
+				},
+				methods: {
+					get_emoji_html(num) {
+						var style = "background-position:" + $('li>span[data-emoji-num="' + num + '"]')[0].style.backgroundPosition;
+						return style;
+					},
+					big_img:function(e){
+
+						console.log($(e.currentTarget))
+						var _this = $(e.currentTarget); //将当前的pimg元素作为_this传入函数
+						imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+					}
+				},
+
+				mounted: function() {
+					var vm = this;
+
+					$.ajax({
+						url: api_address + '/api/messages/dialoglist',
+						type: 'post',
+						dataType: 'json',
+						data: {
+							'from_uid': f_id
+						},
+						success: function(data) {
+							console.log(data);
+							if (data.code !== 200) {
+								return;
+							}
+							localStorage.removeItem('dialoglist_'+f_id);
+							let dialoglist = JSON.stringify(data.data);
+							localStorage.setItem('dialoglist_'+f_id, dialoglist);
+							setTimeout(function () {
+								vm.sx_box_list = data.data;
+								vm.$forceUpdate();
+							}, 1000)
+
+						},
+						error: function(e) {
+							console.log(e)
+						}
+					});
+					
+					
+					
+				}
+			});
+			function check_big_img(e) {
+				console.log($(e))
+				var _this = $(e); //将当前的pimg元素作为_this传入函数
+				imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+			}
+		</script>
+	</body>
+</html>

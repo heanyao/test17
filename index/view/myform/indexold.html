@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>首页</title>
+		<link rel="stylesheet" href="__INDEX__/style/complaint.css" />
+	</head>
+	<div id="dialog"></div>
+	<!--头部-->
+{include file="public/header"}
+	<!--内容-->
+	<div class="container_l">
+		<!-- 左侧 -->
+		<div class="container_l_left">
+			<!-- 头部面包屑 -->
+			<div class="breadcrumb">
+				<span>
+					首页&nbsp;>&nbsp;
+				</span>
+				<span>
+					填写投诉
+				</span>
+			</div>
+			<!-- 必填表单 -->
+			<div class="require_form">
+				<p>以下项目为必填</p>
+				<div class="require_form_box">
+					<div class="input_item">
+						<span>投诉对象</span>
+						<input id='complain_target' type="text" placeholder="说明投诉对象">
+						<img src="__INDEX__/images/sousuo.png" alt="">
+						<div class="complaint_result_list">
+							<ul>
+							</ul>
+						</div>
+					</div>
+					<div class="input_item">
+						<span>投诉要求</span>
+						<input id="form_require" type="text" maxlength=40 placeholder="说明投诉要求、最多40字">
+						<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+					</div>
+					<div class="input_item">
+						<span>投诉标题</span>
+						<input id="form_title" type="text" placeholder="说明投诉核心标题">
+						<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+					</div>
+					<div class="category_box">
+						<span>选择曝光分类</span>
+						<div>
+							<input id="category_one" type="radio" name="category" value="1">
+							<label for="category_one">无法出金</label>
+							<input id="category_two" type="radio" name="category" value="2">
+							<label for="category_two">滑点严重</label>
+							<input id="category_three" type="radio" name="category" value="3">
+							<label for="category_three">诱导/欺诈</label>
+							<input id="category_four" type="radio" name="category" value="4">
+							<label for="category_four">其他曝光</label>
+						</div>
+					</div>
+					<div class="textarea_box">
+						<span>投诉事由</span>
+						<textarea maxlength=400 name="" id="details_content" cols="60" rows="10" placeholder="我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。"></textarea>
+						<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+					</div>
+					<div class="textarea_box">
+						<span>隐私内容</span>
+						<span style="font-size: 16px;font-weight: 500;color: rgba(20,20,20,1);margin-left: 20px;">仅自己、投诉平台、被投诉人可见</span>
+						<div>
+							<textarea maxlength=400 name="" id="private_details_content" cols="60" rows="10" placeholder="我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。我是提示文字内容，请说明投诉事由，最多不超过400个字。"></textarea>
+							<img class="input_clearbtn" src="__INDEX__/images/guanbi.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 非必填表单 -->
+			<div class="optional_form">
+				<p>以下项目可以不填写</p>
+				<div class="optional_form_box">
+					<div class="input_item">
+						<span>涉及金额</span>
+						<input id="money_num" type="number" placeholder="0.00">
+						<span></span>
+						<span>元</span>
+					</div>
+					<div class="img_upload">
+						<span>上传附件</span>
+						<p>请上传购买凭证、相关截图照片、投诉/对话记录等有效证据;图片最多上传9张，大小不超过5M，支持jpg;</p>
+						<input id="upload_input" type="file" name="" id="" accept="image/*">
+						<div id="addupload_box">
+							<img id="addupload" src="__INDEX__/images/upload.jpg" alt="">
+						</div>
+					</div>
+					<div style="margin-left: 88px;">
+						<input type="checkbox" name="is_hidefile" id="input_checkbox_one">
+						<label for="input_checkbox_one">隐藏附件</label>
+					</div>
+					<div class="contact_option">
+						<span>联系方式</span>
+						<input type="checkbox" checked ='checked' name="contact_allow" id="input_checkbox_two">
+						<label for="input_checkbox_two">允许商家通过本平台预留的手机号码联系您（强烈建议勾选，仅限本平台及被投诉商家可见)</label>
+					</div>
+				</div>
+				<button id="submit_btn">提交</button>
+			</div>
+		</div>
+		<!-- 右侧 -->
+		<div class="container_l_right">
+			<!-- 投诉窗口 -->
+			<div class="complain_box">
+				<div>
+					<span></span>
+					<p>我要投诉</p>
+				</div>
+				<div>
+					<span></span>
+					<p>我要咨询</p>
+				</div>
+				<div>
+					<span></span>
+					<p>我的咨询/投诉单</p>
+				</div>
+			</div>
+			<!-- 曝光列表 -->
+			<div class="expose_list">
+				<p>本周曝光最多</p>
+				<ul>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>2</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>3</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+					<li>
+						<img src="__INDEX__/images/cupIcon.png" alt="">
+						<span>英国金融</span>
+						<span>1</span>
+					</li>
+				</ul>
+			</div>
+			<!-- 上下文章 -->
+			<div class="essay_link">
+				<div>
+					<span>上一篇</span>
+					<span>1天前</span>
+					<p>NEV永利资管崩盘倒计时！本金很难退出</p>
+				</div>
+				<div>
+					<span>下一篇</span>
+					<span>20小时前</span>
+					<p>NEV永利资管崩盘倒计时！本金很难退出</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--尾部-->
+{include file="public/footer"}
+
+	<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+	<!-- 表单逻辑 -->
+	<script src="__INDEX__/style/complaint.js"></script>
+	</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>change_phone</title>
+    <script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/element-ui.css">
+    <script src="__INDEX__/style/vue.min.js"></script>
+    <script src="__INDEX__/style/element-ui.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css"/>
+    <script src="__INDEX__/style/layer.js"></script>
+    <script type="text/javascript">
+        var __HOMEURL__ = "__ROOTURL__";
+    </script>
+    <script src="__INDEX__/style/indexcommon.js"></script>
+</head>
+<body>
+<div id="app" class='login_main'>
+    <el-container class='el-container content is-vertical'>
+        <el-header class='header'>
+            <div class="logo">
+                <a href="c_index.html" target="_blank"><img src="__INDEX__/images/erlogo.png" alt="logo"></a>
+            </div>
+            <div class="buttons">
+                <ul class="clear">
+                    <li @mouseenter="li_bg_color('#FFDD0F',$event)" @mouseleave="li_bg_color('#f4c830',$event)"><a
+                            href="javascript:;" target="_blank"><i class="el-icon-mobile-phone"></i>APP下载</a></li>
+                    <li class="select_box" @mouseenter="li_bg_color('#f4c830',$event)"
+                        @mouseleave="li_bg_color('#f0f0f0',$event)">
+                        <a href="javascript:;">
+                            <i class="el-icon-house"></i>返回首页
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </el-header>
+        <el-main class='main'>
+            <el-card class="box-card">
+                <h2 class="login-title"><span>修改手机</span></h2>
+                <div class="login_content" v-if="!is_next">
+                    <p>修改绑定的手机前，请先确认之前的手机</p>
+                    <div class="form-control phone_control">
+                        <div class="select-area-code">
+                            <img :src="imgsrc" class="select_country">
+                            <span  class="select_country">{{areacode}}</span>
+                            <i class="el-icon-caret-bottom"></i>
+                            <input id="old_phone" type="tel" v-model="old_phone" readonly class="phone_input account">
+                        </div>
+                    </div>
+                    <div class="form-control code_control">
+                        <input id="old_code" v-model="old_code"   class='input code' placeholder="验证码"/>
+                        <button @click="send_code(1)" class="quick_btn" style="cursor: pointer;background: #f4c830">{{
+                            code_btn }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="login_content" v-else>
+                    <p></p>
+                    <div class="form-control phone_control">
+                        <div class="select-area-code">
+                            <img @click="select_country"
+                                 :src="imgsrc"
+                                 class="select_country">
+                            <span @click="select_country" class="select_country">{{areacode}}</span>
+                            <i class="el-icon-caret-bottom"></i>
+                            <input id="new_phone" type="tel" v-model="new_phone" placeholder="请输入手机号"
+                                   class="phone_input account">
+                        </div>
+                    </div>
+                    <div class="form-control code_control">
+                        <input id="new_code" v-model="new_code" class='input code' placeholder="验证码"/>
+                        <button @click="send_code(0)" disabled="disabled" class="quick_btn">{{
+                            code_btn }}
+                        </button>
+                    </div>
+                </div>
+                <div class="login_content">
+                    <button v-if="!is_next" class='btn' @click="test_old_phone">下一步</button>
+                    <button v-else class='btn' @click="change_phone">确定</button>
+                </div>
+
+            </el-card>
+        </el-main>
+    </el-container>
+    <div id="bg">
+        <div class="area-code-box">
+            <div class="area-code-nav">
+                <ul>
+                    <li @click="add_on($event)" v-for="item in area_nav_list">{{item}}</li>
+                </ul>
+            </div>
+            <div class="area-code-content">
+                <div class="area-code-titlt">
+                    <span @click="close_bg" class="el-icon-close"></span>
+                </div>
+                <div class="area-code-body">
+                    <dl v-for="item in area_nav_list" :name="item">
+                        <dt>{{ item }}</dt>
+                        <dd @click="change_country(i.imgsrc,i.code)" v-for="(i,idx) in area_code_list" :key="idx"
+                            v-if="i.name==item">
+                            <img :src="i.imgsrc" alt="">
+                            <em>{{i.title}}</em>
+                            <span>{{i.code}}</span>
+
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="__INDEX__/style/c_index.js"></script>
+<script src="__INDEX__/style/c_area.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                old_phone: '{$user_phone}',
+                new_phone: '',
+                old_code: '',
+                new_code: '',
+                code_btn: '验证码',
+                is_next:false,
+                isError: false,
+                errormsg: '',
+                isTimeOver: true,
+                imgsrc: 'https://img.wikifx.com/flag/7d8833382673bab2/CN.png_wiki-template-global',
+                areacode: '00{$areacode}',
+                area_nav_list: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'],
+                area_code_list: []
+            }
+        },
+        mounted:function(){
+            let self =this;
+            let srclist = getCountrys();
+            let src = '';
+            srclist.filter(item =>{
+                if(item.code.replace(/\b(00+)/gi, "")===self.areacode.replace(/\b(00+)/gi, "")){
+                    src = item.imgsrc;
+                }
+            });
+            self.imgsrc = src;
+
+        },
+        methods: {
+            test_old_phone:function(){
+                let self = this;
+                let lay = layer;
+                let apiAddress = getApi()+'/user/checkoldpwd';
+                let timestamp = Date.parse(new Date())/1000;
+                let old_code =self.old_code;
+                if(old_code!=''){
+                    $.ajax({
+                        url:apiAddress,
+                        type:'post',
+                        data:{'code':old_code,'time':timestamp},
+                        success:function (data) {
+                            if(data.code===200){
+                                clearInterval(self.timer);
+                                self.isTimeOver = true;
+                                self.code_btn = '验证码';
+                                self.is_next =true;
+                            }else{
+                                lay.tips(data.msg, '#old_code');
+                                return;
+                            }
+                        },
+                        error(){
+                            console.log('请求错误');
+                        }
+
+                    });
+                }else{
+                    lay.tips('请输入验证码！', '#old_code');
+                    return;
+                }
+
+
+            },
+            change_phone:function(){
+                let self = this;
+                let lay = layer;
+                let apiAddress = getApi()+'/user/newemailandphone';
+                let code = self.new_code;
+                let phone = self.new_phone;
+                let areacode = self.areacode.replace(/\b(00+)/gi, "");
+                let timestamp = new Date().getTime();
+                if (phone == '') {
+                    lay.tips('请输入手机号!', '#new_phone');
+                    return;
+                }
+                if (areacode == 86 && !(/^1[3456789]\d{9}$/.test(phone))) {
+                    lay.tips('请输入正确的手机号!', '#new_phone');
+                    return;
+                }
+                if (code == '') {
+                    lay.tips('请输入验证码!', '#new_code');
+                    return;
+                }
+                $.ajax({
+                    url:apiAddress,
+                    type:'post',
+                    data:{'user_name':phone,'code':code,'time':timestamp,'country_code':areacode},
+                    success:function (data) {
+                        if(data.code===200){
+                            window.location.assign('{:url('user/c_person_safe')}') 
+                        }else{
+                            lay.tips(data.msg, '#new_phone');
+                            return;
+                        }
+                    },
+                    error(){
+                        console.log('请求错误');
+                    }
+
+                });
+
+            },
+            select_country: function () {
+                let self = this;
+                self.area_code_list = getCountrys();
+                enable_bg();
+            },
+            close_bg: function () {
+                disable_bg();
+            },
+            add_on: function (e) {
+                add_on_class(e);
+            },
+            change_country: function (src, code) {
+                let self = this;
+                self.imgsrc = src;
+                self.areacode = code;
+                disable_bg();
+            },
+            send_code: function (yz) {
+                let self = this;
+                let apiAddress = getApi();
+                let phone = self.old_phone;
+                 if(self.is_next){
+                    phone = self.new_phone;
+                }
+                let code = self.areacode.replace(/\b(00+)/gi, "");
+                let timestamp = new Date().getTime();
+                getcode(self, apiAddress, phone, yz, timestamp, code);
+            }
+
+        },
+        watch: {
+            new_phone: function () {
+                let self = this;
+                let phone = this.new_phone;
+                let isTimeOver = this.isTimeOver;
+                let areacode = self.areacode.replace(/\b(00+)/gi, "");
+                if (phone != '') {
+
+                    if (areacode == 86 && (/^1[3456789]\d{9}$/.test(phone)) && isTimeOver) {
+                        enable_code();
+                    }
+                    else if (areacode != 86 && isTimeOver) {
+                        enable_code();
+                    }
+                    else {
+                        disable_code();
+                    }
+                }
+                else {
+                    disable_code();
+                }
+            }
+            ,
+            areacode: function () {
+                let phone = this.new_phone;
+                let isTimeOver = this.isTimeOver;
+                let areacode = this.areacode.replace(/\b(00+)/gi, "");
+                if (phone != '') {
+                    if (areacode != 86 && isTimeOver) {
+                        enable_code();
+                    } else if (areacode == 86 && (/^1[3456789]\d{9}$/.test(phone)) && isTimeOver) {
+                        enable_code();
+                    }
+                    else {
+                        disable_code();
+                    }
+                }
+                else {
+                    disable_code();
+                }
+            }
+        },
+    });
+</script>
+
+
+</body>
+</html>

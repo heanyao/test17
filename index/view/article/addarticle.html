@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>add_article</title>
+		<script src="__ADMIN__/ueditor/jquery-2.0.3.min.js"></script>
+		<link href="__ADMIN__/style/font-awesome.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/ueditor/e_editor.css" />
+		<script charset="utf-8" src="__ADMIN__/ueditor/ueditor.config.js"></script>
+		<script charset="utf-8" src="__ADMIN__/ueditor/ueditor.all.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="__ADMIN__/ueditor/ueditor.css" />
+		<script charset="utf-8" src="__ADMIN__/style/zh-cn.js"></script>
+
+		<script src="__ADMIN__/style/bootstrap.js"></script>
+		<link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet" />
+	</head>
+	<body>
+	{include file="public/header"}
+		<div class="add_main" style="padding-top: 50px">
+			<form id="add_article" class="add_form" action="" method="post" enctype="multipart/form-data">
+                <label for="username" class="col-sm-2 control-label no-padding-right">文章标题：</label>
+				<p><input style="margin-bottom: 25px" id="add_title" class="add_title" name="title" type="text" value="" placeholder="请在这里输入标题"></p>
+                        <div class="form-group" style="margin-bottom: 25px">
+                            <label for="username" class="col-sm-2 control-label no-padding-right">文章摘要：</label>
+                            <div class="col-sm-6">
+                                <textarea name="abstract" required="" class="form-control" style="margin: 0px; height: 89px; width: 571px;" placeholder="请在这里输入文章摘要"></textarea>
+                            </div>
+                            <p class="help-block col-sm-4 red">* 不超过两行</p>
+                        </div>
+<!-- 				<p><select id="e1" name="cateid" class="add_title select">
+						<option value="1" />房产置业
+						<option value="2" />海外留学
+						<option value="3" />海外生活
+						<option value="4" />移民政策
+						<option value="5" />海外金融
+						<option value="6" />其他相关
+					</select></p> -->
+<!-- 				<p><select id="e2" name="country_id" class="add_title select">
+			
+						<option value="44" />55
+				
+					</select>
+				</p> -->
+				<label for="username" class="col-sm-2 control-label no-padding-right">文章内容：</label>
+				<div class="editor_box">
+					 <textarea id="editor" name="content"></textarea>
+				</div>
+				<div style="margin:20px 0px 0px 10px;">请在此上传文章要展示的缩略图</div>
+				<p><input id="add_title" class="add_title" name="thumb" type="file" /></p>
+				<div class="btns">
+					<div class="accept_pact">
+						<input type="checkbox" checked="">
+						我已阅读并同意<a href="javascript:;" title="《发文协议》" target="_blank">《发文协议》</a>
+					</div>
+					<br>
+					<input class="btn_submit" value="发表" type="submit">
+					<div class="cont">或者</div>
+					<input class="btn_save" value="保存草稿" type="button">
+				</div>
+			</form>
+		</div>
+		{include file="public/footer"}
+		<script src="__ADMIN__/ueditor/e_editor.js"></script>
+		<script src="__ADMIN__/style/beyond.js"></script>
+		<script src="__ADMIN__/style/select-search-extra.js"></script>
+		<script src="__ADMIN__/style/select2.js"></script>
+		<script type="text/javascript">
+			UE.getEditor('editor', {
+				initialFrameWidth: 595,
+				initialFrameHeight: 400,
+			});
+		</script>
+	</body>
+</html>

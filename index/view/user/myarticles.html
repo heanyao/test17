@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Person</title>
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="__INDEX__/style/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/layer.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css" />
+		<script src="__INDEX__/style/layer.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/font_Icon/iconfont.css">
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_new_follows.css"/>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+.left_con_item {
+    position: relative;
+    display: block;
+    width: 780px;
+    height: 150px;
+    background-color: #f2f6fc;;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+    text-decoration: none !important;
+}
+
+.left_con_item:hover {
+    box-shadow: 0 0 14px 2px #1E6FE4;
+}
+
+.left_con_item:last-child {
+    margin-top: 22px;
+}
+
+.left_con_item:hover .left_item_title {
+    color: #1E6FE4;
+}
+.left_msg_status {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    right: -6px;
+    top: -6px;
+    background: #f2f6fc;
+}
+.left_item_title {
+    width: 736px;
+    height: 24px;
+    font-size: 18px;
+    font-family: Helvetica;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 20px;
+}
+.left_hot_icon {
+    width: 31px;
+    height: 15px;
+    display: inline-block;
+    background: url("/static/index/images/hotIcon.png") no-repeat;
+        background-size: auto;
+    background-size: 100%;
+    margin-right: 5px;
+}
+.left_item_text {
+    width: 742px;
+    height: 36px;
+    font-size: 12px;
+    font-family: Helvetica;
+    color: rgba(102, 102, 102, 1);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    line-height: 18px;
+    margin-top: 10px;
+}
+.left_item_complaint_user {
+    margin-top: 10px;
+}
+.left_item_complaint_user > span {
+    font-size: 12px;
+    color: #E75755;
+    font-family: Helvetica;
+}
+.complain_user_info {
+    display: inline-block;
+}
+.complain_user_info img {
+    width: 16px;
+    height: 16px;
+    border-width: 0;
+    outline: none;
+    vertical-align: bottom;
+    margin-left: 10px;
+    margin-right: 6px;
+}
+.complain_user_name {
+    font-size: 12px;
+    font-family: Helvetica;
+    color: rgba(153, 153, 153, 1);
+}
+.left_item_complaint_content {
+    margin-top: 6px;
+}
+.left_item_complaint_content span {
+    font-size: 12px;
+    font-family: Helvetica;
+    color: rgba(51, 51, 51, 1);
+}
+.left_item_complaint_content span {
+    font-size: 12px;
+    font-family: Helvetica;
+    color: rgba(51, 51, 51, 1);
+}
+.left_click_load_more {
+    background-color: #FFFFFF;
+    color: #A99CA7;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    cursor: pointer;
+	width: 820px;
+}
+
+.left_click_load_more:hover {
+    background-color: #EBEDEF;
+    color: #777777;
+}
+
+.no_more {
+    background-color: #FFFFFF;
+    color: #A99CA7;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+#rate1 img,#rate2 img,#rate3 img {width: 22px;}
+		</style>
+	</head>
+	<body>
+	{include file="public/header"}
+		<div id="app">
+			<div class="wrapper c_row">
+				<div class="c_aside c_col">
+					<a v-for="(item,idx) in p_left_list" :key="idx" href="javascript:;" @click="person_page(item.src)" :class="item.class"><img
+						 :src="item.img" alt="" v-cloak>{{item.title}}</a>
+				</div>
+				<div class="p_info_content">
+					<div class="hd c_row" style="border-bottom: none;">
+						<span class="c_row" style="font-size: 14px;color: #666;">
+							选择投诉 
+							 <p class="c_news"><i data-type='0' class="c_sx_check c_sx_checked" @click="sx_checked($event)"></i>全部</p>
+							 <p class="c_news"><i data-type='1' class="c_sx_check" @click="sx_checked($event)"></i>审核中</p>
+							 <p class="c_news"><i data-type='2' class="c_sx_check" @click="sx_checked($event)"></i>已发表</p>
+							 <p class="c_news"><i data-type='3' class="c_sx_check" @click="sx_checked($event)"></i>未通过</p>
+						</span>
+					</div>
+					<div class="left_con_list" style="font-size: 0;"></div>
+					<div class="left_click_load_more" @click="loadmore($event)">
+						点击加载更多
+					</div>
+					<div class="no_more" style="display: none;">
+						没有搜索到相关内容
+					</div>
+				</div>
+			</div>
+	{include file="public/footer"}		
+	
+		<script src="__INDEX__/style/c_index.js"></script>
+		<script src="__INDEX__/style/url_tools.js"></script>
+		<script src="__INDEX__/style/c_chat.js"></script>
+		<script src="__INDEX__/style/d_jquery.page.js"></script>
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+		<script src="__INDEX__/style/jquery.raty.min.js"></script>
+		<script>
+            new Vue({
+                el: '#layui-layer1',
+                data() {
+                    return {
+                        value: null,
+                        colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+                    }
+                }
+            });
+
+
+			new Vue({
+				el: '#app',
+				filters: {
+					formatDate(time) {
+						time = time * 1000
+						let date = new Date(time);
+						return formatDate(date, 'yyyy-MM-dd hh:mm')
+					}
+				},
+				data: function() {
+					return {
+						p_left_list: [{
+								src: 'c_person_info.html',
+								img: '__INDEX__/images/p1.png',
+								class: '',
+								title: '我的信息'
+							},
+							{
+								src: 'c_person_tx.html',
+								img: '__INDEX__/images/tx1.png',
+								class: '',
+								title: '我的头像'
+							},
+							{
+								src: 'c_person_safe.html',
+								img: '__INDEX__/images/safety1.png',
+								class: '',
+								title: '账号安全'
+							},
+							{
+								src: 'mycaselist.html',
+								img: '__INDEX__/images/home1.png',
+								class: '',
+								title: '我的投诉'
+							},
+							{
+								src: 'c_person_follow.html',
+								img: '__INDEX__/images/follow.png',
+								class: '',
+								title: '我的关注'
+							},
+							{
+								src: 'c_person_fan.html',
+								img: '__INDEX__/images/fans.png',
+								class: '',
+								title: '我的粉丝'
+							},
+							{
+								src: 'c_person_messages.html',
+								img: '__INDEX__/images/message.png',
+								class: '',
+								title: '我的私信'
+							},
+							{
+								src: 'c_black_list.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '黑名单管理'
+							},
+							{
+								src: 'brokercenter.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '交易商中心'
+							},
+							{
+								src: 'myarticles.html',
+								img: '__INDEX__/images/blackname2.png',
+								class: 'c_aside_on',
+								title: '我的文章'
+							}
+
+						],
+						msg_count:0,
+						page_size:20,//修改每页显示条数
+						page:1,
+                        current_page:1,
+                        keyword: '',
+                        catid: 0,
+						msg_list: [],
+						show_list: [],
+						my_id:1,
+						my_head_img:my_h_img,
+						value: null,
+						colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+					}
+				},
+				methods: {
+					person_page: function(src) {
+						if (src != '') {
+							window.location.assign(src);
+						}
+					},
+
+					handleCurrentChange(val) {
+						this.page = val;
+						this.get_msg_list();
+
+					},
+					sx_checked: function(e) {
+						var el = event.currentTarget;
+
+						console.log('el', el)
+						for	(var i=0; i<$('.c_sx_check').length; i++){
+							var n=$(el).attr('data-type');
+							console.log('n', n)
+							if (i == n && $('.c_sx_check').eq(n).hasClass('c_sx_checked') == false) {
+								$('.c_sx_check').eq(i).addClass('c_sx_checked');
+								//this.is_only_readed = false;
+                                this.current_page = 1; //重置为第一页
+								msg_list = getData(this.current_page, this.keyword, n)
+								this.show_list = this.msg_list;
+								this.catid = n
+
+							} else {
+								$('.c_sx_check').eq(i).removeClass('c_sx_checked');
+								//this.is_only_readed = true;
+								this.show_list = this.no_readed;
+							}
+						}
+					},
+                    loadmore: function(e) {
+                        this.current_page++;
+                        getData(this.current_page, this.keyword, this.catid);
+                    },
+                    sx_load: function() {
+
+                        this.current_page = 1; //重置为第一页
+                        msg_list = getData(this.current_page, this.keyword, this.catid)
+                        this.show_list = this.msg_list;
+                    },
+
+				},
+				computed: {
+					no_readed: function() {
+						return this.msg_list.filter(item => {
+							return item.status > 1
+						});
+					}
+				},
+				mounted: function() {
+					// this.get_msg_count();
+					// this.get_msg_list();
+                    this.sx_load();
+				}
+			});
+			// var current_page = 1;
+			// var keyword = '';
+			// getData(current_page, keyword, 0)
+			// 加载更多
+			// $('body').on('click', '.left_click_load_more', function() {
+			// 	current_page++;
+			// 	getData(current_page, keyword, $(this).attr('data-type'));
+			// });
+			// 跳转
+			function go1(e){
+				id= e.getAttribute('data-id')
+				$(window).attr('location','/index/article/articles?myid='+id);
+			}
+			function go2(id){
+				console.log('修改')
+				$(window).attr('location','/index/article/editarticle?myid='+id);
+			}
+
+			
+			// 获取数据
+			function getData(page, keyword, cate_id) {
+				if (page == 1) {
+					$('.left_click_load_more').show();
+					$('.no_more').hide();
+				}
+				$.ajax({
+					url: `/api/article/myarticlelist?page=`+page+'&cate_id='+cate_id,
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						var html_text = '';
+						if (data.code === 200) {
+							var res = data.data.data;
+							console.log(res)
+							for(var i = 0; i < res.length; i++ ) {
+								var status = '';
+								var botton1 = '';//追加
+								if (res[i].status ==1) {
+									status = '/static/index/images/shenhezhong.png'; // 审核中
+									botton1 = '<button id="go2_'+res[i].myid+'" onclick="go2('+res[i].myid+';return false;" style="width:70px; height:30px; display:block;color: #1E6FE4;border: 1px #1E6FE4 solid;border-radius: 3px;background: #ffffff;position: absolute;right: 100px;bottom: 20px;z-index:99999">修改</button>'; 
+								} else if(res[i].status ==0) {
+									status = '/static/index/images/yifabiao.png'; // 已发表
+									botton1 = '<button id="go2_'+res[i].myid+'" onclick="go2('+res[i].myid+');return false;" style="width:70px; height:30px; display:block;color: #1E6FE4;border: 1px #1E6FE4 solid;border-radius: 3px;background: #ffffff;position: absolute;right: 100px;bottom: 20px;z-index:99999">修改</button>'; 
+								} else if(res[i].status ==2) {
+									status = '/static/index/images/weitongguo.png'; // 不通过
+								} 
+
+								html_text += `<div class="left_con_item"><a data-id="${res[i].myid}" href="javascript:;" onclick="go1(this)">
+									<img src="${status}" alt="状态" class="left_msg_status"/>
+									<div class="left_item_title">
+										<i class="left_hot_icon"></i>${res[i].title}
+									</div>
+									<div class="left_item_text">
+										${res[i].abstract}
+									</div>
+									<div class="left_item_complaint_user">
+										<span>【发表日期】</span>
+										<div class="complain_user_info">
+											<span class="complain_user_name">${res[i].time}</span>
+										</div>
+									</div>
+									</a>
+									<div class="left_item_complaint_content">
+									${botton1}
+									</div></div>`
+							}
+							// if(page==3){
+							// 	$('.left_click_load_more').css('display', 'none')
+							// }
+							if (data.data.last_page < page) {
+								if (page == 1) {
+									$('.left_click_load_more').hide();
+									$('.no_more').show();
+									$('.left_con_list').html(html_text);
+								} else {
+									Dialog.success("温馨提示", "已经加载完毕！")
+								}
+								return;
+							}
+							if (page != 1) {
+								var html = $('.left_con_list').html();
+								$('.left_con_list').html(html + html_text);
+							} else {
+								$('.left_con_list').html(html_text);
+							}
+						}
+					},
+					error: function(e) {
+						console.log(e);
+					}
+				});
+			}
+			
+		</script>
+	</body>
+</html>

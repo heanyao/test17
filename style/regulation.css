@@ -1,0 +1,315 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: rgba(241, 242, 246);
+}
+#menu_slider .container {
+  margin-top: 20px;
+  background-color: #ffffff;
+  padding: 50px 20px;
+  width: 1200px;
+}
+#menu_slider .container .container_btn button {
+  width: 100%;
+  border-radius: 22px;
+}
+#menu_slider .container .owl-carousel {
+  width: 100%;
+  font-size: 15px;
+  opacity: 1;
+  display: block;
+}
+#menu_slider .container .owl-carousel .owl-wrapper-outer {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper {
+  left: 0px;
+  display: block;
+  position: relative;
+}
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item {
+  float: left;
+  padding: 5px 13px;
+  width: auto!important;
+}
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  padding-bottom: 2px;
+}
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item a:active,
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item a:hover,
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item a.focus,
+#menu_slider .container .owl-carousel .owl-wrapper-outer .owl-wrapper .owl-item a.current {
+  color: #1E6FE4;
+  border-bottom: 1px solid #1E6FE4;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+#menu_slider_1 {
+  background-color: #ffffff;
+}
+#menu_slider_1 #container-fluid {
+  background-color: #ffffff;
+  padding: 40px 60px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+#menu_slider_1 #container-fluid .container_fluid_pag {
+  padding: 7px 10px;
+  text-align: center;
+  max-width: 270px;
+  height: 156px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+}
+#menu_slider_1 #container-fluid .container_fluid_pag img {
+  max-width: 100%;
+  width: 253px;
+  height: 140px;
+}
+#menu_slider_1 #container-fluid .container_fluid_name {
+  height: 36px;
+}
+#menu_slider_1 #container-fluid .con_fluid_img {
+  width: 40px;
+  height: 26px;
+  vertical-align: middle;
+  float: left;
+}
+#menu_slider_1 #container-fluid .con_fluid_tit {
+  vertical-align: middle;
+  margin-left: 5px;
+  float: left;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+#menu_slider_1 #container-fluid .font_lab_inst {
+  font-size: 13px;
+}
+#menu_slider_1 #container-fluid .font_lab_time {
+  font-size: 15px;
+  font-weight: bold;
+  margin-right: 20px;
+}
+#menu_slider_1 #container-fluid .con_fluid_nolab {
+  float: left;
+  margin: 0 30px 0 0;
+}
+#menu_slider_1 #container-fluid .con_fluid_nolab p {
+  width: 39px;
+  height: 18px;
+  font-size: 13px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #606060;
+  line-height: 18px;
+  text-align: center;
+}
+#menu_slider_1 #container-fluid .con_fluid_nolab img {
+  width: 28px;
+  height: 28px;
+}
+#menu_slider_1 #container-fluid .container_fluid_btn {
+  text-align: center;
+  padding: 10px 0 10px 0px;
+}
+#menu_slider_1 #container-fluid .container_fluid_btn button {
+  width: 105px;
+  height: 39px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+/*************************************************************************/
+@media (min-width: 768px) {
+  #container-fluid,
+  #container-dealer {
+    width: 750px;
+  }
+  .col-sm-3 {
+    padding: 20px 20px 20px 0px;
+    width: 25%;
+  }
+}
+@media (min-width: 992px) {
+  #container-fluid,
+  #container-dealer {
+    width: 970px;
+  }
+  .col-md-3 {
+    padding: 20px 20px 20px 0px;
+    width: 25%;
+  }
+}
+@media (min-width: 1200px) {
+  #container-fluid,
+  #container-dealer {
+    width: 1199px;
+  }
+}
+/******************************************************************************/
+#menu_slider_2 {
+  background-color: #ffffff;
+}
+#menu_slider_2 #container-dealer {
+  background-color: #ffffff;
+  padding: 30px 20px;
+  margin: 0 auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+#menu_slider_2 #container-dealer .row:nth-child(2) {
+  margin-top: 11px;
+}
+#menu_slider_2 #container-dealer .container-dealer_title {
+  padding-bottom: 4.5px;
+  border-bottom: 1px solid #E2E2E2;
+  font-size: 20px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #333333;
+  line-height: 28px;
+  margin: 0;
+}
+#menu_slider_2 #container-dealer .container-dealer_title font {
+  border-bottom: 3px solid #292929;
+  padding-bottom: 4.5px;
+}
+#menu_slider_2 #container-dealer ul.drag-list {
+  list-style: none;
+  height: 550px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items {
+  box-sizing: border-box;
+  margin: 10px 9px;
+  float: left;
+  width: 271px;
+  height: 322px;
+  border: 1px solid #f1f1f1;
+  z-index: 1;
+  box-shadow: 0px 0px 1px 1px rgba(242, 242, 244, 0.9);
+  transform: scale(1);
+  transition: box-shadow 0.6s, transform 0.5s;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items a {
+  text-decoration: none;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  padding: 10px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items a:hover,
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items a:focus {
+  text-decoration: none;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items .drag-items_t_img {
+  width: 232px;
+  height: 132px;
+  text-align: center;
+  margin: 25px auto 0;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items .drag-items_t_img img {
+  width: 100%;
+  height: 100%;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items .drag-items_t_line {
+  width: 100%;
+  border-bottom: 1px dashed #ddd;
+  margin: 9px auto 20px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items h4 {
+  font-size: 18px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #393939;
+  line-height: 25px;
+  height: 25px;
+  text-align: center;
+  overflow: hidden;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items p {
+  text-align: center;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items p.drag-items_txt_year {
+  font-size: 15px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #8e8e8e;
+  line-height: 21px;
+  height: 21px;
+  text-align: center;
+  overflow: hidden;
+  margin: 0;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items p.drag-items_txt_year font.drag-items_font {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_cc {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_cc div.drag-items_cc_lab {
+  margin: 10px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_cc div.drag-items_cc_lab p {
+  text-align: center;
+  margin: 0;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_cc div.drag-items_cc_lab p:first-child {
+  font-size: 16px;
+  font-family: PingFangSC-Medium, PingFang SC;
+  font-weight: 500;
+  color: #393939;
+  line-height: 22px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_cc div.drag-items_cc_lab p:nth-child(2) {
+  font-size: 14px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #717171;
+  line-height: 20px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_pos {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  font-size: 16px;
+  padding: 5px 15px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_pos p {
+  margin: 0;
+  font-size: 16px;
+  font-family: PingFangSC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 22px;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_last {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items div.drag-items_last p {
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+}
+#menu_slider_2 #container-dealer ul.drag-list li.drag-items:hover {
+  box-shadow: 0px 0px 8px 8px rgba(242, 242, 244, 0.9);
+  transition: box-shadow 0.5s;
+}

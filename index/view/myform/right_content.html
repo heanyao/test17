@@ -1,0 +1,43 @@
+		<div class="container_l_right">
+			<!-- 投诉窗口 -->
+			<div class="complain_box">
+				<div>
+					<span></span>
+					<p>我要曝光</p>
+				</div>
+				<div>
+					<span></span>
+					<p>我的投诉</p>
+				</div>
+				<div>
+					<span></span>
+					<p>我的文章</p>
+				</div>
+			</div>
+			<!-- 曝光列表 -->
+			<div class="expose_list">
+				<p>本周曝光最多</p>
+				<ul>
+				{volist name="blacklist" id="vo" key="k" }
+					<li>
+						<img src="{$vo.logo_url}" alt="">
+						<a style="text-decoration: none;color: #000;" href="/broker/{$vo.myid}"><span style="width: 75%;display: block;overflow: hidden;text-overflow: ellipsis;height: 22px;">{$vo.name_en}{$vo.name_cn}</span></a>
+						<span>{$k}</span>
+					</li>
+				{/volist}
+				</ul>
+			</div>
+			<!-- 上下文章 -->
+<!-- 			<div class="essay_link">
+				<div>
+					<span>上一篇</span>
+					<span>1天前</span>
+					<p>NEV永利资管崩盘倒计时！本金很难退出</p>
+				</div>
+				<div>
+					<span>下一篇</span>
+					<span>20小时前</span>
+					<p>NEV永利资管崩盘倒计时！本金很难退出</p>
+				</div>
+			</div> -->
+		</div>

@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="__INDEX__/style/top_l.css"/>
+<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+<script src="__INDEX__/style/kefu.js"></script>
+<script type="text/javascript">
+    var __HOMEURL__ = "__ROOTURL__";
+	var kefu = new Kefu({
+		index: "/",
+		tel: "13888888888",//电话号码
+		qq: "888888",//在线QQ
+		wechatPerson: {
+			state: true,// true是开启个人微信二维码, false不开启
+			imgURL: "__INDEX__/images/2wm.png" //图片路径
+		},
+		wechatofficial: {
+			state: true,// true是开启微信公众号二维码, false不开启
+			imgURL: "__INDEX__/images/2wm.png" //图片路径
+		}//微信公众号
+	});
+</script>
+<!--头部-->
+<div class="top_l">
+    <div class="top_l_content">
+        <ul class="top_l_menu">
+            <li class="top_logo_l">
+                <a href="/">
+                    <img src="__INDEX__/images/indexLogo.png" alt="logo">
+                </a>
+            </li>
+            <li class="menu_item_l">
+                <a href="/brokerlist">交易商</a>
+            </li>
+            <li class="menu_item_l">
+                <a href="/articlelist">行业新闻</a>
+            </li>
+            <li class="menu_item_l">
+                <a href="/index/myform/index">我要曝光</a>
+            </li>
+            <li class="menu_item_l">
+                <a href="/search">搜索交易商</a>
+            </li>
+            <li class="menu_item_l">
+                <a href="/index/article/addarticle">发表文章</a>
+            </li>
+            <li class="search_input_con">
+                <div class="shares_select_l">
+                    <span class="shares_select_title">交易商</span>
+                    <i class="icon1_l"></i>
+
+                    <div class="shares_select_option_con">
+                        <div class="code_option_item" name="1">交易商</div>
+                        <div class="code_option_item" name="2">代理商</div>
+                        <div class="code_option_item" name="3">新闻</div>
+                    </div>
+                </div>
+                <div class="search_key_con">
+                    <input type="text" class="search_input_text" placeholder="交易商有很多多"/>
+                    <i class="icon2_l"></i>
+                    <div class="key_result_list">
+                    </div>
+                </div>
+            </li>
+            <li class="user_login_l" style="line-height: 56px;">
+                {if condition="session('userinfo') neq ''"}
+                <div class="login_status_2">
+                    <a href="{:url('index/user/c_person_messages')}" class="msg_icon_link">
+                        <i class="top_msg_icon_l"></i>
+                        <span class="top_msg_number">{$Request.session.userinfo.unread_num}</span>
+                    </a>
+                    <a href="{:url('index/user/c_person_messages')}">消息<i class="msg_detail_icon"></i></a>
+                    <a href="{:url('index/user/c_person_info')}" class="user_head_photo">
+                        <img src="{$Request.session.userinfo.head_img_url}" alt=""/>
+                    </a>
+                    <a href="{:url('index/user/logout')}" style="left:10px;position: relative;">退出</a>
+                </div>
+                {else/}
+                <div class="login_status_1">
+                    <a class="login_btn_l" href="{:url('index/user/c_login')}">登录</a>
+                    <a class="register_btn_l" href="{:url('index/user/c_register')}">注册</a>
+                </div>
+                {/if}
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!--头部js-->
+<script src="__INDEX__/style/top_l.js"></script>

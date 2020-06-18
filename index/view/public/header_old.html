@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+          name="viewport">
+    <title>首页</title>
+    <script type="text/javascript">
+        var __HOMEURL__ = "__ROOTURL__";
+    </script>
+</head>
+<body class="index_body_a">
+<div class="container_a">
+    <!--头部-->
+    <div class="topContainer_a">
+        <div class="topContent">
+            <div class="topNavigation">
+                <ul>
+                    {if condition="session('userinfo') neq ''"}
+                    <li><a href="{:url('index/user/c_person_info')}">{$Request.session.userinfo.name}</a></li>
+                    <li><span class="gap"></span></li>
+                    <li><a href="{:url('index/user/logout')}">退出</a></li>
+                    {else/}
+                    <li><a href="{:url('index/user/c_login')}">登录</a></li>
+                    <li><span class="gap"></span></li>
+                    <li><a href="{:url('index/user/c_register')}">注册</a></li>
+                    {/if}
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

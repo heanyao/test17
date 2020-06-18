@@ -1,0 +1,61 @@
+
+/*分页*/
+
+.pages {
+	margin-top: 40px;
+}
+
+.tcdPageCode {
+	margin-left: 4px;
+	color: #ccc;
+	text-align: right;
+}
+
+.tcdPageCode a {
+	display: inline-block;
+	color: #666666;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	border: 1px solid #ffffff;
+	margin: 0 2px;
+	
+	vertical-align: middle;
+}
+
+.tcdPageCode a:hover {
+	text-decoration: none;
+	border: 1px solid #ffffff;
+}
+
+.tcdPageCode span.current {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	margin: 0 2px;
+	color: #fff;
+	background-color: #1E6FE4;
+	border: 1px solid #1E6FE4;
+	
+	vertical-align: middle;
+}
+
+.tcdPageCode span.disabled {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	margin: 0 2px;
+	color: #666666;
+	background: #f2f2f2;
+	border: 1px solid #bfbfbf;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+.nextPage:hover {
+	color: #ffffff !important;
+	background-color: #1E6FE4;
+	border: 1px solid #1E6FE4;
+}

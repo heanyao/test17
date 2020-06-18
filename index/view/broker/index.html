@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>broker</title>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/q_broker.css" />
+		<!-- <script src="__INDEX__/style/jquery-1.8.3.min.js"></script> -->
+		<script src="__INDEX__/style/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/bootstrap.css" />
+		<script src="__INDEX__/style/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/progress.css" />
+		<!-- <link rel="stylesheet" type="text/css" href="__INDEX__/style/page.css" /> -->
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/jquery.webui-popover.css" />
+
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/q_emoji.css" />
+		<style>
+			.waves {
+			  width: 100%
+			  height: 100%;
+				position:absolute;
+				left:0;
+				top:0;
+				right:0;
+				bottom:0;
+			}
+			.user_head_photo img {
+				vertical-align: top;
+			}
+		</style>
+		<script>
+		var color_green = 'blue';
+		var color_red = 'rgb(255, 99, 132)';
+
+	    var servers = {$mt4server};
+	    var reg_obj = {$json_regulation};
+	    console.log(reg_obj);
+		</script>
+
+		<!-- 弹窗蒙层 -->
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/fixed_position.css" />
+		<link rel="stylesheet" href="__INDEX__/style/font-awesome-4.7.0/css/font-awesome.min.css">
+	</head>
+
+	<body>
+		<input type="hidden" name="" id="companie_id" value="1" />
+
+		<div class="q_main q_col">
+			<!-- 头部 -->
+{include file="public/header"}
+			<div class=" q_header  q_col ">
+				<div class="waves"></div>
+				<script src="__INDEX__/style/q_bj.js"></script>
+				<div class="q_h_gxsj q_row">
+					<i></i> 更新时间：<span></span>
+				</div>
+				<script>
+					$(function(){
+						var myDate = new Date;
+						    var year = myDate.getFullYear(); //获取当前年
+						    var mon = myDate.getMonth() + 1; //获取当前月
+						    var date = myDate.getDate(); //获取当前日
+						var today_ = year+"-"+mon+"-"+date;
+						$('.q_h_gxsj>span').text(today_);
+					});
+				</script>
+				<div class="q_h_content q_row">
+					<div class="q_h_jianguan">
+						<div class="q_jianguan" style="border-color: {$basic_info.status.color};">
+							<div class="q_jianguan_lt" style="background: {$basic_info.status.color}">{$basic_info.status.name}</div>
+							<div class="q_jg_dsj" style="border-top: 6px solid {$basic_info.status.color};"></div>
+							<div class="q_jg_dsj2" style="border-top: 6px solid {$basic_info.status.color};"></div>
+							<img src="__INDEX__/images/test.png" alt="">
+						</div>
+						<div class="q_jianguan_2 q_row">
+							<img src="__INDEX__/images/icons/pic_qbdt.png">
+							<div class="q_qinbao_list">
+								<p class="q_qinbao_item">11111111111111111111111111111111111111111111111111111111111111111</p>
+								<p class="q_qinbao_item">22222222222222222222222222222222222222222</p>
+								<p class="q_qinbao_item">32444444444444444444444444444444444444</p>
+								<p class="q_qinbao_item">4333333333333333333333</p>
+								<p class="q_qinbao_item">5555555555555555555</p>
+							</div>
+							<a href="javascript:;">更多</a>
+
+						</div>
+						<div class="q_jianguan_3 q_row">
+							<p><img onclick="shoucang(this)" data-sc-type="1" src="__INDEX__/images/icons/ico_xq_guanzhu.png"><span>关注</span></p>
+							<p><img src="__INDEX__/images/icons/ico_xq_zhuanfa.png"><span>转发</span></p>
+							<p><img src="__INDEX__/images/icons/ico_xq_jiucuo.png"><span>纠错</span></p>
+							<p><img src="__INDEX__/images/icons/ico_xq_tousu.png"><span>投诉</span></p>
+						</div>
+					</div>
+					<div class="q_h_info">
+						<p class="name">
+						{if condition="$basic_info.name_en eq $basic_info.name_cn"}
+						<span>{$basic_info.name_en}</span></span>
+						{else /}
+						<span>{$basic_info.name_en}</span> · <span>{$basic_info.name_cn}</span>
+						{/if}
+						</p>
+						<p class="info">{$basic_info.tag_year}年 <span>|</span> {$basic_info.tag_regulation} <span>|</span> {$basic_info.tag_license} <span>|</span> {$basic_info.tag_mt4} </p>
+						<p class="info2">
+							<img src="{$basic_info.r_country}"> &nbsp;&nbsp; {$basic_info.found_year}年 &nbsp;&nbsp;
+							<span>
+								推荐指数：
+								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+								<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+								&nbsp;&nbsp;4.8
+							</span>
+						</p>
+						<div class="address q_row" style="margin-top: 29px;">中文地址 <span>{$basic_info['web_cn'][0]}</span><img src="__INDEX__/images/icons/down.png"
+							 onclick="open_address_other(this)">
+							<div class="address_other">
+								<p class="q_row">
+									<span>中文地址</span>
+									<span class="address_other_address">
+									{volist name="$basic_info.web_cn" id="vo" key="k" }
+										<a href="{$vo}">{$vo}</a>
+									{/volist}
+									</span>
+									<img src="__INDEX__/images/icons/up.png" onclick="close_address_other(this)">
+								</p>
+
+							</div>
+						</div>
+
+						<div class="address q_row" style="margin-top: 10px;">英文地址 <span>{$basic_info['web_en'][0]}</span><img src="__INDEX__/images/icons/down.png"
+							 onclick="open_address_other(this)">
+							<div class="address_other">
+								<p class="q_row">
+									<span>中文地址</span>
+									<span class="address_other_address">
+									{volist name="$basic_info.web_en" id="vo" key="k" }
+										<a href="{$vo}">{$vo}</a>
+									{/volist}
+									</span>
+									<img src="__INDEX__/images/icons/up.png" onclick="close_address_other(this)">
+								</p>
+
+							</div>
+						</div>
+
+
+
+						<script>
+
+							function open_address_other(e){
+								$('.address_other').css('display','none');
+								$(e).siblings('.address_other').fadeIn();
+							
+							}
+							function close_address_other(e){
+								$(e).parents('.address_other').fadeOut();
+							}
+						</script>
+						<p class="btns">
+							<a href="javascript:;">在线开户</a>
+							<a href="javascript:;">MT4下载</a>
+							<a href="javascript:;">MT4/5鉴定</a>
+							<a href="javascript:;">IB直通车</a>
+						</p>
+					</div>
+					<div class="q_h_zhkb">
+						<p class="title">
+							综合口碑({$basic_info.comment_sum}人点评)
+							<i class="q_qdf_icon" onclick="to_dafen()"></i>
+							<script>
+								function to_dafen(){
+									$('body,html').animate({scrollTop: $('.q_tijiao_box').offset().top}, 500);
+								}
+							</script>
+						</p>
+						<div class="q_row q_h_pf">
+							<div class="pf">
+								<div class="circlechart" data-percentage="{$basic_info.support_rate}"></div>
+							</div>
+							<div>
+								<table class="hp">
+									<tr>
+										<td><img src="__INDEX__/images/icons/ico_kb_hp.png"></td>
+										<td>好评:</td>
+										<td>({$basic_info.good_cmt_num})</td>
+									</tr>
+									<tr>
+										<td><img src="__INDEX__/images/icons/ico_kb_yb.png"></td>
+										<td>一般:</td>
+										<td>({$basic_info.general_cmt_num})</td>
+									</tr>
+									<tr>
+										<td><img src="__INDEX__/images/icons/ico_kb_cp.png"></td>
+										<td>差评:</td>
+										<td>({$basic_info.bad_cmt_num})</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<p class="title">
+							网友印象
+						</p>
+						<div class="q_h_pf_labels q_row">
+						{volist name="impresslist" id="vo" key="k" }
+							<span class="q_pf_item">
+								{$vo.content} {$vo.count}
+							</span>
+						{/volist}
+<!-- 							<span class="q_pf_item">
+								靠谱 483
+							</span>
+							<span class="q_pf_item">
+								背景强大 483
+							</span> -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="q_contnet q_row">
+				<!-- 内容部分 -->
+				<div class="q_c_left">
+					<!-- 左边 -->
+					<div class="q_fxsm q_row">
+						<!-- 风险扫描 -->
+						<!-- Loader1 -->
+						<svg version="1.1" id="L1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+						 y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+							<circle fill="none" stroke="#ff0000" stroke-width="6" stroke-miterlimit="15" stroke-dasharray="14.2472,14.2472"
+							 cx="50" cy="50" r="47">
+								<animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="5s" from="0 50 50" to="360 50 50"
+								 repeatCount="indefinite" />
+							</circle>
+							<circle fill="none" stroke="#ff0000" stroke-width="1" stroke-miterlimit="10" stroke-dasharray="10,10" cx="50" cy="50"
+							 r="39">
+								<animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="5s" from="0 50 50" to="-360 50 50"
+								 repeatCount="indefinite" />
+							</circle>
+							<g fill="#ff0000">
+								<rect x="30" y="35" width="5" height="30">
+									<animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite"
+									 begin="0.1" />
+								</rect>
+								<rect x="40" y="35" width="5" height="30">
+									<animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite"
+									 begin="0.2" />
+								</rect>
+								<rect x="50" y="35" width="5" height="30">
+									<animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite"
+									 begin="0.3" />
+								</rect>
+								<rect x="60" y="35" width="5" height="30">
+									<animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite"
+									 begin="0.4" />
+								</rect>
+								<rect x="70" y="35" width="5" height="30">
+									<animateTransform attributeName="transform" dur="1s" type="translate" values="0 5 ; 0 -5; 0 5" repeatCount="indefinite"
+									 begin="0.5" />
+								</rect>
+							</g>
+						</svg>
+						<img class="q_fxsm_img1" src="__INDEX__/images/icons/pic_fxsm.png">
+						<img src="__INDEX__/images/icons/ico_fxsm_gaowei.png">
+						<span class="q_fx_gw">高危风险 56 </span>
+						<img src="__INDEX__/images/icons/ico_fxsm_zhongdeng.png">
+						<span class="q_fx_zd">中等风险 4</span>
+						<img src="__INDEX__/images/icons/ico_fxsm_yiban.png">
+						<span class="q_fx_yb">一般风险 65</span>
+						<span class="q_fx_ck" onclick="check_fx()">查看风险</span>
+					</div>
+					<div class="q_info">
+						<!-- 信息和功能 -->
+						<div class="q_info_info">
+							<p class="q_row q_info_1">
+								<span><span class="q_info_title">电话：</span><span>
+								{if condition="$basic_info.tel neq null"}
+								{$basic_info.tel}
+								{else /} - -
+								{/if}
+								</span></span>
+								<span><span class="q_info_title">邮箱：</span><span>
+								{if condition="$basic_info.email neq null"}
+								{$basic_info.email}
+								{else /} - -
+								{/if}
+								</span></span>
+							</p>
+							<p class="q_row q_info_1">
+								<span><span class="q_info_title">QQ/微信：</span><span>
+								{if condition="$basic_info.wechat neq null"}
+								{$basic_info.wechat}
+								{else /} - -
+								{/if}
+								</span></span>
+								<span><span class="q_info_title">地址：</span><span>
+								{if condition="$basic_info.wechat neq null"}
+								{$basic_info.address}
+								{else /} - -
+								{/if}
+								</span></span>
+							</p>
+							<p class="q_info_3 q_row">
+								<span class="q_info_title">简介：</span><span>							{if condition="$basic_info.intro neq null"}
+								{$basic_info.intro}
+								{else /} - -
+								{/if}</span>
+								<a href="javascript:;" onclick="change_last_heght()">更多</a>
+								<script>
+									function change_last_heght(){
+										if($('.q_info_3').css('overflow-y')!='visible'){
+											$('.q_info_3').css('overflow-y','visible');
+											$('.q_info_3').css('height','auto');
+										}
+										else{
+											$('.q_info_3').css('overflow-y','hidden')
+											$('.q_info_3').css('height','15px');
+											}
+										}
+								</script>
+								
+							</p>
+						</div>
+
+						<h3>监管信息</h3>
+						{if condition="$regulation_info neq null"}
+						{volist name="regulation_info" id="vo" key="k" }
+						<div class="q_info_jg q_row">
+							<div class="q_jianguan_lt" style="background:{$vo.status.color}" >{$vo.status.name}</div>
+							<div class="q_jg_dsj" style="border-top: 6px solid {$vo.status.color};"></div>
+							<div class="q_jg_dsj2" style="border-top: 6px solid {$vo.status.color};"></div>
+							<div class="q_info_jg_1"><img src="{$vo.c_logo}"></div>
+							<div class="q_info_jg_2 q_col">
+								<span><span>监管国家 :</span><span>{$vo.country_id.c_name}</span></span>
+								<span><span>监管证号 :</span><span>
+								{if condition="$vo.license_number neq null"}
+								{$vo.license_number}
+								{else /} - -
+								{/if}
+								</span></span>
+								<span><span>牌照类型 :</span><span>
+								{if condition="$vo.license_type neq null"}
+								{$vo.license_type}
+								{else /} - -
+								{/if}
+								</span></span>
+								<span><span>发证时间 :</span><span>
+								{if condition="$vo.active_time neq null"}
+								{$vo.active_time|date='Y-m-d',###}
+								{else /} - -
+								{/if}
+								</span></span>
+							</div>
+							<div class="q_info_jg_3 q_info_jg_2 q_col">
+								<span><span>监管强度 :</span><span>
+								{if condition="$vo.r_level eq '高'"}
+										<i class="q_info_jgqd1"></i>
+								{elseif condition="$vo.r_level eq '中'"/}
+										<i class="q_info_jgqd2"></i>
+								{else /}
+										<i class="q_info_jgqd3"></i>
+								{/if}
+									</span></span>
+								<span><span>业务权限 :</span><span>金融零食</span></span>
+								<span><span>公司注册码 :</span><span>
+								{if condition="$vo.license_number neq null"}
+								{$vo.license_number}
+								{else /} - -
+								{/if}
+								</span></span>
+								<span><span>到期时间 :</span><span>
+								{if condition="$vo.expire_time neq null"}
+								{$vo.expire_time|date='Y-m-d',###}
+								{else /} - -
+								{/if}
+								</span></span>
+							</div>
+							<div class="q_info_jg_4 q_row">
+								<a href="javascript:;" class="certificate-btn" onclick="openCertificate({$k})">查看证书</a>
+							</div>
+						</div>
+						{/volist}
+						{else /}
+						<div class="q_info_jg q_row">
+							<div class="q_info_wjg">
+								<p>
+									<img src="__INDEX__/images/icons/tanhao.png">
+									<span>暂未查证到有效监管信息 请注意风险！</span>
+								</p>
+							</div>
+						</div>
+						{/if}
+						<h3>常用功能</h3>
+						<div class="q_changyong q_row">
+							<div id="mpgg" class="q_cy_item q_row">
+								<img src="__INDEX__/images/ico_cygn_mpgg.png">
+								<div class="q_col">
+									<p>冒牌公告 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</div>
+							<div class="q_cy_item q_row">
+								<img src="__INDEX__/images/ico_cygn_hxtp.png">
+								<div class="q_col">
+									<p>关系图谱 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</div>
+							<div id="identify-mt4" class="q_cy_item q_row">
+								<img src="__INDEX__/images/ico_cygn_jianding.png">
+								<div class="q_col">
+									<p>MT4/5鉴定 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</div>
+							<a class="q_cy_item q_row" target="_blank" href="/index/broker/companypics?myid={$myid}">
+								<img src="__INDEX__/images/ico_cygn_gstp.png">
+								<div class="q_col">
+									<p>公司图片 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</a>
+							<div id="company-executive" class="q_cy_item q_row">
+								<img src="__INDEX__/images/ico_cygn_gsgc.png">
+								<div class="q_col">
+									<p>公司高层 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</div>
+							<div id="papers-info" class="q_cy_item q_row">
+								<img src="__INDEX__/images/ico_cygn_zjzl.png">
+								<div class="q_col">
+									<p>证件资料 ▶</p>
+									<p>快速识别冒牌公告，保障安全</p>
+								</div>
+							</div>
+
+						</div>
+						<div class="q_ckfx_box" id="q_ckfx_box">
+							<div class="q_ckfx_item">
+								<div class="q_ckfx_title q_row">
+									<span>风险扫描</span>
+									<img src="__INDEX__/images/icons/ico_fx_clean.png" onclick="close_ckfx()">
+								</div>
+								<p class="q_ckfx_tab q_row">
+									<label class="q_tab_active">高位风险</label>
+									<label>中等风险</label>
+									<label>一般风险</label>
+								</p>
+								<script>
+									$(function(){
+										$('.q_ckfx_content').css('display','none');
+										$('#q_ckfx_content1').css('display','block');
+									});
+									$('.q_ckfx_tab>label').click(function(){
+										$(this).addClass('q_tab_active');
+										$(this).siblings('label').removeClass('q_tab_active');
+										var text = $(this).text()	
+										$('.q_ckfx_content').css('display','none');
+										if(text == '高位风险'){
+											$('#q_ckfx_content1').css('display','block');
+										}
+										else if(text == '中等风险'){
+											$('#q_ckfx_content2').css('display','block');
+										}
+										else{
+											$('#q_ckfx_content3').css('display','block');
+										}
+									});
+								</script>
+								<!-- 未完成 -->
+
+								<div class="q_ckfx_content" id="q_ckfx_content1">
+									<p>高位风险 <span>(8)</span></p>
+									{volist name="risk_info" id="vo" key="k" }
+									{if condition="$vo.level eq 3"}
+									<p>{$vo.content} <span>(8)</span></p>
+									{else /}
+									{/if}
+									{/volist}
+								</div>
+								<div class="q_ckfx_content" id="q_ckfx_content2">
+									<p>中等风险 <span>(8)</span></p>
+									{volist name="risk_info" id="vo" key="k" }
+									{if condition="$vo.level eq 2"}
+									<p>{$vo.content} <span>(8)</span></p>
+									{else /}
+									{/if}
+									{/volist}
+								</div>
+								<div class="q_ckfx_content" id="q_ckfx_content3">
+									<p>一般风险 <span>(8)</span></p>
+									{volist name="risk_info" id="vo" key="k" }
+									{if condition="$vo.level eq 1"}
+									<p>{$vo.content} <span>(8)</span></p>
+									{else /}
+									{/if}
+									{/volist}
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<div class="q_dsj">
+						<!-- 大数据 -->
+						<div class="q_dsj_title q_row">
+							<h3>大数据评级</h3>
+							<span><i class="show-pop btn btn-default bottom" data-placement="bottom"></i>关于评分规则</span>
+							<!-- 弹窗 -->
+							<script src="__INDEX__/style/jquery.webui-popover.js"></script>
+							<script>
+								(function() {
+						            var settings = {
+						                trigger: 'hover',
+						                title: '<div class="q_pfxz_box">\
+										<div class="q_pfxz_item q_row"><span>牌照指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>信披指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>软件指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>监管指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>舆情指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>服务指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div>\
+										<div class="q_pfxz_item q_row"><span>交易指数</span><span>由我司法务团队，通过在监管机构网站查询，与监管机构电话、邮件沟通等多种手段对交易商的牌照真实性、价值性等作出综合评估。</span></div></div>',
+						                content: '',
+						                width: 490,
+						                multi: true,
+						                closeable: false,
+						                style: '',
+						                delay: 300,
+						                padding: true
+						            };
+						            $('i.show-pop').webuiPopover('destroy').webuiPopover(settings);
+						        })();
+						    </script>
+						</div>
+						<div class="q_dsj_content q_row">
+							<div class="q_dsj_img">
+								<canvas id="chartjs-radar-chart">
+									请使用版本较高的浏览器
+								</canvas>
+							</div>
+							<div class="dsj_info">
+								<div class="q_dsj_info_title q_row">
+									<span><i></i><text class="q_dashuju_date"></text>
+										<script>
+											$(function(){
+											var myDate = new Date;
+											    var year = myDate.getFullYear(); //获取当前年
+											    var mon = myDate.getMonth() + 1; //获取当前月
+											var today_ = year+"年"+mon+"月";
+											$('.q_dashuju_date').text(today_);
+										});
+									</script>
+									</span>
+
+									<span><i>发展指数：</i>{$basic_info.future_index}</span>
+									<span><i>评级排名：</i>{$rank}</span>
+								</div>
+								<div class="q_dsj_info_data q_row">
+									<div>
+										<p class="q_row "><i class="q_dsj_bule"></i><span>牌照指数</span> <span>{$bigdata_info.paizhao}</span></p>
+										<p class="q_row "><i class="q_dsj_yellow"></i><span>信披指数</span> <span>{$bigdata_info.xinpi}</span></p>
+										<p class="q_row "><i class="q_dsj_green"></i><span>风控指数</span> <span>{$bigdata_info.fengkong}</span></p>
+										<p class="q_row "><i class="q_dsj_red"></i><span>软件指数</span> <span>{$bigdata_info.ruanjian}</span></p>
+									</div>
+									<div>
+										<p class="q_row "><i class="q_dsj_orange"></i><span>监管指数</span> <span>{$bigdata_info.jianguan}</span></p>
+										<p class="q_row "><i class="q_dsj_purple"></i><span>舆情指数</span> <span>{$bigdata_info.yuqing}</span></p>
+										<p class="q_row "><i class="q_dsj_grey"></i><span>服务指数</span> <span>{$bigdata_info.fuwu}</span></p>
+										<p class="q_row "><i class="q_dsj_black"></i><span>交易指数</span> <span>{$bigdata_info.jiaoyi}</span></p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="q_yhdp">
+						<!-- 用户点评 -->
+						<h3>用户点评</h3>
+						<div class="q_yhdp_pf q_row">
+							<div class="q_yhdp_pf_1 q_col">
+								<h2>{$basic_info.avg_rate/10}</h2>
+								<p>
+									<i class="q_star"></i>
+									<i class="q_star"></i>
+									<i class="q_star"></i>
+									<i class="q_star"></i>
+									<i class="q_star_empty"></i>
+								</p>
+								<p class="q_pf_text">已有{$basic_info.comment_sum}人点评</p>
+								<a href="javascript:;" onclick="to_dafen()">我要点评</a>
+							</div>
+							<div class="q_yhdp_pf_2">
+								<h5>评分<small style="float: right;margin-top: 3px;">与全部平台相比</small></h5>
+								<table class="q_yhdp_pf_table">
+									<tr>
+										<td>交易成本</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_cost/10}</td>
+
+										{if condition="$comparing[0] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[0]*100-100}%</td>
+										{elseif condition="$comparing[0] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[0]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+
+									</tr>
+									<tr>
+										<td>订单执行</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_exc/10}</td>
+
+										{if condition="$comparing[1] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[1]*100-100}%</td>
+										{elseif condition="$comparing[1] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[1]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+
+									</tr>
+									<tr>
+										<td>出入金</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_fund/10}</td>
+										{if condition="$comparing[2] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[2]*100-100}%</td>
+										{elseif condition="$comparing[2] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[2]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+									</tr>
+									<tr>
+										<td>交易滑点</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_slip/10}</td>
+										{if condition="$comparing[3] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[3]*100-100}%</td>
+										{elseif condition="$comparing[3] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[3]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+									</tr>
+									<tr>
+										<td>卡盘掉线</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_stable/10}</td>
+										{if condition="$comparing[4] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[4]*100-100}%</td>
+										{elseif condition="$comparing[4] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[4]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+									</tr>
+									<tr>
+										<td>客户服务</td>
+										<td>
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+										</td>
+										<td>{$basic_info.avg_service/10}</td>
+										{if condition="$comparing[5] < 1"}
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[5]*100-100}%</td>
+										{elseif condition="$comparing[5] >1"/}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[5]*100-100}%</td>
+										{else /}
+										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 持平 --%</td>
+										{/if}
+									</tr>
+								</table>
+							</div>
+							<div class="q_yhdp_pf_3">
+								<h5>网友印象<small style="float: right;margin-top: 3px;"><img src="__INDEX__/images/icons/ico_xq_gxsj.png" style="cursor: pointer;"
+										 onclick="change_wyyx_num()"> 换一组</small></h4>
+									<div class="q_wyyx q_row q_wyyx_box">
+									{volist name="impresslist2" id="vo" key="k" }
+										<span class="q_wyyx_item">{$vo.content} ({$vo.count})</span>
+									{/volist}
+									</div>
+							</div>
+						</div>
+						
+						<div class="q_yhdp_type q_row">
+							<span class="q_yhdp_type_item q_yhdp_active" data-type="0">全部（{$basic_info.comment_sum})</span>
+							<span class="q_yhdp_type_item" data-type="1">推荐（{$basic_info.good_cmt_num})</span>
+							<span class="q_yhdp_type_item" data-type="2">一般（{$basic_info.general_cmt_num})</span>
+							<span class="q_yhdp_type_item" data-type="3">不推荐（{$basic_info.bad_cmt_num})</span>
+						</div>
+						
+						<div class="q_pinglun_box" id="q_pl_item_html">
+						<!-- 评论部分 -->
+						</div>
+						<div class="pages">
+							
+						</div>
+						<div class="q_tijiao_box">
+							<div class="q_row">
+								<div class="q_tijiao_title">评价：</div>
+								<div class="q_tijiao_right q_tj_pj">
+									<button onclick="q_tj_sup(this,1)"><img src="__INDEX__/images/icons/ico_hp.png">推荐</button>
+									<button onclick="q_tj_sup(this,2)"><img src="__INDEX__/images/icons/ico_yb.png">一般</button>
+									<button onclick="q_tj_sup(this,3)"><img src="__INDEX__/images/icons/ico_cp.png">不推荐</button>
+								</div>
+							</div>
+							<div class="q_row">
+								<div class="q_tijiao_title">印象：</div>
+								<div class="q_tijiao_right q_yx">
+									<div class="q_row">
+										<div class="q_yx_box">
+										</div>
+										<input type="text" class="q_zdyyx">
+										<img src="__INDEX__/images/icons/icon_add_s.png" class="q_zdyyx_img">
+									</div>
+									<div class="q_yx_items">
+										<span>很好</span>
+										<span>非常好</span>
+										<span>一般</span>
+										<span>差评</span>
+									</div>
+								</div>
+							</div>
+							<div class="q_row">
+								<div class="q_tijiao_title">评分：</div>
+								<div class="q_tijiao_right q_tj_pf">
+									<p class="q_pl_star">
+										<span>交易成本</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_cost' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_cost' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_cost' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_cost' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_cost' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span>
+										<span>出入金</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_fund' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_fund' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_fund' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_fund' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_fund' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span>
+										<span>卡盘掉线</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_stable' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_stable' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_stable' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_stable' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_stable' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span></p>
+									<p class="q_pl_star">
+										<span>订单执行</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_exc' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_exc' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_exc' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_exc' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_exc' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span>
+										<span>交易滑点</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_slip' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_slip' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_slip' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_slip' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_slip' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span>
+										<span>客户服务</span>
+										<span>
+											<img data-stars="1" data-star-type='rate_service' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="2" data-star-type='rate_service' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="3" data-star-type='rate_service' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="4" data-star-type='rate_service' src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img data-stars="5" data-star-type='rate_service' src="__INDEX__/images/icons/ico_xing_yiban_b.png"></span></p>
+								</div>
+								<button type="button" class="q_tj_pf_btn" onclick="tj_reset()">重置全部</button>
+
+							</div>
+							<div class="q_row">
+								<div class="q_tijiao_title">点评：</div>
+								<div class="q_tijiao_right">
+									<div class="qq">
+										<p>企业的发展离不开您宝贵的建议，请留下您的最真实的评论！</p>
+										<div class="message q_tj_msh" contentEditable='true'></div>
+										<div class="But">
+											<img src="__INDEX__/images/emojis/bba_thumb.gif" class='bq' />
+											<img src="__INDEX__/images/icons/ico_hf_picture.png" onclick="up_imgs(2)" class='bq2' />
+											<input type="file" style="display: none;" id="q_th_img" onchange="q_tj_imgs(this)" value="" />
+											<span class='submit' onclick="q_tj_pl()">发表</span>
+											<div class="img_sp img_sp2">
+												
+											</div>
+											<!--face begin-->
+											<div class="face">
+												<ul>
+													<li><img src="__INDEX__/images/emojis/smilea_thumb.gif" title="呵呵]"></li>
+													<li><img src="__INDEX__/images/emojis/tootha_thumb.gif" title="嘻嘻]"></li>
+													<li><img src="__INDEX__/images/emojis/laugh.gif" title="[哈哈]"></li>
+													<li><img src="__INDEX__/images/emojis/tza_thumb.gif" title="[可爱]"></li>
+													<li><img src="__INDEX__/images/emojis/kl_thumb.gif" title="[可怜]"></li>
+													<li><img src="__INDEX__/images/emojis/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+													<li><img src="__INDEX__/images/emojis/cj_thumb.gif" title="[吃惊]"></li>
+													<li><img src="__INDEX__/images/emojis/shamea_thumb.gif" title="[害羞]"></li>
+													<li><img src="__INDEX__/images/emojis/zy_thumb.gif" title="[挤眼]"></li>
+													<li><img src="__INDEX__/images/emojis/bz_thumb.gif" title="[闭嘴]"></li>
+													<li><img src="__INDEX__/images/emojis/bs2_thumb.gif" title="[鄙视]"></li>
+													<li><img src="__INDEX__/images/emojis/lovea_thumb.gif" title="[爱你]"></li>
+													<li><img src="__INDEX__/images/emojis/sada_thumb.gif" title="[泪]"></li>
+													<li><img src="__INDEX__/images/emojis/heia_thumb.gif" title="[偷笑]"></li>
+													<li><img src="__INDEX__/images/emojis/qq_thumb.gif" title="[亲亲]"></li>
+													<li><img src="__INDEX__/images/emojis/sb_thumb.gif" title="[生病]"></li>
+													<li><img src="__INDEX__/images/emojis/mb_thumb.gif" title="[太开心]"></li>
+													<li><img src="__INDEX__/images/emojis/ldln_thumb.gif" title="[懒得理你]"></li>
+													<li><img src="__INDEX__/images/emojis/yhh_thumb.gif" title="[右哼哼]"></li>
+													<li><img src="__INDEX__/images/emojis/zhh_thumb.gif" title="[左哼哼]"></li>
+													<li><img src="__INDEX__/images/emojis/x_thumb.gif" title="[嘘]"></li>
+													<li><img src="__INDEX__/images/emojis/cry.gif" title="[衰]"></li>
+													<li><img src="__INDEX__/images/emojis/wq_thumb.gif" title="[委屈]"></li>
+													<li><img src="__INDEX__/images/emojis/t_thumb.gif" title="[吐]"></li>
+													<li><img src="__INDEX__/images/emojis/k_thumb.gif" title="[打哈气]"></li>
+													<li><img src="__INDEX__/images/emojis/bba_thumb.gif" title="[抱抱]"></li>
+													<li><img src="__INDEX__/images/emojis/angrya_thumb.gif" title="[怒]"></li>
+													<li><img src="__INDEX__/images/emojis/yw_thumb.gif" title="[疑问]"></li>
+													<li><img src="__INDEX__/images/emojis/cza_thumb.gif" title="[馋嘴]"></li>
+													<li><img src="__INDEX__/images/emojis/88_thumb.gif" title="[拜拜]"></li>
+													<li><img src="__INDEX__/images/emojis/sk_thumb.gif" title="[思考]"></li>
+													<li><img src="__INDEX__/images/emojis/sweata_thumb.gif" title="[汗]"></li>
+													<li><img src="__INDEX__/images/emojis/sleepya_thumb.gif" title="[困]"></li>
+													<li><img src="__INDEX__/images/emojis/sleepa_thumb.gif" title="[睡觉]"></li>
+													<li><img src="__INDEX__/images/emojis/money_thumb.gif" title="[钱]"></li>
+													<li><img src="__INDEX__/images/emojis/sw_thumb.gif" title="[失望]"></li>
+													<li><img src="__INDEX__/images/emojis/cool_thumb.gif" title="[酷]"></li>
+													<li><img src="__INDEX__/images/emojis/hsa_thumb.gif" title="[花心]"></li>
+													<li><img src="__INDEX__/images/emojis/hatea_thumb.gif" title="[哼]"></li>
+													<li><img src="__INDEX__/images/emojis/gza_thumb.gif" title="[鼓掌]"></li>
+													<li><img src="__INDEX__/images/emojis/dizzya_thumb.gif" title="[晕]"></li>
+													<li><img src="__INDEX__/images/emojis/bs_thumb.gif" title="[悲伤]"></li>
+
+
+												</ul>
+											</div>
+											<!--face end-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- 右边 -->
+				<div class="q_c_right">
+					<div class="q_news_list">
+						<!-- 新闻列表 -->
+						<div class="q_news_top q_row">
+							<div class="q_new_top_item  q_news_tab_active" data-type="">
+								<p>最新投诉</p>
+								<span>（2424）</span>
+							</div>
+							<div class="q_new_top_item" data-type="alredayreply">
+								<p>已回复</p>
+								<span>（424）</span>
+							</div>
+							<div class="q_new_top_item" data-type="alldone">
+								<p>已完成</p>
+								<span>（453）</span>
+							</div>
+							<div class="q_new_top_item" data-type="brokernews">
+								<p>交易商</p>
+								<span>（32）</span>
+							</div>
+							<script>
+								$(function(){
+									$('.q_news_list_content1').css('display','none');
+									$('#tab1').css('display','block');
+								});
+								var tousu_type = '';
+								var tousu_page = 2;
+								$('.q_new_top_item').click(function() {
+									$(this).addClass('q_news_tab_active');
+									$('.q_news_list_content2').html('')
+									$(this).siblings('div').removeClass('q_news_tab_active');
+									tousu_type = $(this).attr('data-type');
+									// 初始化投诉列表
+									$('.q_news_list_content1').css('display','none');
+									
+									$('.q_news_more>a').text('查看更多');
+									tousu_page = 2;
+									if(tousu_type==''){
+										$('#tab1').css('display','block');
+									}
+									else if(tousu_type=='alredayreply'){
+										$('#tab2').css('display','block');
+									}
+									else if(tousu_type=='alldone'){
+										$('#tab3').css('display','block');
+									}
+									else{
+										$('#tab4').css('display','block');
+									}
+								});
+							</script>
+						</div>
+						<div class="q_news_list_content q_news_list_content1" id="tab1">
+						<!-- 循环 -->
+						{volist name="newestlist" id="vo" key="k" }
+							<div class="q_news_item q_row" onclick="javascrtpt:window.location.href='/index/index/index/{$vo.id}'">
+								<div>
+									<p>
+									{if condition="$vo.tag eq '无法出金'"}
+									<span class="q_bule q_news_item_tl">无法出金</span>
+									{elseif condition="$vo.tag eq '滑点点差'"/}
+									<span class="q_yellow q_news_item_tl">滑点严重</span>
+									{elseif condition="$vo.tag eq '其他问题'"/}
+									<span class="q_purple q_news_item_tl">其他曝光</span>
+									{else /}
+									<span class="q_green q_news_item_tl">诱导/欺诈</span>
+									{/if}
+									{$vo.title}</p>
+									<p>
+									{if condition="$vo.head_img_url neq null"}
+									<img src="{$vo.head_img_url}">
+									{else /}
+									<img src="__INDEX__/images/icon01.png">
+									{/if}
+									<span class="tousu_username">{$vo.name}</span><span>{$vo.time|date='Y-m-d',###}</span></p>
+								</div>
+								<div>
+									{if condition="$vo.images neq null"}
+									<img src="{$vo.images}">
+									{else /}
+									<img src="__INDEX__/images/hidepic.png">
+									{/if}
+								</div>
+							</div>
+						{/volist}
+							<!-- 循环 -->
+						</div>
+
+						<div class="q_news_list_content q_news_list_content1" id="tab2">
+
+						{volist name="repliedlist" id="vo" key="k" }
+							<div class="q_news_item q_row">
+								<div>
+									<p>
+									{if condition="$vo.tag eq '无法出金'"}
+									<span class="q_bule q_news_item_tl">无法出金</span>
+									{elseif condition="$vo.tag eq '滑点点差'"/}
+									<span class="q_yellow q_news_item_tl">滑点严重</span>
+									{elseif condition="$vo.tag eq '其他问题'"/}
+									<span class="q_purple q_news_item_tl">其他曝光</span>
+									{else /}
+									<span class="q_green q_news_item_tl">诱导/欺诈</span>
+									{/if}
+									{$vo.title}</p>
+									<p>
+									{if condition="$vo.head_img_url neq null"}
+									<img src="{$vo.head_img_url}">
+									{else /}
+									<img src="__INDEX__/images/icon01.png">
+									{/if}
+									<span class="tousu_username">{$vo.name}</span><span>{$vo.time|date='Y-m-d',###}</span></p>
+								</div>
+								<div>
+									{if condition="$vo.images neq null"}
+									<img src="{$vo.images}">
+									{else /}
+									<img src="__INDEX__/images/hidepic.png">
+									{/if}
+								</div>
+							</div>
+						{/volist}
+
+						</div>
+						<div class="q_news_list_content q_news_list_content1" id="tab3">
+						{volist name="$donelist" id="vo" key="k" }
+							<div class="q_news_item q_row">
+								<div>
+									<p>
+									{if condition="$vo.tag eq '无法出金'"}
+									<span class="q_bule q_news_item_tl">无法出金</span>
+									{elseif condition="$vo.tag eq '滑点点差'"/}
+									<span class="q_yellow q_news_item_tl">滑点严重</span>
+									{elseif condition="$vo.tag eq '其他问题'"/}
+									<span class="q_purple q_news_item_tl">其他曝光</span>
+									{else /}
+									<span class="q_green q_news_item_tl">诱导/欺诈</span>
+									{/if}
+									{$vo.title}</p>
+									<p>
+									{if condition="$vo.head_img_url neq null"}
+									<img src="{$vo.head_img_url}">
+									{else /}
+									<img src="__INDEX__/images/icon01.png">
+									{/if}
+									<span class="tousu_username">{$vo.name}</span><span>{$vo.time|date='Y-m-d',###}</span></p>
+								</div>
+								<div>
+									{if condition="$vo.images neq null"}
+									<img src="{$vo.images}">
+									{else /}
+									<img src="__INDEX__/images/hidepic.png">
+									{/if}
+								</div>
+							</div>
+						{/volist}
+						</div>
+						<div class="q_news_list_content q_news_list_content1" id="tab4">
+						{volist name="brokernews" id="vo" key="k" }
+							<div class="q_news_item q_row">
+								<div>
+									<p>{$vo.title}</p>
+									<p><img src="{$vo.tiny_logo}"><span class="tousu_username">{$vo.name_en}</span><span>{$vo.time}</span></p>
+								</div>
+								<div><img src="{$vo.thumb}"></div>
+							</div>
+						{/volist}
+						</div>
+						<div class="q_news_list_content q_news_list_content2">
+							
+						
+						</div>
+						<div class="q_news_more">
+							<a href="javascript:;" onclick="get_broker(this)">查看更多</a>
+							<script>
+								var broker_id = $("#companie_id").val();
+
+								function get_broker(e) {
+									var tousu_url = api_address + '/api/broker/newestcase';
+									var tousu_data = {
+										'broker_id': broker_id,
+										'progress': tousu_type,
+										'page': tousu_page
+									};
+									if (tousu_type == 'brokernews') {
+										tousu_url = api_address + '/api/broker/brokernews';
+										tousu_data = {
+											'broker_id': broker_id,
+											'page': tousu_page
+										};
+									}
+									$.ajax({
+										url: tousu_url,
+										type: 'post',
+										dataType: 'json',
+										data: tousu_data,
+										success: function(data) {
+											var html_text = '';
+											if (data.code === 200) {
+												data = data.data.data;
+												for (let i = 0; i < data.length; i++) {
+													html_text += '<div class="q_news_item q_row" onclick="to_newsdetail(' + data[i].myid + ')">\
+													<div>';
+													switch (data[i].tag) {
+														case '无法出金':
+															html_text += '<p><span class="q_bule q_news_item_tl">无法出金';
+															break;
+														case '滑点点差':
+															html_text += '<p><span class="q_yellow q_news_item_tl">滑点严重';
+															break;
+														case '诱导欺诈':
+															html_text += '<p><span class="q_green q_news_item_tl">诱导/欺诈';
+															break;
+														case '其他问题':
+															html_text += '<p><span class="q_purple q_news_item_tl">其他曝光';
+															break;
+														default:
+															break;
+													}
+													var time = data[i].time * 1000
+													let date = new Date(time);
+													html_text += '</span>' + data[i].title + '</p>\
+													<p><img src="' + api_address + data[i].head_img_url +
+														'"><span class="tousu_username">' + data[i].name + '</span><span>' + formatDate(date, 'yyyy-MM-dd') +
+														'</span></p>\
+													</div>\
+													<div><img src="' + api_address + data[i].images.split(
+															',')[0] + '"></div>\
+													</div>';
+												}
+												$('.q_news_list_content2').append(html_text);
+												if (data.length < 1) {
+													$(e).text('已经没有更多了');
+												}
+											}
+
+											tousu_page++;
+
+										},
+										error: function(e) {
+											console.log(e);
+										}
+									});
+								}
+							</script>
+						</div>
+					</div>
+					<div class="q_gfpj">
+						<!-- 官方评级 -->
+						<div class="q_pj_top q_row">
+							<span>官方评级 TOP10</span>
+							<span>更多</span>
+						</div>
+						<div class="q_pj_list_box">
+							<a class="q_row q_pj_item">
+								<span class="q_pj_title">排名</span>
+								<span class="q_pj_title">平台</span>
+								<span class="q_pj_title">发展指数</span>
+							</a>
+							{volist name="top10" id="vo" key="k" }
+							<a class="q_row q_pj_item" onclick="javascrtpt:window.location.href='/index/index/index/{$vo.myid}'" style="cursor:pointer">
+							    {if condition="$k < 4"}
+								<span><i class="q_pj_{$k} q_pj_icon">{$k}</i></span>
+								{else /} 
+								<span><i class="q_pj_4 q_pj_icon">{$k}</i></span>
+								{/if}
+								<span><img src="{$vo.tiny_logo}">{$vo.name_cn}</span>
+								<span>{$vo.future_index}</span>
+							</a>
+							{/volist}
+
+						</div>
+						<div class="q_pj_more q_col">
+							<p>评级介绍及不收费声明</p>
+							<p>3月评级报告全文</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{include file="public/footer"}
+		</div>
+
+		<!-- 展示大图 -->
+		<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:9999999;width:100%;height:100%;display:none;">
+			<div id="innerdiv" style="position:absolute;">
+				<img id="bigimg" style="border:5px solid #fff;" src="" />
+			</div>
+		</div>
+		<!-- MT4 MT5 -->
+		<div class="fixed-position identify-mt4" style="display: none;">
+			<div class="position-window">
+				<div class="close-icon">
+					<img src="__INDEX__/images/close.png" alt="">
+				</div>
+				<div class="title">TMFX拓富 · MT4/5鉴定</div>
+				<dashboard class="dashboard">
+					<div class="dashboard-header">
+						<div class="dashboard-title">
+							<div class="dashboard-status">
+								<div class="success">
+									<i class="fa fa-check"></i>
+								</div>
+							</div>
+							<div class="dashboard-status-title">鉴定结果：</div>
+							<div class="dashboard-status-name">主标 MT4/5</div>
+						</div>
+						<dashboard-clock digital="true" binary="true" />
+					</div>
+					<p class="dashboard-explain">正规的MT4/5主标交易商会有健全的系统服务与后续技术支持，一般情况下业务和技术都较为成熟风险控制能力较强</p>
+					<server-list>
+						<server v-for="(server, index) in servers" :class="{ 'has-failed': !server.status }" :type="server.type">
+							<span slot="name" class="data">{{server.name}}</span>
+							<span slot="status" class="data signal">{{server.mt}}</span>
+							<img slot="adr_icon" class="adr-icon" :src="server.adr_icon"/>
+							<!-- 更改状态图片 -->
+							<img slot="status_img" class="status_img" :src="server.status?'__INDEX__/images/mtonline.png':'__INDEX__/images/mtoffline.png'"/>
+							<span slot="adr" class="data">{{server.adr}}</span>
+						</server>
+					</server-list>
+				</dashboard>
+			</div>
+		</div>
+		<!-- 公司高层 -->
+		<div class="fixed-position company-executive" style="display: none;">
+			<div class="position-window">
+				<div class="close-icon">
+					<img src="__INDEX__/images/close.png" alt="">
+				</div>
+				<div class="title">公司高层</div>
+				<div class="content">
+					<div class="executive-title">
+						<div>姓名</div>
+						<div>职位</div>
+						<div>简介</div>
+					</div>
+					<div class="scroll">
+					{volist name="staff_list" id="vo" key="k" }
+						<div class="executive-item">
+							<div>
+								<div>
+									<div><img src="{$vo.head_img}" alt=""></div>
+									<div>{$vo.name}</div>
+								</div>
+							</div>
+							<div>
+								<div>{$vo.title}</div>
+							</div>
+							<div>
+								<div>{$vo.desc}</div>
+							</div>
+						</div>
+					{/volist}
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- 证书资料 - 图片 -->
+		<div class="fixed-position papers-info" style="display: none;">
+			<div class="position-window">
+				<div class="close-icon">
+					<img src="__INDEX__/images/close.png" alt="">
+				</div>
+				<div class="title">
+					证件资料
+				</div>
+				<div id="papers-info-img" class="content">
+				  {volist name="doclink_list" id="vo" key="k" }
+					<img src="{$vo.link}" alt="">
+				 {/volist}
+				</div>
+			</div>
+		</div>
+		<!-- 冒牌公告 -->
+		<div class="fixed-position mpgg" style="display: none;">
+			<div class="position-window">
+				<div class="close-icon">
+					<img src="__INDEX__/images/close.png" alt="">
+				</div>
+				<div class="title">
+					冒牌公告
+				</div>
+				<div class="content j_dangan">
+				{volist name="fake_brokers" id="vo" key="k" }
+					<div class="j_row" onclick="javascript:window.location.href='/index/broker/index?myid={$vo.myid}'">
+                        <div class="j_row">
+                            <div class="j_dangan_lt">{$vo.status}</div>
+                            <div class="j_dangan_left">
+                                <img src="{$vo.logo_url}">
+                            </div>
+                            <div class="j_dangan_right j_col">
+                                <p>
+									<span>{$vo.name_cn}</span>
+								</p>
+								<p>
+									<span>口碑评分<span>{$vo.avg_rate/10}</span></span>
+								</p>
+                                <p>{$vo.tag_regulation} | {$vo.tag_year}年 | {$vo.tag_license} | {$vo.tag_mt4}</p>
+                            </div>
+                        </div>
+                        <div class="j_dangan_r_btn j_col">
+                            <img src="__INDEX__/images/search.png">
+                            <div>
+                                查看<br> 更多详情
+                            </div>
+                        </div>
+					</div>
+				{/volist}
+				</div>
+			</div>
+		</div>
+		<!-- 证书 -->
+		<div class="fixed-position certificate" style="display: none;">
+			<div class="position-window">
+				<div class="close-icon">
+					<img src="__INDEX__/images/close.png" alt="">
+				</div>
+				<img src="__INDEX__/images/bkcetif.png" style="width: 100%;" alt="">
+				<div class="content">
+<!-- 					<div class="logo">
+						<img src="__INDEX__/images/LOGO.png" alt="">
+					</div>
+					<div class="certificate-title">
+						<div>澳大利亚证券及投资委员会1</div>
+						<div class="jgdj">监管等级：<div>高</div></div>
+					</div>
+					<div class="explain">澳大利亚证券和投资委员会(ASIC) 是澳大利亚政府的独立机构，根据Walis Inquiry的建议于1998年7月1日成立，负责监管澳大利亚的公司。ASIC的作用是实施金融服务法和规范公司行为，以保护澳澳大利亚证券和投资委员会(ASIC) 是澳大利亚政府的独立机构，根据Walis Inquiry的建议于1998年7月1日成立，负责监管澳大利亚的公司。ASIC的作用是实施金融服务法和规范公司行为，以保护澳澳大利亚证券和投资委员会(ASIC) 是澳大利亚政府的独立机构，根据Walis Inquiry的建议于1998年7月1日成立，负责监管澳大利亚的公司ASIC的作用是实施金融服务法和规范公司行为，以保护澳大利亚的消..</div>
+					<div class="status">
+						<div>当前状态：<span>监管中</span></div>
+						<div>监管国家：<span>澳大利亚</span></div>
+						<div>监管证号：<span>406684</span></div>
+						<div>牌照类型：<span>全牌照MM</span></div>
+					</div>
+					<div class="info">
+						<div>
+							<p><span class="bold">持牌机构:</span><span>M AVA CAPITAL MARKETS AUSTRALIA PTY LTD</span></p>
+							<p><span class="bold">持牌机构邮箱: </span><span>D.Ferguson@avatrade.com</span></p>
+							<p><span class="bold">持牌机构网址:</span><span>— —</span></p>
+							<p><span class="bold">持牌机构地址:</span><span>Level 13, 2- -26 Park Street, SYDNEY NSW 2000</span></p>
+							<p><span class="bold">持牌机构证明文件:</span><span></span></p>
+							<p>爱华AFCA牌照信息20190213更新<a>[查看证明文件]</a></p>
+							<p>爱华AFCA牌照信息20190213更新<a>[查看证明文件]</a></p>
+							<p>爱华AFCA牌照信息20190213更新<a>[查看证明文件]</a></p>
+						</div>
+						<div>
+							<div>
+								<p>
+									<span class="bold">生效时间:</span>
+									<span>2011年11月09日</span>
+								</p>
+								<p>
+									<span class="bold">到期时间:</span>
+									<span>— —</span>
+								</p>
+								<p>
+									<span class="bold">持牌机构电话: </span>
+									<span>1800 206 496</span>
+								</p>
+							</div>
+							<div>
+								<img src="__INDEX__/images/zhang.png" alt="">
+								<img src="__INDEX__/images/zhang.png" alt="">
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
+		<script src="__INDEX__/style/url_tools.js"></script>
+		<script src="__INDEX__/style/q_emoji_broker.js"></script>
+
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+		<script src="__INDEX__/style/q_broker.js"></script>
+		<script src="__INDEX__/style/progresscircle.js"></script>
+		<script src="__INDEX__/style/d_jquery.page.js"></script>
+		<!-- 弹窗引入的js -->
+		<script src='__INDEX__/style/vue.min.js'></script>
+		<script src='__INDEX__/style/vuex.min.js'></script>
+		<script src="__INDEX__/style/imagePreview.min.js" type="text/javascript"></script>
+		<script src="__INDEX__/style/fixed_position.js"></script> <!-- 弹窗用到的自己的js -->
+		<script>
+	    function to_newsdetail(id){
+	        window.location.href="/index/index/index/"+id;
+	    }
+		</script>
+		<script>
+			$('.circlechart').circlechart(); // Initialization
+			
+
+			function q_huifu_img(e) {
+				var _this = $(e); //将当前的pimg元素作为_this传入函数
+				imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+			}
+		</script>
+		<script src="__INDEX__/style/Chart.min.js"></script>
+		<script>
+			window.chartColors = {
+				red: 'rgb(255, 99, 132)',
+				orange: 'rgb(255, 159, 64)',
+				yellow: 'rgb(255, 205, 86)',
+				green: 'rgb(75, 192, 192)',
+				blue: 'rgb(54, 162, 235)',
+				purple: 'rgb(153, 102, 255)',
+				grey: 'rgb(201, 203, 207)',
+				black: 'rgb(0, 0, 0)'
+			};
+			var color = Chart.helpers.color;
+			var radarConfig = {
+				type: 'radar',
+				data: {
+					labels: [
+						"牌照指数", "监管指数", "信披指数", "舆情指数", "舆情指数", "服务指数", "软件指数", "交易指数"
+					],
+					datasets: [{
+						label: "",
+						backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
+						borderColor: window.chartColors.red,
+						pointBackgroundColor: window.chartColors.red,
+						data: [
+							{$bigdata_info.paizhao}, {$bigdata_info.jianguan}, {$bigdata_info.xinpi}, {$bigdata_info.yuqing}, {$bigdata_info.fengkong}, {$bigdata_info.fuwu}, {$bigdata_info.jiaoyi}, {$bigdata_info.ruanjian}
+						]
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					legend: {
+						display: false
+					},
+					title: {
+						display: false,
+					},
+					scale: {
+						ticks: {
+							beginAtZero: true
+						}
+					}
+				}
+			};
+
+
+
+			window.myRadar = new Chart(document.getElementById("chartjs-radar-chart"), radarConfig);
+		</script>
+	</body>
+
+</html>

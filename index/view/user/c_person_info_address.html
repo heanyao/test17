@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Person</title>
+    <script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/element-ui.css">
+    <script src="__INDEX__/style/element-ui.js"></script>
+    <script src="__INDEX__/style/vue.min.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css"/>
+    <script src="__INDEX__/style/layer.js"></script>
+</head>
+<body>
+<div id="app">
+    <div class="wrapper c_row">
+        <div class="c_aside c_col">
+            <a v-for="(item,idx) in p_left_list" :key="idx" href="javascript:;" @click="person_page(item.src)"
+               :class="item.class"><img :src="item.img" alt="">{{item.title}}</a>
+        </div>
+        <div class="p_info_content">
+            <div class="hd c_row">
+                <strong>收货地址</strong>
+                <span class="c_row">
+                     资料完善度 &nbsp;&nbsp;&nbsp;
+                    <el-progress class="progress" :text-inside="true" :stroke-width="26" status="warning"
+                                 :percentage="70"></el-progress>
+                </span>
+            </div>
+            <form action="">
+                <div class="" style="display:none"></div>
+                <dl class="c_info_dl c_row">
+                    <dt>姓名：</dt>
+                    <dd><input type="text" name="name" value=""></dd>
+                </dl>
+
+                <!--省市联动-->
+                <dl class="c_info_dl c_row">
+                    <dt>
+                        所在地区：
+                    </dt>
+                    <dd>
+
+                    </dd>
+                </dl>
+
+                <dl class="c_info_dl c_row">
+                    <dt>详细地址：</dt>
+                    <dd><textarea name="intro" placeholder="" class="verification[maxSize[100]]"
+                                  maxlength="100"></textarea></dd>
+                </dl>
+                <dl class="c_info_dl c_row">
+                    <dt>手机号码：</dt>
+                    <dd><input type="text" name="name" value=""></dd>
+                </dl>
+                <dl class="c_info_dl c_row">
+                    <dt>邮政编码：</dt>
+                    <dd><input type="text" name="name" value=""></dd>
+                </dl>
+                <dl class="c_info_dl c_row">
+
+                    <dd>
+                        <label><span class="cssradio"><input type="radio" name="gender" value="0"
+                                                             checked="true"><span></span></span>&nbsp;设置为默认收货地址</label>
+                    </dd>
+                </dl>
+                <div class="c_info_btn c_row">
+                    <button style="background-color: #eee;color: #999;">
+                        取消
+                    </button>
+                    <button>保存</button>
+                </div>
+
+                <dl class="c_info_dl c_row" style="padding: 10px 0 40px;">
+                    <dd style="color: #999;font-size: 14px">已保存0条地址，还能保存10条</dd>
+                </dl>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script src="__INDEX__/style/c_index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                p_left_list: [
+                    {src: 'c_person_info.html', img: '__INDEX__/images/p2.png', class: 'c_aside_on', title: '我的信息'},
+                    {src: 'c_person_tx.html', img: '__INDEX__/images/tx1.png', class: '', title: '我的头像'},
+                    {src: '', img: '__INDEX__/images/bd1.png', class: '', title: '绑定设置'},
+                    {src: 'c_person_safe.html', img: '__INDEX__/images/safety1.png', class: '', title: '账号安全'},
+                    {src: '', img: '__INDEX__/images/home1.png', class: '', title: '我的窝设置'},
+                    {src: '', img: '__INDEX__/images/blackname1.png', class: '', title: '黑名单管理'},
+                    {src: '', img: '__INDEX__/images/qb1.png', class: '', title: '我的钱包'}
+                ],
+            }
+        },
+        methods: {
+            person_page: function (src) {
+                if (src != '') {
+                    window.location.assign(src);
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>

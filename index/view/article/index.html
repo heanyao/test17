@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<script src="__INDEX__/style/bootstrap.js"></script>
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/e_article.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/bootstrap.css" />
+		<title>article</title>
+		<script>
+			var apiAddress = "__ROOTURL__";
+		</script>
+		<style>
+			.user_head_photo img {
+				vertical-align: top;
+			}
+		</style>
+	</head>
+	<body onload="init()">
+		<!-- 头部 -->
+{include file="public/header"}
+		<!--内容-->
+		<div class="article_content">
+			<!-- 导航 -->
+			<div class="article_top">
+				<div class="top_menu">
+					<a href="javascript:;" name="top_type_0" onclick="top_type(0)" class="menu_selected">所有</a>
+					<label class="menu_line"></label>
+					<a name="top_type_1" onclick="top_type(1)"  href="javascript:;">行业</a>
+					<label class="menu_line"></label>
+					<a name="top_type_2" onclick="top_type(2)"  href="javascript:;">原创</a>
+					<label class="menu_line"></label>
+					<a name="top_type_3" onclick="top_type(3)"  href="javascript:;">交易商</a>
+					<label class="menu_line"></label>
+					<a name="top_type_4" onclick="top_type(4)"  href="javascript:;">舆情</a>
+					<label class="menu_line"></label>
+					<a name="top_type_5" onclick="top_type(5)"  href="javascript:;">海外金融</a>
+					<label class="menu_line"></label>
+					<a name="top_type_6" onclick="top_type(6)"  href="javascript:;">其他相关</a>
+				</div>
+			</div>
+			<div class="article_top_hide">
+				<div class="top_menu">
+					<a href="javascript:;" name="top_type_0" onclick="top_type(0)" class="menu_selected">所有</a>
+					<label class="menu_line"></label>
+					<a name="top_type_1" onclick="top_type(1)"  href="javascript:;">行业</a>
+					<label class="menu_line"></label>
+					<a name="top_type_2" onclick="top_type(2)"  href="javascript:;">原创</a>
+					<label class="menu_line"></label>
+					<a name="top_type_3" onclick="top_type(3)"  href="javascript:;">交易商</a>
+					<label class="menu_line"></label>
+					<a name="top_type_4" onclick="top_type(4)"  href="javascript:;">舆情</a>
+					<label class="menu_line"></label>
+					<a name="top_type_5" onclick="top_type(5)"  href="javascript:;">海外金融</a>
+					<label class="menu_line"></label>
+					<a name="top_type_6" onclick="top_type(6)"  href="javascript:;">其他相关</a>
+				</div>
+			</div>
+			
+			<!-- 主体内容 -->
+			<div class="content">
+				<!-- 图片区域 -->
+				<div class="top_img e_row">
+					<div class="content_Img">
+						<img class="img_one" src="{$newslist[0]['thumb']}" alt="">
+						<p class="img_p" style="width: 780px;"><a href="article/{$newslist[0]['myid']}">{$newslist[0]['title']}</a></p>
+					</div>
+					<div class="e_col">
+						<div class="content_Img_two">
+							<img src="{$newslist[1]['thumb']}" alt="" class="img_two">
+							<p class="img_p" style="font-size:20px;width: 390px;margin-bottom: 0px;"><a href="article/{$newslist[1]['myid']}">{$newslist[1]['title']}</a></p>
+						</div>
+						<div class="content_Img_two" style="padding-bottom: 10px;">
+							<img src="{$newslist[2]['thumb']}" alt="" class="img_two">
+							<p class="img_p" style="font-size:20px;width: 390px;"><a href="article/{$newslist[2]['myid']}">{$newslist[2]['title']}</a></p>
+						</div>
+					</div>
+				</div>
+				<!-- 内容区域	 -->
+				<div class="e_row" style="margin-top: 10px;">
+					<!-- 左边文章区域 -->
+					<div class="left">
+						<!-- 左边顶部 -->
+						<div class="content_top e_row">
+							<div class="e_row">
+								<a class="article_tab tab_selected" href="javascript:;" onclick="articleHot()">热门游记</a>
+								<a class="article_tab" href="javascript:;" onclick="articleNew()">最新发表</a>
+								<div class="country_list">
+									<label onclick="articleByCountry(0)" class="country_item country_selected">
+										全部
+									</label>
+									<label onclick="articleByCountry(2)" class="country_item ">
+										中国
+									</label>
+									<label onclick="articleByCountry(9)" class="country_item ">
+										日本
+									</label>
+								</div>
+							</div>
+						</div>
+						<!-- 左边主体 -->
+						<div id="article_list" class="article_list">
+							<!-- 循环展示文章 --> 
+							
+						</div>
+						<div id="article_list_pages" class="article_list">
+							
+						</div>
+					</div>
+					<!-- 右边排行榜区域 -->
+					<div class="right">
+						<!-- 右边顶部 -->
+						<div class="content_top e_row">
+							<div>
+								<span class="list_title">
+									排行榜
+								</span>
+							</div>
+							<div>
+								<ul class="date_select e_row">
+									<a onclick="getCharts_list(1)" class="selected_date" href="javascript:;" >今日</a>
+									<li>|</li>
+									<a onclick="getCharts_list(2)" href="javascript:;">本周</a>
+									<li>|</li>
+									<a onclick="getCharts_list(3)" href="javascript:;">本月</a>
+								</ul>
+							</div>
+						</div>
+						<!-- 右边主体 -->
+						<div class="q_pj_list_box">
+							<p class="q_row q_pj_item">
+								<span class="q_pj_title">排名</span>
+								<span class="q_pj_title">平台</span>
+								<span class="q_pj_title">发展指数</span>
+							</p>
+						</div>
+						
+						<div class="charts_list e_row">
+							<div class="charts_icon e_col">
+								<div><span><i class="q_pj_1 q_pj_icon">1</i></span></div>
+								<div><span><i class="q_pj_2 q_pj_icon">2</i></span></div>
+								<div><span><i class="q_pj_3 q_pj_icon">3</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">4</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">5</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">6</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">7</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">8</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">9</i></span></div>
+								<div><span><i class="q_pj_4 q_pj_icon">10</i></span></div>
+							</div>
+							<div id="charts_items" class="charts_items e_col">
+								<!-- 循环显示排行列表 -->
+								
+								
+							</div>
+						</div>
+						<div class="q_pj_more q_col">
+							<p>评级介绍及不收费声明</p>
+							<p>3月评级报告全文</p>
+						</div>
+					</div>
+				</div>	
+			
+			</div>
+		</div>
+		<!-- 提示框 -->
+{include file="public/footer"}		
+<script src="__INDEX__/style/d_jquery.page.js"></script>
+<script>
+    
+</script>
+		<script src="__INDEX__/style/e_article.js"></script>
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+	</body>
+</html>

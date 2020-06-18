@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Person</title>
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+		<script src="__INDEX__/style/vue.min.js"></script>
+		<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/layer.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css" />
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/c_new_follows.css" />
+		<script src="__INDEX__/style/layer.js"></script>
+		<style>
+			[v-cloak] {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+	{include file="public/header"}
+		<div id="app">
+
+			<div class="wrapper c_row">
+				<div class="c_aside c_col">
+					<a v-for="(item,idx) in p_left_list" :key="idx" href="javascript:;" @click="person_page(item.src)" :class="item.class"><img
+						 :src="item.img" alt="">{{item.title}}</a>
+				</div>
+				<div class="p_info_content">
+					<div class="hd c_row" style="border-bottom: none;">
+						<span class="c_row" style="font-size: 18px;color: #666;">
+							我的关注 &nbsp;<b v-cloak>{{follows_num}}</b>
+						</span>
+					</div>
+					<div class="c_follows_box c_row">
+
+						<div class="follows_item c_col" v-cloak v-for="(item,idx) in follows_data" :key='idx'>
+							<a class="fol_tx_a" :href="api_address+/profiledetails/+item.id">
+								<img :src="api_address+item.head_img_url">
+							</a>
+							<span class="fol_name_sp c_row">
+								<a :href="api_address+/profiledetails/+item.id">{{item.name}}</a>
+								<i v-if="item.user_sex==1" class="c_male"></i>
+								<i v-if="item.user_sex==0" class="c_fmale"></i>
+							</span>
+							<div class="c_fol_info c_row">
+								<a href="javascript:;">
+									<b>30</b>
+									<span>游记</span>
+								</a>
+								<a href="javascript:;" class="c_fans">
+									<b>3000</b>
+									<span>粉丝</span>
+								</a>
+								<a href="javascript:;" class="no_right_border">
+									<b>84</b>
+									<span>足迹</span>
+								</a>
+							</div>
+							<div class="c_fol_btn">
+								<a href="javascript:;" @mouseenter="qxgz($event)" @mouseleave="ygz($event)" @click="hid_ygz(item.id,$event)"
+								 class="c_fol_ygz">已关注</a>
+								<a href="javascript:;" @click="hid_gz(item.id,$event)" class="c_fol_gz c_none">关注</a>
+								<a href="javascript:;" @click="to_msg(item.id,item.head_img_url,item.name)" class="c_fol_sx">发私信</a>
+							</div>
+						</div>
+						
+					</div>
+					<div class="pages">
+						<div class="tcdPageCode"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		 {include file="public/footer"}
+		<script src="__INDEX__/style/c_index.js"></script>
+		<script src="__INDEX__/style/d_jquery.page.js"></script>
+		<script src="__INDEX__/style/url_tools.js"></script>
+		<script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+		
+
+		<script>
+			new Vue({
+				el: '#app',
+				data: function() {
+					return {
+						p_left_list: [{
+								src: 'c_person_info.html',
+								img: '__INDEX__/images/p1.png',
+								class: '',
+								title: '我的信息'
+							},
+							{
+								src: 'c_person_tx.html',
+								img: '__INDEX__/images/tx1.png',
+								class: '',
+								title: '我的头像'
+							},
+							{
+								src: 'c_person_safe.html',
+								img: '__INDEX__/images/safety1.png',
+								class: '',
+								title: '账号安全'
+							},
+							{
+								src: 'mycaselist.html',
+								img: '__INDEX__/images/home1.png',
+								class: '',
+								title: '我的投诉'
+							},
+							{
+								src: 'c_person_follow.html',
+								img: '__INDEX__/images/follow2.png',
+								class: 'c_aside_on',
+								title: '我的关注'
+							},
+							{
+								src: 'c_person_fan.html',
+								img: '__INDEX__/images/fans.png',
+								class: '',
+								title: '我的粉丝'
+							},
+							{
+								src: 'c_person_messages.html',
+								img: '__INDEX__/images/message.png',
+								class: '',
+								title: '我的私信'
+							},
+							{
+								src: 'c_black_list.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '黑名单管理'
+							},
+							{
+								src: 'brokercenter.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '交易商中心'
+							},
+							{
+								src: 'myarticles.html',
+								img: '__INDEX__/images/blackname1.png',
+								class: '',
+								title: '我的文章'
+							}
+						],
+						follows_data: [],
+						current_page:1
+					}
+				},
+				methods: {
+					person_page: function(src) {
+						if (src != '') {
+							window.location.assign(src);
+						}
+					},
+					to_msg: function(id, head, name) {
+						window.localStorage.setItem('f_id', id);
+						window.localStorage.setItem('f_head_img', api_address + head);
+						window.localStorage.setItem('f_name', name);
+						window.location.assign('msg_tools.html');
+					},
+					qxgz: function(e) {
+						$(e.currentTarget).text('取消关注')
+					},
+					ygz: function(e) {
+						$(e.currentTarget).text('已关注')
+					},
+					hid_ygz: function(id, e) {
+						isfollow(id, 2, $(e.currentTarget));
+					},
+					hid_gz: function(id, e) {
+						isfollow(id, 1, $(e.currentTarget));
+					},
+					set_pages(last_page) {
+						 var vm = this;
+					    $(".tcdPageCode").createPage({
+					        pageCount: last_page,
+					        current: this.current_page,
+					        backFn: function(p) {
+					          this.current_page = p; 
+							  $.ajax({
+							  	url: api_address + '/api/messages/myfocuslist?page='+p,
+							  	type: 'get',
+							  	dataType: 'json',
+							  	success: function(data) {
+							  		if (data.code === 200) {
+							  			vm.follows_data = data.data.data;
+							  			vm.$forceUpdate();
+							  		}
+							  		
+							  	},
+							  	error: function(e) {
+							  		console.log(e)
+							  	}
+							  });
+					        }
+					    });
+						}
+				},
+				computed: {
+					follows_num: function() {
+						return this.follows_data.length;
+					}
+				},
+				mounted: function() {
+					var vm = this;
+					$.ajax({
+						url: api_address + '/api/messages/myfocuslist?page='+1,
+						type: 'get',
+						dataType: 'json',
+						success: function(data) {
+							if (data.code === 200) {
+								vm.follows_data = data.data.data;
+								vm.$forceUpdate();
+								vm.set_pages(data.data.last_page,data.data.per_page);
+							}
+							
+						},
+						error: function(e) {
+							console.log(e)
+						}
+					});
+				}
+
+			});
+		</script>
+	</body>
+</html>

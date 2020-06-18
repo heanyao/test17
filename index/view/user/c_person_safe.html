@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Person</title>
+    <script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+    <script src="__INDEX__/style/vue.min.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/element-ui.css">
+    <script src="__INDEX__/style/element-ui.js"></script>
+    <link rel="stylesheet" href="__INDEX__/style/layer.css"/>
+    <link rel="stylesheet" type="text/css" href="__INDEX__/style/c_style.css"/>
+    <script src="__INDEX__/style/layer.js"></script>
+</head>
+<body>
+{include file="public/header"}
+<div id="app">
+    <div class="wrapper c_row">
+        <div class="c_aside c_col">
+            <a v-for="(item,idx) in p_left_list" :key="idx" href="javascript:;" @click="person_page(item.src)"
+               :class="item.class"><img :src="item.img" alt="">{{item.title}}</a>
+        </div>
+        <div class="p_info_content">
+            <div class="hd c_row">
+                <strong>账号安全</strong>
+<!--                 <span class="c_row">
+                     资料完善度 &nbsp;&nbsp;&nbsp;
+                    <el-progress class="progress" :text-inside="true" :stroke-width="26" status="warning"
+                                 :percentage="70"></el-progress>
+                </span> -->
+            </div>
+            <div class="c_safe_box">
+                <div class="" style="display:none"></div>
+                <dl class="c_info_dl c_row">
+                    <dt>密码：</dt>
+                    <dd><a href="javascript:;" @click="ways">修改密码</a>
+                        <div>
+                            <div class="safe_ways c_row" v-if="show_ways">
+                                <a href="{:url('user/c_findpassword')}"><i></i>
+                                    <p>手机验证修改</p></a>
+                                <a href="{:url('user/c_findpassword')}"><i style="background-position: -54px 0"></i>
+                                    <p>邮箱验证修改</p></a>
+                            </div>
+                        </div>
+                    </dd>
+                </dl>
+                <dl class="c_info_dl userpass  c_row">
+                    <dt>绑定邮箱：</dt>
+                    <dd>
+                        {{email}}
+                        <span class="status" v-if="is_bd_email"><i></i>已绑定
+                        <a style="margin-left: 15px;" href="{:url('user/c_change_email')}">更改邮箱</a></span>
+                        <a v-else  href="{:url('user/c_change_email')}">绑定邮箱</a>
+                    </dd>
+                </dl>
+                <dl class="c_info_dl userpass  c_row">
+                    <dt>绑定手机：</dt>
+                    <dd>
+                        {{phone}}
+                        <span class="status"><i></i>已绑定
+                        <a style="margin-left: 15px;" href="{:url('user/c_change_phone')}">更改号码</a>
+                        </span>
+                    </dd>
+                </dl>
+
+
+                <dl class="c_info_dl c_row">
+                    <dt>账号注销：</dt>
+                    <dd>
+                        <a href="javascript:;">申请注销</a>
+                    </dd>
+                </dl>
+                <ul class="logout-question">
+                    <li @click="ques_alert(idx)" v-for="(item,idx) in questions" :key="idx"><a>{{item}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <el-dialog
+            :title="dialog_title"
+            :visible.sync="dialogVisible"
+            width="30%">
+        <span class="dialog_br">{{dialog_content}}</span>
+        <span slot="footer" class="dialog-footer">
+    <el-button type="warning" @click="dialogVisible = false">知道啦</el-button>
+  </span>
+    </el-dialog>
+</div>
+{include file="public/footer"}
+
+<script src="__INDEX__/style/c_index.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                dialog_title: '',
+                dialog_content: '',
+                dialogVisible: false,
+                is_bd_email: true,
+                email: '{$useremail}',
+                phone: '{$userphone}',
+                show_ways: false,
+                p_left_list: [
+                    {src: 'c_person_info.html', img: '__INDEX__/images/p1.png', class: '', title: '我的信息'},
+                    {src: 'c_person_tx.html', img: '__INDEX__/images/tx1.png', class: '', title: '我的头像'},
+                    // {src: '', img: '__INDEX__/images/bd1.png', class: '', title: '绑定设置'},
+                    {src: 'c_person_safe.html', img: '__INDEX__/images/safety2.png', class: 'c_aside_on', title: '账号安全'},
+                    {src: 'mycaselist.html', img: '__INDEX__/images/home1.png', class: '', title: '我的投诉'},
+                    {src: 'c_person_follow.html', img: '__INDEX__/images/follow.png', class: '', title: '我的关注'},
+                    {src: 'c_person_fan.html', img: '__INDEX__/images/fans.png', class: '', title: '我的粉丝'},
+                    {src: 'c_person_messages.html', img: '__INDEX__/images/message.png', class: '', title: '我的私信'},
+                    {src: 'c_black_list.html', img: '__INDEX__/images/blackname1.png', class: '', title: '黑名单管理'},
+                    {src: 'brokercenter.html',img: '__INDEX__/images/blackname1.png', class: '', title: '交易商中心'},
+                    {src: 'myarticles.html', img: '__INDEX__/images/blackname1.png', class: '', title: '我的文章'}
+                ],
+                questions: ['注销账号有哪些影响？', '注销账号的条件有哪些？', '已完成商家入驻，是否可以注销？', '攻略号是否可以注销？', '手机号未绑定可以注销账号吗？',
+                    '绑定的手机号已更换，如何注销账号？', '申请了注销是否还能撤销？', '账号注销后，是否可以重新注册新账号？', '注销账户申请的审核时间是多久？'],
+                answer: [' 回答：1、注销账户后，马蜂窝不支持恢复数据与相关服务，请做好相关账户资料信息和数据的备份。请您保存好订单、服务的交易凭证等资料，否则您有可能无法享受售后服务。\n' +
+                '2、注销马蜂窝账户，您将无法再使用本账户，也将无法找回您马蜂窝账户中及与账户相关的任何内容或信息，包括但不限于：\n' +
+                '（1）您将无法登录、使用本马蜂窝账户；\n' +
+                '（2）马蜂窝账户的个人资料（包括但不限于昵称、头像、签名、关注、粉丝等）和历史信息（包括但不限于发表的游记/问题/回答/嗡嗡/评论/回复等）都将无法找回；\n' +
+                '（3）您的虚拟权益（包括但不限于账户余额、代金券、优惠券、蜂蜜金币等）视为您自行放弃，将无法继续使用\n',
+                '回答：申请注销的账户应满足以下条件：\n' +
+                ' 1、账号处于安全状态，没有被盗、被封等风险：账号未被禁言、封号；最近一个月内无提交注销操作；最近一周内未触犯《马蜂窝社区公约》；\n' +
+                ' 2、账户无进行中的交易、无未完成的订单或服务，且最近一笔交易完成时间大于一年；\n' +
+                ' 3、账户无未完成的借款、无进行中的分期，且最近一笔分期或借款完成时间大于一个月；\n' +
+                ' 4、账号无任何纠纷，未处于被举报中或举报发起中；未有被举报成立记录；未有举报成立记录或举报成立记录已超过六个月；\n' +
+                ' 5、账号未注册过商家号或攻略号；\n' +
+                ' 6、账号未发起活动，且活动未结束；账号没有正在参与的活动；\n' +
+                ' 7、账号不是小组管理员；\n' +
+                ' 8、不存在其他马蜂窝认定为非正常操作（如抄袭、刷单、非正常举报和投诉、恶意评论等）的',
+                    '回答：已完成商家入驻的账户不可以注销。',
+                    '回答：已成为攻略号的账户不可以注销。',
+                    '回答：出于对蜂蜂账户的安全考虑，注销账户必须要绑定本人手机号，才可以申请注销的。',
+                    '回答：请蜂蜂先去换绑手机号，再提交注销。',
+                    '回答：注销申请一旦提交成功，就无法撤销了，因此请蜂蜂谨慎操作',
+                    '回答：注销后，该帐号绑定的邮箱或手机号会自动解除绑定，可以再次用于注册或绑定其他帐号。\n',
+                    '回答：一般情况下会在1～10个工作日完成您的账户注销申请，请蜂蜂耐心等待；如遇特殊情形，客服人员会与您联系的。\n'
+                ]
+
+            }
+        },
+        methods: {
+            ways: function () {
+                let self = this;
+                self.show_ways = !self.show_ways;
+            },
+            person_page: function (src) {
+                if (src != '') {
+                    window.location.assign(src);
+                }
+            },
+            ques_alert: function (idx) {
+                let self = this;
+                self.dialogVisible = true;
+                self.dialog_title = self.questions[idx];
+                self.dialog_content = self.answer[idx];
+            }
+        }
+    });
+</script>
+</body>
+</html>

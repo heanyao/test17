@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Process</title>
+		<link rel="stylesheet" href="__INDEX__/style/cases.css">
+		<link rel="stylesheet" type="text/css" href="__INDEX__/style/bootstrap.css" />
+		<script src="__INDEX__/style/jquery-1.8.3.min.js"></script>
+		<script src="__INDEX__/style/bootstrap.js"></script>
+    <!-- 新增 -->
+		<script src="__INDEX__/style/d_jquery.page.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/page.css">
+		<script src="__INDEX__/style/q_emoji.js"></script>
+		<link rel="stylesheet" href="__INDEX__/style/q_emoji.css">
+		<link rel="stylesheet" href="__INDEX__/style/q_style.css">
+		<style>#rate1 img,#rate2 img,#rate3 img {width: 22px;}</style>
+	</head>
+	<script>
+	var case_id = {$basic_info.myid};
+	</script>
+	<style>
+			.user_head_photo img {
+				vertical-align: top;
+			}
+	</style>
+	<body>
+	{include file="public/header"}
+	<input type="hidden" name="" id="case_id" value="{$basic_info.myid}" />
+		<div class="j_main">
+			<div class="j_top_number">
+				<span>编号：</span><span>{$basic_info.myid}</span>
+			</div>
+			<div class="j_content j_row">
+				<div class="j_left">
+					<div class="top_title">
+						<p><span>{$basic_info.tag}</span><span>{$basic_info.title}</span></p>
+						<div class="j_row">
+							<div class="top_head_img">
+								<img src="{$basic_info.head_img_url}">
+							</div>
+							<div class="top_info j_col">
+								<p>{$basic_info.name}</p>
+								<p>
+									<span>{$basic_info.time|date="Y-m-d",###}</span>
+<!-- 									<span><img  class="shoucang_img" src="__INDEX__/images/sc_star.png" ><span>156</span></span>
+									<span><span class="glyphicon glyphicon-comment"></span><span>2</span></span>
+									<span><span class="glyphicon glyphicon-share"></span></span>
+								</p> -->
+							</div>
+						</div>
+					</div>
+					<div class="j_one_obj">
+						<div class="left_obj" style="height: 288px;">
+							<p><span>投诉对象：</span><span>{$case_broker.name_cn}</span></p>
+							<p><span>投诉要求：</span><span>{$basic_info.require}</span></p>
+							<p><span>涉诉金额：</span><span style="font-size: 20px;font-weight: 500;">{$basic_info.money}人民币</span></p>
+							<p><span>投诉进度：</span><span style="color: #E93732;">投诉
+							{if condition="$basic_info.status == 2 "} 
+							审核通过
+							{elseif condition="$basic_info.status > 7 "/}
+							商家拒绝处理
+							{elseif condition="$basic_info.status == 7"/}
+							已完成
+							{else /}
+							处理中
+							{/if}
+							</span></p>
+							<p><span>投诉人电话：</span><span>{$basic_info.user_phone}</span></p>
+							<p><span>投诉人邮箱：</span><span>{$basic_info.user_email}</span></p>
+						</div>
+					</div>
+<!-- 					<div class="j_pinsheng">
+						<label>评审团</label>
+						<div class="j_row">
+							<div class="pin_item j_col">
+								<img src="__INDEX__/images/touxiang.png">
+								<p>林东东</p>
+								<p>西南大虚法师兼国家安全局局长</p>
+							</div>
+						</div>
+					</div> -->
+					<div class="j_dangan">
+						<label>涉事企业档案</label>
+						<div class="j_row" onclick="javascript:location.href=__HOMEURL__+'/index/broker/index?myid={$case_broker.myid}'">
+							<div class="j_row">
+								<div class="j_dangan_lt" style="background: {$case_broker.color};">{$case_broker.status}</div>
+								<div class="j_dangan_left">
+									<img src="__INDEX__/images/img1.png">
+								</div>
+								<div class="j_dangan_right j_col">
+									<p><span>{$case_broker.name_en}</span>
+										<span class="dangan_icon">
+											<span>口碑评分</span>
+											<span>{$case_broker.avg_rate/10}</span>
+										</span></p>
+									<p>{$case_broker.tag_regulation} | {$case_broker.tag_year} | {$case_broker.tag_license} | {$case_broker.tag_mt4}</p>
+								</div>
+							</div>
+							<div class="j_dangan_r_btn j_col">
+								<img src="__INDEX__/images/search.png">
+								<div>
+									查看<br>
+									更多详情
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<div class="j_process_content">
+
+
+						{volist name="case_pgs" id="vo" key="k" }
+						<div class="j_process_img_box j_row">
+							<div class="j_process_head_img j_col">
+								<img src="{$vo.head_img_url}">
+								{if condition="($vo.status == 4) OR ($vo.status == 7) "}
+								<div class="shangjia">商</div>
+								{elseif condition="$vo.status eq 6"/}
+								<div class="shengping">评</div>
+								{else /}
+								{/if}
+								<!-- 小三角 -->
+								<div class="sanjiao"></div>
+							</div>
+							<div class="j_process_info j_row">
+								<span>{$vo.name}</span>
+								<span>
+								{if condition="$vo.status eq 2 "} 
+								已审核通过
+								{elseif condition="$vo.status eq 3"/}
+								已联系商家
+								{elseif condition="$vo.status eq 4"/}
+								商家回复
+								{elseif condition="$vo.status eq 5"/}
+								补充投诉
+								{elseif condition="$vo.status eq 6"/}
+								律师介入
+								{elseif condition="$vo.status eq 7"/}
+								确认完成
+								{else /}
+								商家拒绝处理
+								{/if}
+								</span>
+								<span>{$vo.time|date="Y-m-d H:i:s",###}</span>
+							</div>
+						</div>
+						<div class="j_process_content_box j_row">
+							<!-- 左边竖线 -->
+							<div class="j_left_line"></div>
+							<div class="j_col">
+								<div class="j_sketch">
+							{if condition="$vo.status eq 2 "} 
+							正联系交付给商家。
+							{elseif condition="$vo.status eq 3"/}
+							商家处理中。
+							{elseif condition="$vo.status eq 7"/}
+
+							
+							<div style="margin:10px 10px 0 45px">
+                    <div style="height: 30px;clear: both;"><div style="width: 70px;float: left;">处理速度：</div><div style="float: left;width: 130px" id="rate1"></div><div style="margin-left: 5px;width: 40px;float: left;">{$basic_info.s_speed/10} 星</div></div>
+                    <div style="height: 30px;clear: both;"><div style="width: 70px;float: left;">服务态度：</div><div style="float: left;width: 130px" id="rate2"></div><div style="margin-left: 5px;width: 40px;float: left;">{$basic_info.s_service/10} 星</div></div>
+                    <div style="height: 30px;clear: both;"><div style="width: 70px;float: left;">满意度：  </div><div style="float: left;width: 130px" id="rate3"></div><div style="margin-left: 5px;width: 40px;float: left;">{$basic_info.s_satisfation/10} 星</div></div></div>
+
+							{else /}
+								{$vo.content}<br />{$vo.hidden_content}
+							{/if}
+								</div>
+							{if condition="($vo['imgs'] neq null) AND ($vo['imgs'] neq '')"}
+							<div class="j_process_c_img j_row">
+							 	{foreach $vo.imgs as $vo} 
+								<img src="{$vo}" alt="">
+								{/foreach}
+							</div>
+							{else /}
+							{/if}
+							</div>
+						</div>
+						{/volist}
+
+						<!-- 发起投诉 -->
+						<div class="j_process_img_box j_row">
+							<div class="j_process_head_img j_col">
+								<img src="{$basic_info.head_img_url}">
+							</div>
+							<div class="j_process_info j_row">
+								<span>{$basic_info.name}</span>
+								<span>发起投诉</span>
+								<span>{$basic_info.time|date="Y-m-d H:i:s",###}</span>
+							</div>
+						</div>
+						<div class="j_process_content_box j_col" style="padding-left: 78px;">
+
+							<div>{$basic_info.details}
+							</div><br />
+							<div>{$basic_info.private_details}
+							</div>
+							{if condition="($basic_info.images neq null) AND ($basic_info.images neq '')"}
+							<div class="j_process_c_img j_row">
+							 	{foreach $basic_info.images as $vo} 
+								<img src="{$vo}" alt="">
+								{/foreach}
+							</div>
+							{else /}
+							{/if}
+
+						</div>
+						<div class="j_support">
+							<button onclick="ding()">支持TA<img src="__INDEX__/images/woshou.png"></button>
+						</div>
+						<div id="ding_img_list" class="j_process_img_list j_row">
+						
+						</div>
+
+					</div>
+				</div>
+				<div class="j_right">
+<!-- 					<button class="j_right_btn">
+						<img src="__INDEX__/images/comment.png">
+						我要咨询
+					</button> -->
+					<button class="j_right_btn" onclick="javascrtpt:window.location.href='/index/myform/index'">
+						<img src="__INDEX__/images/camera.png">
+						我要曝光
+					</button>
+					<button class="j_right_btn" style="background-color: #B0B0B0;" onclick="javascrtpt:window.location.href='/index/user/mycaselist'">
+						<img src="__INDEX__/images/list.png">
+						我的投诉单
+					</button>
+
+					<span class="j_right_list_title">本周曝光最多</span>
+					<div class="j_right_list">
+						{volist name="blacklist" id="vo" key="k" }
+						<div class="j_right_item j_row" onclick="javascrtpt:window.location.href='/index/broker/index?myid={$vo.myid}'">
+							<div><img src="{$vo.logo_url}"><span>{$vo.name_en}</span></div>
+							<div class="j_right_num j_right_num{$k}">{$k}</div>
+						</div>
+						{/volist}
+
+					</div>
+<!-- 					<div class="j_right_tabs">
+						<div class="j_row">
+							<span>上一篇</span><span>1天前</span>
+						</div>
+						<div>NEV永利资管崩盘倒计时！本金很难退出</div>
+					</div>
+					<div class="j_right_tabs">
+						<div class="j_row">
+							<span>下一篇</span><span>20小时前</span>
+						</div>
+						<div>NEV永利资管崩盘倒计时！本金很难退出</div>
+					</div> -->
+
+				</div>
+			</div>
+			<div class="j_bottom_article">
+				<span class="j_bottom_title">相关文章</span>
+				{volist name="rec_case" id="vo" key="k" }
+				<div class="j_bottom_item" onclick="javascript:location.href=__HOMEURL__+'/article?myid={$vo.myid}'">
+					<p class="j_bot_p1">
+						<span style="background: rgba(15, 129, 225, 1);">{$vo.tag}</span>
+<!-- 						<img src="__INDEX__/images/test_icon2.png">
+						<span>美联金融</span> -->
+						<span style="font-size: 16px;">{$vo.title}</span>
+					</p>
+					<p class="j_bot_p2">
+						{$vo.details}
+					</p>
+					<p class="j_bot_p3">
+						<img src="{$vo.head_img_url}">
+						<span>{$vo.name}</span>
+						<span>{$vo.time|date="Y-m-d H:i:s",###}</span>
+					</p>
+					<p class="j_bot_p4">
+						<span><span><img  class="shoucang_img" src="__INDEX__/images/sc_star.png" ></span><span>156</span></span>
+						<span><span class="glyphicon glyphicon-comment"></span><span>2</span></span>
+					</p>
+				</div>
+				{/volist}
+
+			</div>
+			<div class="j_bottom_article" style="width: 782px;">
+				<span class="j_bottom_title">评论</span>
+            <!-- 新增 -->
+            <div class="q_yhdp">
+                <div class="q_yhdp_type q_row">
+                    <span class="q_yhdp_type_item q_yhdp_active" data-type="0">全部</span>
+                    <span class="q_yhdp_type_item" data-type="1">最新</span>
+
+                </div>
+
+                <div class="q_pinglun_box" id="q_pl_item_html">
+
+                </div>
+                <div class="pages">
+
+                </div>
+                <div class="q_tijiao_box">
+
+                    <div class="q_row">
+                        <div class="q_tijiao_title">点评：</div>
+                        <div class="q_tijiao_right">
+                            <div class="qq">
+                                <p>企业的发展离不开您宝贵的建议，请留下您的最真实的评论！</p>
+                                <div class="message q_tj_msh" contentEditable='true'></div>
+                                <div class="But">
+                                    <img src="__INDEX__/images/emojis/bba_thumb.gif" class='bq' />
+                                    <img src="__INDEX__/images/ico_hf_picture.png" onclick="up_imgs(2)" class='bq2' />
+                                    <input type="file" style="display: none;" id="q_th_img" onchange="q_tj_imgs(this)" value="" />
+                                    <span class='submit' onclick="q_tj_pl()">发表</span>
+                                    <div class="img_sp img_sp2">
+
+                                    </div>
+                                    <!--face begin-->
+                                    <div class="face">
+                                        <ul>
+                                            <li><img src="__INDEX__/images/emojis/smilea_thumb.gif" title="呵呵]"></li>
+                                            <li><img src="__INDEX__/images/emojis/tootha_thumb.gif" title="嘻嘻]"></li>
+                                            <li><img src="__INDEX__/images/emojis/laugh.gif" title="[哈哈]"></li>
+                                            <li><img src="__INDEX__/images/emojis/tza_thumb.gif" title="[可爱]"></li>
+                                            <li><img src="__INDEX__/images/emojis/kl_thumb.gif" title="[可怜]"></li>
+                                            <li><img src="__INDEX__/images/emojis/kbsa_thumb.gif" title="[挖鼻屎]"></li>
+                                            <li><img src="__INDEX__/images/emojis/cj_thumb.gif" title="[吃惊]"></li>
+                                            <li><img src="__INDEX__/images/emojis/shamea_thumb.gif" title="[害羞]"></li>
+                                            <li><img src="__INDEX__/images/emojis/zy_thumb.gif" title="[挤眼]"></li>
+                                            <li><img src="__INDEX__/images/emojis/bz_thumb.gif" title="[闭嘴]"></li>
+                                            <li><img src="__INDEX__/images/emojis/bs2_thumb.gif" title="[鄙视]"></li>
+                                            <li><img src="__INDEX__/images/emojis/lovea_thumb.gif" title="[爱你]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sada_thumb.gif" title="[泪]"></li>
+                                            <li><img src="__INDEX__/images/emojis/heia_thumb.gif" title="[偷笑]"></li>
+                                            <li><img src="__INDEX__/images/emojis/qq_thumb.gif" title="[亲亲]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sb_thumb.gif" title="[生病]"></li>
+                                            <li><img src="__INDEX__/images/emojis/mb_thumb.gif" title="[太开心]"></li>
+                                            <li><img src="__INDEX__/images/emojis/ldln_thumb.gif" title="[懒得理你]"></li>
+                                            <li><img src="__INDEX__/images/emojis/yhh_thumb.gif" title="[右哼哼]"></li>
+                                            <li><img src="__INDEX__/images/emojis/zhh_thumb.gif" title="[左哼哼]"></li>
+                                            <li><img src="__INDEX__/images/emojis/x_thumb.gif" title="[嘘]"></li>
+                                            <li><img src="__INDEX__/images/emojis/cry.gif" title="[衰]"></li>
+                                            <li><img src="__INDEX__/images/emojis/wq_thumb.gif" title="[委屈]"></li>
+                                            <li><img src="__INDEX__/images/emojis/t_thumb.gif" title="[吐]"></li>
+                                            <li><img src="__INDEX__/images/emojis/k_thumb.gif" title="[打哈气]"></li>
+                                            <li><img src="__INDEX__/images/emojis/bba_thumb.gif" title="[抱抱]"></li>
+                                            <li><img src="__INDEX__/images/emojis/angrya_thumb.gif" title="[怒]"></li>
+                                            <li><img src="__INDEX__/images/emojis/yw_thumb.gif" title="[疑问]"></li>
+                                            <li><img src="__INDEX__/images/emojis/cza_thumb.gif" title="[馋嘴]"></li>
+                                            <li><img src="__INDEX__/images/emojis/88_thumb.gif" title="[拜拜]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sk_thumb.gif" title="[思考]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sweata_thumb.gif" title="[汗]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sleepya_thumb.gif" title="[困]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sleepa_thumb.gif" title="[睡觉]"></li>
+                                            <li><img src="__INDEX__/images/emojis/money_thumb.gif" title="[钱]"></li>
+                                            <li><img src="__INDEX__/images/emojis/sw_thumb.gif" title="[失望]"></li>
+                                            <li><img src="__INDEX__/images/emojis/cool_thumb.gif" title="[酷]"></li>
+                                            <li><img src="__INDEX__/images/emojis/hsa_thumb.gif" title="[花心]"></li>
+                                            <li><img src="__INDEX__/images/emojis/hatea_thumb.gif" title="[哼]"></li>
+                                            <li><img src="__INDEX__/images/emojis/gza_thumb.gif" title="[鼓掌]"></li>
+                                            <li><img src="__INDEX__/images/emojis/dizzya_thumb.gif" title="[晕]"></li>
+                                            <li><img src="__INDEX__/images/emojis/bs_thumb.gif" title="[悲伤]"></li>
+
+                                        </ul>
+                                    </div>
+                                    <!--face end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+			</div>
+
+		</div>
+	{include file="public/footer"}
+		<div id="outerdiv" style="position:fixed;top:0;left:0;background:rgba(0,0,0,0.7);z-index:2;width:100%;height:100%;display:none;">
+			<div id="innerdiv" style="position:absolute;">
+				<img id="bigimg" style="border:5px solid #fff;" src="" />
+			</div>
+		</div>
+	<script src="__INDEX__/style/url_tools.js"></script>
+    <script src="__INDEX__/style/q_index.js"></script>
+    <script src="__INDEX__/style/d_jquery.page.js"></script>
+    <script src="__INDEX__/style/MiniDialog-es5.min.js"></script>
+    <script src="__INDEX__/style/cases.js"></script>
+	<script src="__INDEX__/style/jquery.raty.min.js"></script>
+    <script>
+        //$('.circlechart').circlechart(); // Initialization
+        $(".tcdPageCode").createPage({
+            pageCount: 10,
+            current: 1,
+            backFn: function(p) {
+                console.log(p);
+            }
+        });
+
+        function q_huifu_img(e) {
+            var _this = $(e); //将当前的pimg元素作为_this传入函数
+            imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
+        }
+		
+		setTimeout(function(){
+		
+			$('#rate1').raty({
+				readOnly: true,
+				half: true,
+				path: '/static/index/images',
+				starHalf: 'Half-star.png',
+				starOff: 'Star_2.png',
+				starOn: 'Star.png',
+				width: 130,
+				score: {$basic_info.s_speed/10}
+			});
+			$('#rate2').raty({
+				readOnly: true,
+				half: true,
+				path: '/static/index/images',
+				starHalf: 'Half-star.png',
+				starOff: 'Star_2.png',
+				starOn: 'Star.png',
+				width: 130,
+				score: {$basic_info.s_service/10}
+			});
+			$('#rate3').raty({
+				readOnly: true,
+				half: true,
+				path: '/static/index/images',
+				starHalf: 'Half-star.png',
+				starOff: 'Star_2.png',
+				starOn: 'Star.png',
+				width: 130,
+				score: {$basic_info.s_satisfation/10}
+			});
+		}, 100)
+    </script>
+
+	</body>
+</html>
