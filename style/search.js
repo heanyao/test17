@@ -109,7 +109,7 @@ $(function(){
                             } else if (res[i].status > 6) { 
                                 status = '/static/index/images/doneIcon.png'; // 已完成
                             }
-                            html_text += `<a href="/cases/${res[i].myid}" class="left_con_item">
+                            html_text += `<a href="/cases/${res[i].myid}.html" class="left_con_item">
                                 <img src="${status}" alt="状态" class="left_msg_status"/>
                                 <div class="left_item_title">
                                     <i class="left_hot_icon"></i>${res[i].title}
@@ -132,7 +132,7 @@ $(function(){
                         }
                     } else if (search_type == 1) {
                         for(var i = 0; i < res.length; i++) {
-                            html_text += `<a href="/broker/${res[i].code}" class="left_con_item_company">
+                            html_text += `<a href="/broker/${res[i].code}.html" class="left_con_item_company">
                                 <div>
                                     <div class="flag_tips" style="background: ${res[i].status.color}">${res[i].status.name}</div>
                                     <img src="${urls + res[i].logo_url}" alt="">
@@ -154,7 +154,7 @@ $(function(){
                         }
                     } else if (search_type == 2) {
                         for(var i = 0; i < res.length; i++) {
-                            html_text += `<a href="/agent/${res[i].code}" class="left_con_item_company">
+                            html_text += `<a href="/agent/${res[i].code}.html" class="left_con_item_company">
                                 <div>
                                     <div class="flag_tips" style="background: ${res[i].status.color}">${res[i].status.name}</div>
                                     <img src="${urls + res[i].logo_url}" alt="">

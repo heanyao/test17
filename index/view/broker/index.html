@@ -103,8 +103,8 @@
 						</p>
 						<p class="info">{$basic_info.tag_year}年 <span>|</span> {$basic_info.tag_regulation} <span>|</span> {$basic_info.tag_license} <span>|</span> {$basic_info.tag_mt4} </p>
 						<p class="info2">
-							<img src="{$basic_info.r_country}"> &nbsp;&nbsp; {$basic_info.found_year}年 &nbsp;&nbsp;
-							<span>
+							<!-- <img src="{$basic_info.r_country}"> &nbsp;&nbsp; {$basic_info.found_year}年 &nbsp;&nbsp; -->
+							<!-- <span>
 								推荐指数：
 								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
@@ -112,7 +112,17 @@
 								<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 								<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
 								&nbsp;&nbsp;4.8
-							</span>
+								
+							</span> -->
+						</p>
+						<p class="info2">
+						<div style="height: 30px;clear: both;float:left;color:white;margin-bottom: 20px;"><img src="{$basic_info.r_country}"> &nbsp;&nbsp; {$basic_info.found_year}年 &nbsp;&nbsp;推荐指数：</div>
+							<div style="width: 90px;float:left" id="rate1"></div>
+							<div style="margin-left: 5px;width: 40px;float:left;color:white">4.5 星</div>
+							<style>
+							#rate1 img{width:20px;margin: 0 -3px;}
+							</style>
+						
 						</p>
 						<div class="address q_row" style="margin-top: 29px;">中文地址 <span>{$basic_info['web_cn'][0]}</span><img src="__INDEX__/images/icons/down.png"
 							 onclick="open_address_other(this)">
@@ -583,11 +593,50 @@
 							<div class="q_yhdp_pf_1 q_col">
 								<h2>{$basic_info.avg_rate/10}</h2>
 								<p>
+								<?php
+								function star($fen){
+									$tmp = explode('.', $fen);
+									if(isset($tmp[1])){
+										if($tmp[1]>5){
+											$tmpfen = ceil($fen);
+										}else{
+											$tmpfen = $tmp[0].'.5';
+										}
+									}else{
+										$tmpfen = $tmp[0];
+									}
+									
+									// echo $tmpfen;
+									
+									// 4, 4.5, 0.5
+									
+									//全五星
+									$fen1 = intval($tmpfen);
+									for($i=0; $i<$fen1; $i++){
+										echo '<i class="q_star"></i>';
+									}
+									//空白五星
+									$fen2 = 5 - $tmpfen;
+									$fen2 = intval($fen2);
+									
+									//半个五星
+									$fen3 = 5- $fen1 - $fen2;
+									$fen3 = intval($fen3);
+									for($i=0; $i<$fen3; $i++){
+										echo '<i class="q_star_half"></i>';
+									}
+									
+									for($i=0; $i<$fen2; $i++){
+										echo '<i class="q_star_empty"></i>';
+									}
+								}
+								star($basic_info['avg_rate']/10);
+								?>
+									<!-- <i class="q_star"></i>
 									<i class="q_star"></i>
 									<i class="q_star"></i>
-									<i class="q_star"></i>
-									<i class="q_star"></i>
-									<i class="q_star_empty"></i>
+									<i class="q_star"></i> -->
+									<!-- <i class="q_star_empty"></i> -->
 								</p>
 								<p class="q_pf_text">已有{$basic_info.comment_sum}人点评</p>
 								<a href="javascript:;" onclick="to_dafen()">我要点评</a>
@@ -598,16 +647,17 @@
 									<tr>
 										<td>交易成本</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_cost/10|star}
 										</td>
 										<td>{$basic_info.avg_cost/10}</td>
 
 										{if condition="$comparing[0] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[0]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[0]*100-100|abs}%</td>
 										{elseif condition="$comparing[0] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[0]*100-100}%</td>
 										{else /}
@@ -618,16 +668,17 @@
 									<tr>
 										<td>订单执行</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_exc/10|star}
 										</td>
 										<td>{$basic_info.avg_exc/10}</td>
 
 										{if condition="$comparing[1] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[1]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[1]*100-100|abs}%</td>
 										{elseif condition="$comparing[1] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[1]*100-100}%</td>
 										{else /}
@@ -638,15 +689,16 @@
 									<tr>
 										<td>出入金</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_fund/10|star}
 										</td>
 										<td>{$basic_info.avg_fund/10}</td>
 										{if condition="$comparing[2] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[2]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[2]*100-100|abs}%</td>
 										{elseif condition="$comparing[2] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[2]*100-100}%</td>
 										{else /}
@@ -656,15 +708,16 @@
 									<tr>
 										<td>交易滑点</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_slip/10|star}
 										</td>
 										<td>{$basic_info.avg_slip/10}</td>
 										{if condition="$comparing[3] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[3]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[3]*100-100|abs}%</td>
 										{elseif condition="$comparing[3] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[3]*100-100}%</td>
 										{else /}
@@ -674,15 +727,16 @@
 									<tr>
 										<td>卡盘掉线</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_stable/10|star}
 										</td>
 										<td>{$basic_info.avg_stable/10}</td>
 										{if condition="$comparing[4] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[4]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[4]*100-100|abs}%</td>
 										{elseif condition="$comparing[4] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[4]*100-100}%</td>
 										{else /}
@@ -692,15 +746,16 @@
 									<tr>
 										<td>客户服务</td>
 										<td>
+											<!-- <img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
 											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_wanz_b.png">
-											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png">
+											<img src="__INDEX__/images/icons/ico_xing_yiban_b.png"> -->
+											{$basic_info.avg_service/10|star}
 										</td>
 										<td>{$basic_info.avg_service/10}</td>
 										{if condition="$comparing[5] < 1"}
-										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[5]*100-100}%</td>
+										<td><img src="__INDEX__/images/icons/ico_low.png" class="q_jiantou"> 低 {$comparing[5]*100-100|abs}%</td>
 										{elseif condition="$comparing[5] >1"/}
 										<td><img src="__INDEX__/images/icons/ico_hign.png" class="q_jiantou"> 高 {$comparing[5]*100-100}%</td>
 										{else /}
@@ -730,7 +785,7 @@
 						<div class="q_pinglun_box" id="q_pl_item_html">
 						<!-- 评论部分 -->
 						</div>
-						<div class="pages">
+						<div class="pages" style="display: flex;">
 							
 						</div>
 						<div class="q_tijiao_box">
@@ -1348,6 +1403,22 @@
 				</div>
 			</div>
 		</div>
+		
+<!-- 分页CSS -->
+<style>
+.tcdPageCode {
+	margin:10px auto;
+}
+.tcdPageCode a, .tcdPageCode span {
+	padding: 2px 6px;
+	margin: 0 4px 0 0;
+}
+.tcdPageCode .current {
+	background:#409EFF;
+	color:#fff
+}
+
+</style>
 		<script src="__INDEX__/style/url_tools.js"></script>
 		<script src="__INDEX__/style/q_emoji_broker.js"></script>
 
@@ -1375,6 +1446,7 @@
 			}
 		</script>
 		<script src="__INDEX__/style/Chart.min.js"></script>
+		<script src="__INDEX__/style/jquery.raty.min.js"></script>
 		<script>
 			window.chartColors = {
 				red: 'rgb(255, 99, 132)',
@@ -1419,6 +1491,17 @@
 					}
 				}
 			};
+			
+			$('#rate1').raty({
+				readOnly: true,
+				half: true,
+				path: '/static/index/images',
+				starHalf: 'Half-star.png',
+				starOff: 'Star_2.png',
+				starOn: 'Star.png',
+				width: 90,
+				score: 4.5
+			});
 
 
 

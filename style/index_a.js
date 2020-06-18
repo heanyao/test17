@@ -297,12 +297,33 @@ $(".left_click_load_more").click(function () {
                         console.log(res.data.data1.data);
                         var arr = res.data.data1.data;
                         var arr2 = res.data.data2.data;
+						console.log('arr', arr)
+						console.log('arr2', arr2)
                         if (arr.length === 0) {
                             Dialog.warn("温馨提示", '没有更多了');
                             $('.mini-dialog-footer').css('height','64px');
                         }
+						
+						if(menuFlag==1){
+							var list = $('.left_con_item');
+							var classname = 'left_con_item';
+						}else if(menuFlag==2){
+							var list = $('.hy_item');
+							var classname = 'hy_item';
+						}else if(menuFlag==3){
+							var list = $('.yc_item');
+							var classname = 'yc_item';
+						}
+						
+						
                         for (var i = 0; i < arr.length; i++) {
-                            str += '<a href="' + /cases/ + arr[i].myid + '" class="left_con_item">' +
+							if(typeof(arr2[i])=='undefined'){
+								arr2[i] = {
+									logo_url:'',
+									name_cn:''
+								}
+							}
+                            str += '<a href="' + /cases/ + arr[i].myid + '.html" class="'+classname+'" style="display: block;">' +
                                 '                    <img src="' + _getStatusUrl(arr[i].status) + '" alt="状态" class="left_msg_status"/>' +
                                 '                    <div class="left_user_head">' +
                                 '                        <img src="' + _serverUrl + arr[i].head_img_url + '" alt="头像" class="left_head_photo"/>' +
@@ -330,7 +351,7 @@ $(".left_click_load_more").click(function () {
                                 '                </a>'
 
                         }
-                        var list = $('.left_con_item');
+                        
                         $(list[list.length - 1]).after(str);
                         _hoverTitle();
                     }

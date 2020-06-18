@@ -583,8 +583,10 @@ a:hover {
 
 .q_h_info>.address>span {
 	color: white;
-	margin-left: -100px;
+	/* margin-left: -100px; */
 	cursor: pointer;
+	position: absolute;
+	left: 100px;
 }
 
 .q_h_info>.address>img {
@@ -757,7 +759,7 @@ a:hover {
 }
 .address_other_address {
 	width: 50%;
-	overflow: hidden;
+	/* overflow: hidden; */
 	text-overflow: ellipsis;
 }
 .address_other>p>img{
@@ -771,6 +773,8 @@ a:hover {
 	display: block;
 	cursor: pointer;
 	color: #999;
+	position: relative;
+	left: -35px;
 }
 
 .address_other_address>a:hover {
@@ -1276,13 +1280,23 @@ a:hover {
 	width: 15px;
 	height: 15px;
 	display: inline-block;
+	margin: 0 2px 0 0;
 	background: url(../images/icons/ico_xing_wanz_b.png) no-repeat;
+	/* background: url(/static/index/images/Star.png) no-repeat; */
 }
 
+.q_star_half {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	margin: 0 2px 0 0;
+	background: url(../images/icons/ico_xing_yiban_a.png) no-repeat;
+}
 .q_star_empty {
 	width: 15px;
 	height: 15px;
 	display: inline-block;
+	margin: 0 2px 0 0;
 	background: url(../images/icons/ico_xing_yiban_b.png) no-repeat;
 }
 

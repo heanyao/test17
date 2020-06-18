@@ -207,7 +207,7 @@ function top_type(top_type_num){
 }
 //排行榜用户ID
 function charts_user_id(user_id){
-	window.location.assign(apiAddress+'/broker/myid='+user_id);
+	window.location.assign(apiAddress+'/broker/myid='+user_id+'.html');
 }
 
 //顶 按钮事件
@@ -240,10 +240,10 @@ function toAdd(){
 	window.location.assign('add_article.html');
 }
 function to_article_user(user_id){
-	window.location.assign('http://fin110.com/profiledetails/'+user_id);
+	window.location.assign('http://fin110.com/profiledetails/'+user_id+'.html');
 	var e = e || window.event;
 	e.stopPropagation();
 }
 function to_article_detail(article_id){
-	window.location.assign('http://fin110.com/article/'+article_id);
+	window.location.assign('http://fin110.com/article/'+article_id+'.html');
 }

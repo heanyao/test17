@@ -282,7 +282,7 @@
   padding: 20px 10px;
 }
 .f-related {
-  height: 1013px;
+  height: auto;
   background: #ffffff;
   border: 1px solid #dddddd;
   /* margin-left: 17px; */
@@ -358,6 +358,8 @@
   margin-left: 8px;
   float: left;
   margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .f-relatedtime {
   width: 42px;

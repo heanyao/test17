@@ -121,8 +121,9 @@ class Search extends Model
             ->field('a.myid,a.title,a.details,a.status,a.require,a.time,b.logo_url,b.name_en as name')
             ->alias('a')
             ->join('bk_broker b','a.broker_id=b.id')
-            ->where('a.title','like',"%{$data['keyword']}%")
-            ->whereOr('a.details','like',"%{$data['keyword']}%")
+            /* ->where('a.title','like',"%{$data['keyword']}%") */
+            /* ->whereOr('a.details','like',"%{$data['keyword']}%") */
+			->where('a.title|a.details','like',"%{$data['keyword']}%")
             ->where('a.is_delete',0)
             ->order('a.id desc')
             ->paginate($data['num']);

@@ -139,7 +139,7 @@ function js_ificialMethod(indexV,idN){
                 let status = nowData.status;
 				ulListHtml+=`
 				 <li class="drag-items">
-				    <a href="/broker/${nowData.myid}" target="_blank">
+				    <a href="/broker/${nowData.myid}.html" target="_blank">
 				     <div class="drag-items_t_img">
 				                            <img src=" ${nowData.logo_url}">
 				                        </div>
@@ -174,7 +174,7 @@ function js_ificialMethod(indexV,idN){
 
                 ulListHtml+=`
 			<li class="drag-items">
-			    <a href="/index/user/c_login" target="_blank">
+			    <a href="/index/user/c_login.html" target="_blank">
 			      <div class="drag-items_last">
 			        <p>
 			            <img src="/static/index/images/companyLogo.png">

@@ -61,7 +61,7 @@
                         <circle id="circle18" class="circle18 steap" cx="586px" cy="190" r="660"></circle>
                     </svg>
                     {volist name="slidernews" id="vo" key="k" }
-                    <a id="slide{$k}" class="slide{$k}" href="/catedetail/{$vo.myid}">
+                    <a id="slide{$k}" class="slide{$k}" href="/catedetail/{$vo.myid}.html">
                         <img src="{$vo.thumb}" alt="图片">
                         <div class="image_desc_l">
                             {$vo.title}
@@ -140,11 +140,11 @@ background-color: #ffffff;
 display: inline-block;
 margin: 0 20px;"><a href="http://fin110.com/"><img src="__INDEX__/images/longzhimeng.jpg" alt="龙之梦"/></a></div>
         <div class="other_msg_box">
-            <a href="/index/myform/index" class="other_btn_l complain_btn">
+            <a href="/index/myform/index.html" class="other_btn_l complain_btn">
                 <img src="__INDEX__/images/complaintIcon.png" alt="图标"/>
                 我要投诉
             </a>
-            <a href="/index/user/mycaselist" class="other_btn_l ask_btn">
+            <a href="/index/user/mycaselist.html" class="other_btn_l ask_btn">
                 <img src="__INDEX__/images/askIcon.png" alt="图标"/>我的投诉
             </a>
 
@@ -172,7 +172,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
 
     <div class="con_row2_l thumbnail_list_l">
     {volist name="brokerslogo" id="vo" key="k" }
-        <a href="/broker/{$vo.myid}" class="thumbnail_item_l">
+        <a href="/broker/{$vo.myid}.html" class="thumbnail_item_l">
             <img src="{$vo.logo_url}" alt="图片"/>
             <div class="thumbnail_desc">
                {$vo.name_cn}
@@ -213,7 +213,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
             <div class="left_con_list">
                 <!--最新-->
                 {volist name="data1_newcase" id="vo" key="k" }
-                <a href="/cases/{$vo.myid}" class="left_con_item">
+                <a href="/cases/{$vo.myid}.html" class="left_con_item">
                 {if condition="$vo.status < 4 "} 
                     <img src="__INDEX__/images/dealIcon.png" alt="状态" class="left_msg_status"/>
                     {elseif condition="$vo.status > 6"/}
@@ -254,7 +254,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
 
                 <!--已处理-->
                 {volist name="data1_repliedcase" id="vo" key="k" }
-                <a href="/cases/{$vo.myid}" class="hy_item">
+                <a href="/cases/{$vo.myid}.html" class="hy_item">
                     <img src="__INDEX__/images/replyIcon.png" alt="已回复" class="left_msg_status"/>
                     <div class="left_user_head">
                         <img src="{$vo.head_img_url}" alt="头像" class="left_head_photo"/>
@@ -289,7 +289,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
                 {/volist}
                 <!--已完成-->
                 {volist name="data1_donecase" id="vo" key="k" }
-                <a href="/cases/{$vo.myid}" class="yc_item">
+                <a href="/cases/{$vo.myid}.html" class="yc_item">
                     <img src="__INDEX__/images/doneIcon.png" alt="状态" class="left_msg_status"/>
 
                     <div class="left_user_head">
@@ -326,7 +326,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
 
                 <!--原创新闻-->
                 {volist name="newslist" id="vo" key="k" }
-                <a href="/article/{$vo.myid}" class="left_con_item2">
+                <a href="/article/{$vo.myid}.html" class="left_con_item2">
                     <div class="left_user_head2">
                         <img src="{$vo.thumb}" alt="标题图片" class="left_head_photo2"/>
                     </div>
@@ -410,7 +410,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
             <div class="right_con_list">
                 <!--119排行-->
                 {volist name="getrank" id="vo" key="k" }
-                <a href="/broker/{$vo.myid}" class="right_con_item one_item_right">
+                <a href="/broker/{$vo.myid}.html" class="right_con_item one_item_right">
                     {if condition="$k < 4"}
                     <div class="thumbnail_right_item">
                         <img class="right_thumbnail" src="{$vo.logo_url}" alt="图片"/>
@@ -451,7 +451,7 @@ text-align: center;"><a href="http://fin110.com/"><img src="__INDEX__/images/don
 
                 <!--黑平台排行-->
                 {volist name="blackrank" id="vo" key="k" }
-                <a href="/broker/{$vo.myid}" class="two_item_right">
+                <a href="/broker/{$vo.myid}.html" class="two_item_right">
                     {if condition="$k < 4"}
                     <div class="thumbnail_right_item">
                         <img class="right_thumbnail" src="{$vo.logo_url}" alt="图片"/>
