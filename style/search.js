@@ -53,7 +53,6 @@ $(function(){
         $(this).addClass('active');
         $(this).siblings('li').removeClass('active');
         var index = $(this).attr('data-index');
-		if(index == 2) index=3
         search_type = index;
         if (index == 1) {
             $('.z_form').attr('placeholder', '请输入企业名');
@@ -100,7 +99,7 @@ $(function(){
                 var html_text = '';
                 if (data.code === 200) {
                     var res = data.data.data;
-                    if (search_type == 3 || search_type == 2) {
+                    if (search_type == 3) {
                         for(var i = 0; i < res.length; i++ ) {
                             var status = '';
                             if (res[i].status < 4) {
@@ -154,7 +153,7 @@ $(function(){
                             </a>`;
                         }
                     } else if (search_type == 2) {
-                        for(var i = 0; i < res.length; i++) {
+                        /* for(var i = 0; i < res.length; i++) {
                             html_text += `<a href="/agent/${res[i].code}.html" class="left_con_item_company">
                                 <div>
                                     <div class="flag_tips" style="background: ${res[i].status.color}">${res[i].status.name}</div>
@@ -174,6 +173,36 @@ $(function(){
                                     <div>${res[i].avg_rate}</div>
                                 </div>
                             </a>`;
+                        } */
+						for(var i = 0; i < res.length; i++ ) {
+                            var status = '';
+                            if (res[i].status < 4) {
+                                status = '/static/index/images/dealIcon.png'; // 已处理
+                            } else if(res[i].status > 3 && res[i].status <7) {
+                                status = '/static/index/images/returnIcon.png'; // 已回复
+                            } else if (res[i].status > 6) { 
+                                status = '/static/index/images/doneIcon.png'; // 已完成
+                            }
+                            html_text += `<a href="/cases/${res[i].myid}.html" class="left_con_item">
+                                <img src="${status}" alt="状态" class="left_msg_status"/>
+                                <div class="left_item_title">
+                                    <i class="left_hot_icon"></i>${res[i].title}
+                                </div>
+                                <div class="left_item_text">
+                                    ${res[i].details}
+                                </div>
+                                <div class="left_item_complaint_user">
+                                    <span>【投诉对象】</span>
+                                    <div class="complain_user_info">
+                                        <img src="${urls + res[i].logo_url}" alt="头像"/>
+                                        <span class="complain_user_name">${res[i].name}</span>
+                                    </div>
+                                </div>
+                                <div class="left_item_complaint_content">
+                                    <span>【投诉要求】</span>
+                                    <span class="item_marginLeft10">${res[i].require}</span>
+                                </div>
+                            </a>`
                         }
                     }
                     if(page==3){
