@@ -17,7 +17,6 @@ switch (htmlspecialchars($_GET['action'])) {
             "allowFiles" => $CONFIG['imageAllowFiles']
         );
         $fieldName = $CONFIG['imageFieldName'];
-		$watermark = $CONFIG['iswatermark'];
         break;
     case 'uploadscrawl':
         $config = array(
@@ -49,8 +48,7 @@ switch (htmlspecialchars($_GET['action'])) {
 }
 
 /* 生成上传实例对象并完成上传 */
-// $up = new Uploader($fieldName, $config, $base64);
-$up = new Uploader($fieldName, $config, $base64, $watermark);
+$up = new Uploader($fieldName, $config, $base64);
 
 /**
  * 得到上传文件所对应的各个参数,数组结构
