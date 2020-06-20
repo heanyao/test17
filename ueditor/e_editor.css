@@ -1,0 +1,98 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.add_main {
+	width: 1200px;
+	margin: 0 auto;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+
+.add_form {
+	width: -webkit-fit-content;
+	margin: 0 auto;
+}
+
+.add_title {
+	margin: 5px auto;
+	height: 24px;
+	width: 573px;
+	padding: 7px 10px 7px 10px;
+	border: 1px solid #efeeee;
+	line-height: 24px;
+	font-size: 16px;
+	color: #666;
+}
+
+.editor_box {
+	padding-top: 20px;
+	width: -webkit-fit-content;
+	margin: 0 auto;
+}
+
+.btns {
+	padding-top: 20px;
+}
+
+.accept_pact {
+	color: #666;
+	font-size: 12px;
+}
+
+.accept_pact a {
+	color: #666;
+	text-decoration: none;
+	font-size: 12px;
+}
+
+.accept_pact a:hover {
+	text-decoration: underline;
+}
+
+.btns input {
+	position: static!important;
+	opacity: 1!important;
+	float: left;
+	border-radius: 3px;
+	border: 0 none;
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	cursor: pointer;
+}
+
+.btn_submit {
+	padding: 6px 20px;
+	background-color: #ff9e00;
+	color: #fff;
+	margin-right: 5px;
+}
+
+.btn_submit:hover {
+	background-color: #FE5F00;
+}
+
+.cont {
+	float: left;
+	line-height: 36px;
+	color: #666;
+	font-size: 14px;
+	margin-right: 5px;
+}
+
+.btn_save {
+	background-color: transparent;
+	color: #ffa800;
+	font-weight: normal;
+	font-size: 14px;
+	padding: 8px 3px;
+}
+.select{
+	box-sizing: border-box;
+	padding: 0;
+	margin-top: 10px;
+	height: 40px;
+	width: 100%;
+}

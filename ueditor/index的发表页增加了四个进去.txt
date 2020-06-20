@@ -1,0 +1,6 @@
+e_editor.js
+e_editor.css
+ueditor.css
+jquery-2.0.3.min.js
+
+去掉四个即原来后台的原来插件
