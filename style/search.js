@@ -53,6 +53,7 @@ $(function(){
         $(this).addClass('active');
         $(this).siblings('li').removeClass('active');
         var index = $(this).attr('data-index');
+		if(index == 2) index=3
         search_type = index;
         if (index == 1) {
             $('.z_form').attr('placeholder', '请输入企业名');
@@ -99,7 +100,7 @@ $(function(){
                 var html_text = '';
                 if (data.code === 200) {
                     var res = data.data.data;
-                    if (search_type == 3) {
+                    if (search_type == 3 || search_type == 2) {
                         for(var i = 0; i < res.length; i++ ) {
                             var status = '';
                             if (res[i].status < 4) {

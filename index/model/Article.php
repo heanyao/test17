@@ -53,9 +53,19 @@ class Article extends Model
                 $file = request()->file('thumb');
                 $info = $file->validate(['size'=>1567800,'ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'uploads');
                 if($info){
+					//print_r($info);
+					$imgurl = ROOT_PATH  . 'public'.DS.'uploads' . DS . $info->getSaveName();
+					$water = ROOT_PATH.'public'.DS.'static'.DS.'admin'.DS.'ueditor'.DS.'php'.DS.'watermark.gif';
+					//print_r($imgurl);
+					$this->watermark($imgurl,$imgurl, 9, $water);
+					
+					//$image = \think\Image::open($imgurl);
+					// 给原图左上角添加透明度为50的水印并保存alpha_image.png
+					//$image->water($water,\think\Image::WATER_NORTHWEST,50)->save($imgurl);
+					
                     // $property_pics_url=ROOT_PATH . 'public' . DS . 'uploads'.'/'.$info->getExtension();
                     $property_pics_url= DS . 'uploads'. DS .$info->getSaveName();
-                    $data['thumb']=$property_pics_url;
+                    $data['thumb']=$property_pics_url; 
                     return $data;
                 }
     }
@@ -111,6 +121,113 @@ class Article extends Model
 
  
 
+	public function watermark($source, $target = '', $w_pos = '', $w_img = '') {
+		$this->w_pos = 9;
+		$this->w_img = 'watermark.gif';	//GD环境问题，不能用png图片，会出现问题
+		
+		$w_pos = $w_pos ? $w_pos : $this->w_pos;
+		
+		/*打开图片*/
+		//1、配置图片路径
+		$src = $source;
+		//2、获取图片信息
+		$info = getimagesize($src);
+		$source_w  = $info[0];//图片宽度
+        $source_h  = $info[1];//图片高度
+		//3、获取图片类型
+		$type = image_type_to_extension($info[2], false);
+		//4、在内存中创建图像
+		$createImageFunc = "imagecreatefrom{$type}";
+		//5、把图片复制内存中
+		$image = $createImageFunc($src);
 
+		/*操作图片*/
+		//1、设置水印图片路径
+		$imageMark = $w_img ? $w_img : $this->w_img;
+		//2、获取水印图片基本信息
+		$markInfo = getimagesize($imageMark);
+		/* var_dump($markInfo); */
+		$width    = $markInfo[0];
+		$height   = $markInfo[1];
+		//3、获取水印图片类型
+		$markType = image_type_to_extension($markInfo[2], false);
+		//4、在内存创建图像
+		$markCreateImageFunc = "imagecreatefrom{$markType}";
+		//5、把水印图片复制到内存中
+		$water = $markCreateImageFunc($imageMark);
+		
+		//水印位置设定
+		switch($w_pos) {
+            case 1:
+                $wx = 5;
+                $wy = 5;
+                break;
+            case 2:
+                $wx = ($source_w - $width) / 2;
+                $wy = 0;
+                break;
+            case 3:
+                $wx = $source_w - $width;
+                $wy = 0;
+                break;
+            case 4:
+                $wx = 0;
+                $wy = ($source_h - $height) / 2;
+                break;
+            case 5:
+                $wx = ($source_w - $width) / 2;
+                $wy = ($source_h - $height) / 2;
+                break;
+            case 6:
+                $wx = $source_w - $width;
+                $wy = ($source_h - $height) / 2;
+                break;
+            case 7:
+                $wx = 0;
+                $wy = $source_h - $height;
+                break;
+            case 8:
+                $wx = ($source_w - $width) / 2;
+                $wy = $source_h - $height;
+                break;
+            case 9:
+                $wx = $source_w - ($width+5);
+                $wy = $source_h - ($height+5);
+                break;
+            case 10:
+                $wx = rand(0,($source_w - $width));
+                $wy = rand(0,($source_h - $height));
+                break;
+            default:
+                $wx = rand(0,($source_w - $width));
+                $wy = rand(0,($source_h - $height));
+                break;
+        }
+
+		//6、合并图片
+		//imagecopymerge($image, $water, $wx,$wy, 0, 0, $markInfo[0], $markInfo[1], 50);
+		
+		$alpha = 30; //透明度
+		//循环平铺水印
+		for ($x = 20; $x < $info['0']-20; $x) {
+			for ($y = 20; $y < $info['1']-20; $y) {
+				imagecopymerge($image, $water, $x, $y, 0, 0, $markInfo[0], $markInfo[1], $alpha);
+				$y += $markInfo[1]+60;
+			}
+			$x += $markInfo[0]+60;
+		}
+		
+		$imagefunc = "image{$type}";
+		$number = 90;
+		if($type == 'png') $number = 9;
+		$imagefunc($image, $target, $number);
+		
+		//7、销毁水印图片
+		imagedestroy($water);
+
+		/* 销毁图片 */
+		imagedestroy($image);
+		return true;
+	}
 
 }
