@@ -125,7 +125,7 @@ class Uploader
         } else { //移动成功
 		
 			if( $this->water ){ 
-				$this->watermark($this->filePath,$this->filePath, 7);
+				$this->watermark($this->filePath,$this->filePath, 9);
 			}
             $this->stateInfo = $this->stateMap[0];
         }
@@ -417,6 +417,25 @@ class Uploader
 		$markCreateImageFunc = "imagecreatefrom{$markType}";
 		//5、把水印图片复制到内存中
 		$water = $markCreateImageFunc($imageMark);
+		imagesavealpha($water, true);
+	
+		$transparency = imagecolorallocatealpha($water, 0, 0, 0, 127);
+		imagefill($water, 0, 0, $transparency);
+		$degrees = 30;
+		$rotate = @imagerotate($water, $degrees, $transparency); 
+		
+		$outputfunc = "image{$markType}";
+		$outputfunc($rotate, "image_mark." . $markType);
+		//2、保存图片
+		//$outputfunc($rotate, "image_mark." . $markType);
+		imagedestroy($rotate);
+		imagedestroy($water);
+		
+		$newimageMark = "image_mark." . $markType;
+		$markInfo = getimagesize($newimageMark);
+		$width    = $markInfo[0];
+		$height   = $markInfo[1];
+		$newWater = $markCreateImageFunc($newimageMark);
 		
 		//水印位置设定
 		switch($w_pos) {
@@ -465,11 +484,16 @@ class Uploader
                 $wy = rand(0,($source_h - $height));
                 break;
         }
+		
+		$color=imagecolorallocate($newWater,255,255,255);
+		imagecolortransparent($newWater,$color);
+		imagefill($newWater,0,0,$color);
 
 		//6、合并图片
-		imagecopymerge($image, $water, $wx,$wy, 0, 0, $markInfo[0], $markInfo[1], 50);
+		//imagecopymerge($image, $water, $wx,$wy, 0, 0, $markInfo[0], $markInfo[1], 50);
+		imagecopy($image, $newWater, $wx, $wy, 0, 0, $markInfo[0], $markInfo[1]);
 		
-		$alpha = 30; //透明度
+		//$alpha = 30; //透明度
 		//循环平铺水印
 		// for ($x = 20; $x < $info['0']-20; $x) {
 		// 	for ($y = 20; $y < $info['1']-20; $y) {
@@ -486,7 +510,7 @@ class Uploader
 		$imagefunc($image, $target, $number);
 		
 		//7、销毁水印图片
-		imagedestroy($water);
+		imagedestroy($newWater);
 
 		/* 销毁图片 */
 		imagedestroy($image);
